@@ -1,0 +1,77 @@
+.feed {
+  flex: 0.7;
+  margin: 0px 20px;
+  padding-top: 10px;
+  background-color: white;
+  margin-top: 10px;
+  padding-left: 4px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.block {
+  padding: 10px;
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-bottom: 1px solid lightgray;
+  justify-content: flex-start;
+}
+.title {
+  width: 100%;
+  padding: 10px;
+  color: gray;
+  font-size: medium;
+  font-weight: 400;
+}
+.company {
+  max-width: 12.5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  background-color: white;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  min-height: 180px;
+}
+.company_avatar {
+  border-radius: 0 !important;
+  width: 30% !important;
+  height: 30% !important;
+  margin-bottom: 0;
+}
+.company_avatar2 {
+  width: 30% !important;
+  height: 30% !important;
+  margin-bottom: 0;
+}
+.company > img {
+  margin-bottom: -30px;
+  width: 100%;
+  height: 60px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  object-fit: cover;
+}
+.company > h5 {
+  color: black;
+  font-weight: 600;
+  font-size: 10px;
+  padding: 5px 10px;
+}
+.company > h6 {
+  color: gray;
+  font-weight: 300;
+  cursor: pointer;
+}
+.company > h6:hover {
+  color: black;
+  font-weight: 600;
+}
+.Button {
+  flex: 0.8 im !important;
+  border-radius: 30px !important;
+}

@@ -1,0 +1,33 @@
+.container
+{
+    flex:0.3;
+    overflow: scroll;
+    background-color: white;
+    margin-top: 20px;
+    margin-left:20px ;
+    border:1px lightgray solid;
+    border-bottom: none;
+    border-top-left-radius:20px;
+    font-family: system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Fira Sans,Ubuntu,Oxygen,Oxygen Sans,Cantarell,Droid Sans,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Lucida Grande,Helvetica,Arial,sans-serif;
+}
+.sidebarNav
+{
+    height: 7%;
+    position: relative;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; 
+}
+.sidebarNav h3
+{
+    flex: 0.4;
+    padding-left:max(30px,5%);
+    font-weight: 500;
+    color: rgb(44, 44, 44);
+}
+.actions
+{
+    position: absolute;
+    right:10px;
+}

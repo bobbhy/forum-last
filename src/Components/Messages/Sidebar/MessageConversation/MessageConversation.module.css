@@ -1,0 +1,56 @@
+.container
+{
+    height: 15%;
+    overflow: hidden;
+    border-bottom: 1px lightgray solid;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: flex-start;
+    position: relative;
+}
+.container:hover
+{
+    background-color: #9ba3aa;
+}
+.active
+{
+    background-color: #eef3f8;
+    box-shadow: 4px 0 0 #057642 inset,0 -1px 0 #f3f2ef inset;
+}
+.avatar
+{
+    width: 80px !important;
+    height: 80px !important;
+    margin-left: 20px;
+}
+.infos
+{
+    flex:0.6;
+    padding: 20px;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+
+}
+.infos h4
+{
+    font-weight: 600;
+}
+.infos h6
+{
+    font-weight: 400;
+    color: gray;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    
+}
+.date
+{
+    position:absolute;
+    right: 10px;
+    top:10px
+}

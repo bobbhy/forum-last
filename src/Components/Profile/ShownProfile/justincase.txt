@@ -1,0 +1,30 @@
+//just in case
+ {((currentUserId !== id && !switchState) ||
+                  currentUser?.roles[0]?.id == 3 || isFriend == 1) && (
+                    <>
+                      <About data={cv?.about} email={email} />
+                      {isExperience && (
+                        <>
+                          <hr className="m-0" />
+                          {/* Experience*/}
+                          <Experience data={cv?.experiences} />
+                        </>
+                      )}
+                      <hr className="m-0" />
+                      {/* Education*/}
+                      <Education data={cv?.educations} />
+                      <hr className="m-0" />
+                      {/* Skills*/}
+                      <Skill
+                        dev={cv?.devLanguages}
+                        normal={cv?.normalLanguages}
+                        software={cv?.softwares}
+                      />
+                      <hr className="m-0" />
+                      {/* Interests*/}
+                      <Interests data={cv?.about?.interests} />
+                      <hr className="m-0" />
+                      {/* Awards*/}
+                      {cv?.awards.length !== 0 && <Award data={cv?.awards} />}
+                    </>
+                  )}

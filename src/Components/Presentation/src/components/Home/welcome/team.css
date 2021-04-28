@@ -1,0 +1,97 @@
+.intro {
+  background-image: url("./img/wave.svg");
+  width: 100;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10vw 0 10vw;
+  min-height: 20vh;
+}
+
+.introText h1 {
+  font-size: 3vw;
+  margin: 0 !important;
+}
+.introText .btn {
+  width: 120px;
+  margin-top: 30px;
+  font-size: 1.2vw;
+  padding: 14px 20px 14px 20px;
+  background-color: #2f8be0;
+  color: #fff;
+  border-radius: 45px;
+  text-align: center;
+}
+.introText > .btn > a {
+  font-size: 1.2vw;
+  text-decoration: none;
+  color: #fff;
+  align-items: center;
+}
+.introImage > img {
+  margin-top: 30px;
+  width: 40vw;
+}
+
+.about_container {
+  height: auto;
+}
+.space {
+  height: 200px;
+}
+
+.about-flex {
+  display: flex;
+  justify-content: center;
+  width: auto;
+  height: 500px;
+  text-align: center;
+  flex-wrap: wrap;
+  padding: 40px 0 40px 0;
+}
+.about-flex .about-card {
+  background-image: url("./img/wave\ card.png");
+  position: relative;
+  width: 355px;
+  height: 397px;
+  margin: 20px 50px;
+  border-radius: 10px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.09), 0 10px 10px rgba(0, 0, 0, 0.09);
+}
+.about-flex .about-card .about-img {
+  position: absolute;
+  left: 100px;
+  top: 30px;
+}
+.about-flex .about-card .about-text {
+  margin-top: 50%;
+  justify-content: space-between;
+}
+.about-text > h4 {
+  font-weight: 600;
+  font-size: 30px;
+}
+.about > p {
+  line-height: 30px;
+  opacity: 0.6;
+}
+
+.footerlinks a {
+  margin: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  text-decoration: none;
+}
+.footerlinks .mainlink {
+  color: #fff;
+}
+
+@media only screen and (max-width: 700px) {
+  .about-flex {
+    height: auto;
+  }
+}

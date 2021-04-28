@@ -1,0 +1,27 @@
+.profile_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 30px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.profile_info > .image {
+  margin-right: 10px;
+  width:70px  !important;
+  height: 70px !important;
+  margin-left: 20px;
+}
+.profile_info > .square {
+  border-radius: 0 !important;
+}
+.profile_info:hover {
+  background-color: whitesmoke;
+  color: black;
+}
+.profile_info > h5 > span {
+  color: black;
+  font-weight: 300;
+}

@@ -1,0 +1,10 @@
+.loader {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 48vh;
+  left: 48vw;
+  width: 4vw;
+  height: 4vh;
+}

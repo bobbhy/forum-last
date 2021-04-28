@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap");
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  a:not(.btn) {
+    text-decoration: underline;
+  }
+
+  abbr[title]::after {
+    content: " (" attr(title) ")";
+  }
+
+  pre {
+    white-space: pre-wrap !important;
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #adb5bd;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+
+  @page {
+    size: a3;
+  }
+  .cv_body {
+    min-width: 992px !important;
+  }
+}
+.cv_body {
+  font-family: Maven Pro, sans-serif;
+  padding-top: 0;
+  width: 100%;
+  color: #6c757d;
+}
+@media (min-width: 992px) {
+  .cv_body {
+    padding-top: 0;
+    padding-left: 17rem;
+  }
+}

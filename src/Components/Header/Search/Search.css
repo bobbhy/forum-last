@@ -1,0 +1,17 @@
+.header_search {
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  color: gray;
+  height: 40px;
+  background-color: #eef3f8;
+}
+.header_search > input {
+  outline: none;
+  border: none;
+  background: none;
+}
+.header_search > .close:hover {
+  color: black;
+}

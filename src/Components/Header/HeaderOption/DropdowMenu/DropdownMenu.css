@@ -1,0 +1,59 @@
+/* Dropdown Menu */
+
+.dropdown {
+  position: absolute;
+  top: 70px;
+  max-width: 250px;
+  transform: translateX(-45%);
+  background-color: white;
+  border-radius: 10px;
+  border-top-right-radius: 0px;
+  overflow: hidden;
+  transition: height 1000ms ease;
+  border: 0.3px solid lightgray;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  padding-bottom: 20px;
+}
+.menu > .menu_header {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 2px solid lightgray;
+}
+.menu > .menu_header > .menu_headerLogo {
+  object-fit: contain;
+  height: 50px !important;
+  width: 50px !important;
+  margin-bottom: 10px;
+}
+.menu > .menu_header > .menu_headerInfo {
+  flex: 0.8;
+  margin: auto;
+  margin-bottom: 20px;
+}
+.menu > .menu_header > .menu_headerInfo > h2 {
+  font-size: 0.7rem !important;
+}
+.menu > .menu_header > .menu_headerInfo > p {
+  color: gray;
+  font-weight: 400;
+  font-size: 12px;
+}
+.menu > .menu_header > .menu_headerButton {
+  border-radius: 30px;
+  flex: 1;
+  margin: auto;
+  min-width: 200px;
+}
+.logoutButton {
+  width: 70%;
+  margin-left: 15% !important;
+}

@@ -1,0 +1,31 @@
+.comment {
+  display: flex;
+  margin: 8px 3vw;
+  font-size: 16px;
+  padding: 5px 7px;
+  padding-bottom: 0;
+  border-radius: 6px;
+  background-color: rgb(240, 240, 240);
+
+  .user-name {
+    font-weight: bolder;
+    color: rgb(83, 83, 83);
+    margin-bottom: 4px;
+  }
+  .comment-actions {
+    button {
+      margin-left: 8px;
+    }
+  }
+
+  .comment-timestamp {
+    font-size: 12px;
+    color: rgb(119, 128, 155);
+    margin: 0;
+    margin-top: -4px;
+  }
+
+  .message {
+    font-size: 15px;
+  }
+}

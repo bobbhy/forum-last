@@ -1,0 +1,116 @@
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #3f51b5;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  z-index: 999;
+}
+.logo {
+  height: 3rem;
+  width: 7rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .header_left > .logo {
+    height: 1rem;
+    width: 1rem;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .header_left > .logo {
+    display: none;
+  }
+}
+.header_left {
+  display: flex;
+  flex: 0.4;
+  justify-content: space-evenly;
+}
+.header_right {
+  display: flex;
+  justify-content: flex-end;
+  flex: 0.5;
+}
+.header_right > button {
+  position: relative;
+}
+.header_left > img {
+  object-fit: contain;
+  height: 40px;
+  margin-right: 10px;
+}
+.header_search {
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  color: gray;
+  height: 40px;
+  background-color: #eef3f8;
+}
+.header_search > input {
+  outline: none;
+  border: none;
+  background: none;
+}
+.wrapper {
+  position: relative;
+}
+.header_card {
+  position: fixed;
+  top: 65px;
+  left: 68%;
+  width: 15%;
+  min-height: 200px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  display: none;
+}
+.header_card > .top {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+}
+.header_card > .top-infos {
+  margin-left: 10px !important;
+}
+.top_infos > h2 {
+  font-size: 15px !important;
+}
+.top_infos > p {
+  color: gray;
+  font-weight: 400;
+  font-size: 12px;
+}
+.top_image {
+  object-fit: contain;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 70px;
+  width: 70px;
+}
+.header_right > .button {
+  box-shadow: none;
+  background: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  outline: "none";
+  min-width: 30px;
+}
+.header_right > .button:hover {
+  background: none;
+  color: black;
+  box-shadow: none;
+}

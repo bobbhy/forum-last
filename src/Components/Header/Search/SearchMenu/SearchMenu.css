@@ -1,0 +1,75 @@
+.searchMenu {
+  position: absolute;
+  top: 0px;
+  min-width: 400px;
+  transform: translateX(-100%);
+  background-color: white;
+  border-radius: 10px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  overflow: hidden;
+  transition: height 1000ms ease;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.searchMenu > h4 {
+  text-align: left !important;
+  min-width: 400px;
+  margin-top: 5px;
+  font-weight: 300;
+}
+.searchMenu > .recent {
+  display: flex;
+  padding: 10px;
+  min-width: 400px;
+  max-width: 400px;
+  overflow-x: auto;
+  justify-content: flex-start;
+  border-bottom: 1px solid lightgray;
+}
+.searchMenu > .recent > .person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 20px;
+  width: 50px;
+}
+.searchMenu > .recent > .person:hover {
+  color: black;
+  background-color: whitesmoke;
+}
+.searchMenu > .recent > .person > h5 {
+  text-align: center;
+}
+.searchMenu > .profiles > h1 {
+  text-align: left;
+  font-size: 2rem;
+  padding: 10px;
+  color: black;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
