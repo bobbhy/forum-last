@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./authHeader";
 
-const API_URL = "http://localhost:5000/api/auth/";
+const API_URL = "http://134.122.94.140:5000/api/auth/";
 
 const register = (name, companyName, username, email, password, role, etablishment_idx = 0) => {
   name = name.toLowerCase();
