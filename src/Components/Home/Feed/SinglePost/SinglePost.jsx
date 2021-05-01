@@ -164,7 +164,7 @@ export default function SinglePost(props) {
   };
 
   const deleteById = (id) => {
-    axios.delete(`http://localhost:5000/api/cv/post/${id}`).then((response) => {
+    axios.delete(`http://134.122.94.140:5000/api/cv/post/${id}`).then((response) => {
       setRefresh(!refresh);
     });
   };
@@ -176,14 +176,14 @@ export default function SinglePost(props) {
     };
     if (user?.roles[0]?.id === 1) {
       axios
-        .put(`http://localhost:5000/api/cv/post/${id}`, post)
+        .put(`http://134.122.94.140:5000/api/cv/post/${id}`, post)
         .then((response) => {
           setRefresh(true);
           setRefresh(false);
         });
     } else if (user?.roles[0]?.id === 3) {
       axios
-        .put(`http://localhost:5000/api/comp/post/${id}`, post)
+        .put(`http://134.122.94.140:5000/api/comp/post/${id}`, post)
         .then((response) => {
           setRefresh(true);
           setRefresh(false);
@@ -200,7 +200,7 @@ export default function SinglePost(props) {
     if (user?.roles[0]?.id === 1) {
       axios
         .post(
-          `http://localhost:5000/api/cv/post/${id}/comment`,
+          `http://134.122.94.140:5000/api/cv/post/${id}/comment`,
           {
             message: commentInput,
             role: 1,
@@ -217,7 +217,7 @@ export default function SinglePost(props) {
     } else if (user?.roles[0]?.id === 3) {
       axios
         .post(
-          `http://localhost:5000/api/comp/post/${id}/comment`,
+          `http://134.122.94.140:5000/api/comp/post/${id}/comment`,
           {
             message: commentInput,
             role: 3,
@@ -244,7 +244,7 @@ export default function SinglePost(props) {
 
   const likePost = (postId) => {
     axios
-      .put(`http://localhost:5000/api/cv/post/${postId}/${user.id}/liking`)
+      .put(`http://134.122.94.140:5000/api/cv/post/${postId}/${user.id}/liking`)
       .then(
         (response) => {
           setToggleLike(true);
@@ -257,7 +257,7 @@ export default function SinglePost(props) {
   };
   const unlikePost = (postId) => {
     axios
-      .delete(`http://localhost:5000/api/cv/post/${postId}/unliking`, {
+      .delete(`http://134.122.94.140:5000/api/cv/post/${postId}/unliking`, {
         headers: authHeader(),
       })
       .then((response) => {
@@ -326,7 +326,7 @@ export default function SinglePost(props) {
               {role === 1 && (
                 <Avatar
                   src={
-                    "http://localhost:5000/upload/static/images/" +
+                    userService.imageLink+
                     owner?.cv?.image
                   }
                   className={classes.large}
@@ -336,7 +336,7 @@ export default function SinglePost(props) {
                 <Avatar
                   variant="square"
                   src={
-                    "http://localhost:5000/upload/static/images/" +
+                    userService.imageLink +
                     owner?.company?.companyImage
                   }
                   className={classes.large}
@@ -369,13 +369,13 @@ export default function SinglePost(props) {
               <ModalImage
                 className="post_image"
                 small={
-                  "http://localhost:5000/upload/static/images/post" +
+                  "http://134.122.94.140:5000/upload/static/images/post" +
                   postId +
                   "." +
                   imageType
                 }
                 large={
-                  "http://localhost:5000/upload/static/images/post" +
+                  "http://134.122.94.140:5000/upload/static/images/post" +
                   postId +
                   "." +
                   imageType
@@ -448,8 +448,8 @@ export default function SinglePost(props) {
               <Avatar
                 src={
                   role == 1
-                    ? "http://localhost:5000/upload/static/images/" + ownerImage
-                    : "http://localhost:5000/upload/static/images/" + ownerImage
+                    ? userService.imageLink + ownerImage
+                    : userService.imageLink + ownerImage
                 }
                 className={classes.large}
               />

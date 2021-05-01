@@ -507,10 +507,9 @@ const Cv = (props) => {
                 </div>
                 {/* About*/}
 
-                {currentUserId != id && switchState && currentUser?.roles[0]?.id == 1 && isFriend != 1 && (
+                {currentUserId != id && switchState && currentUser?.roles[0]?.id == 1 && isFriend != 1 ? (
                   <h2>Cet utilisateur a un profil privé</h2>
-                )}
-                {currentUserId == id && (
+                ): (
                   <>
                     {" "}
                     <About data={cv?.about} email={email} />

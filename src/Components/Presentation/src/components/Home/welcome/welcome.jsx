@@ -85,7 +85,6 @@ export default function Welcome() {
   };
   // componentDidMount
   useEffect(() => {
-    console.log(authHeader());
     startTimer();
     return () => {
       clearInterval(interval.current);
