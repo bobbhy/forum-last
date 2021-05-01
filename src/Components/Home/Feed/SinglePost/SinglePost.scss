@@ -1,12 +1,11 @@
-.posth {
+.post {
   background-color: white;
   padding: 15px;
-  margin:auto;
-  margin-top: 15px;
+  margin-bottom: 10px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 100%;
   border: 1px solid rgba(211, 211, 211, 0.733);
 }
 .post_comment {
@@ -46,7 +45,6 @@
   margin-top: 5px;
   max-width: 800px;
   max-height: 80%;
-
 }
 .post_image:hover {
   cursor: pointer;

@@ -2,6 +2,7 @@ import axios from "axios";
 import authHeader from "./authHeader";
 
 const API_URL = "http://134.122.94.140:5000/";
+// const API_URL = "http://localhost:5000/";
 
 const getApiState = () => {
   return axios.get(API_URL + "hello");
@@ -18,7 +19,7 @@ const getUsersLike = (key) => {
 };
 const getEtablishements = () => {
   return axios.get(API_URL + "api/profile/etablishment/all");
-}
+};
 const connectTo = (id) => {
   return axios({
     method: "post",
@@ -37,8 +38,8 @@ const disconnect = (id) => {
     method: "delete",
     url: API_URL + "api/profile/disconnect/" + id,
     headers: authHeader(),
-  })
-}
+  });
+};
 const accept = (id) => {
   return axios({
     method: "post",
@@ -96,35 +97,41 @@ const handleSingleNotif = (id) => {
     url: API_URL + `api/profile/notification/${id}`,
     headers: authHeader(),
   });
-}
+};
 const deleteNotification = (id) => {
   return axios({
     method: "delete",
     url: API_URL + `api/profile/notification/${id}`,
     headers: authHeader(),
-  })
-}
+  });
+};
 const deleteMesssage = (id) => {
   return axios({
     method: "delete",
     url: API_URL + `api/profile/message/${id}`,
     headers: authHeader(),
-  })
-}
+  });
+};
 const getAllConversations = () => {
   return axios.get(API_URL + "api/profile/all", {
     headers: authHeader(),
-  })
-}
+  });
+};
 const sendMessage = (messagePayload) => {
-  return axios.post(API_URL + "api/profile/sendMessage", messagePayload, { headers: authHeader() })
-}
+  return axios.post(API_URL + "api/profile/sendMessage", messagePayload, {
+    headers: authHeader(),
+  });
+};
 const getMessages = (id) => {
-  return axios.get(API_URL + `api/profile/allMessages/${id}`, { headers: authHeader() })
-}
+  return axios.get(API_URL + `api/profile/allMessages/${id}`, {
+    headers: authHeader(),
+  });
+};
 const getAllNotifications = () => {
-  return axios.get(API_URL + "api/profile/allNotifications", { headers: authHeader() })
-}
+  return axios.get(API_URL + "api/profile/allNotifications", {
+    headers: authHeader(),
+  });
+};
 const getLikesByPost = (postId) => {
   return axios.get(`${API_URL}api/cv/likesbypost/${postId}`);
 };
@@ -136,10 +143,10 @@ const getPostById = async (postId) => {
 };
 const getPostComments = (postId) => {
   return axios.get(`${API_URL}api/cv/post/${postId}/comment`);
-}
+};
 const contactUs = async (contact) => {
-  return await axios.post(`${API_URL}contact/message`, contact)
-}
+  return await axios.post(`${API_URL}contact/message`, contact);
+};
 const getNonPrivatePosts = () => {
   return axios.get(`${API_URL}api/cv/getNonPosts`, {
     headers: authHeader(),
@@ -149,72 +156,64 @@ const getAll = async () => {
   return await axios.get(`${API_URL}api/profile/getall`, {
     headers: authHeader(),
   }); // buggy
-}
+};
 const enable = async (id) => {
-  return await axios.put(`${API_URL}api/cv/enable/${id}`)
-}
+  return await axios.put(`${API_URL}api/cv/enable/${id}`);
+};
 const updateStudentPost = (id, post) => {
-  return axios.put(`${API_URL}api/cv/post/${id}`, post)
-}
+  return axios.put(`${API_URL}api/cv/post/${id}`, post);
+};
 const updateCompanyPost = (id, post) => {
-  return axios.put(`${API_URL}api/comp/post/${id}`, post)
-}
+  return axios.put(`${API_URL}api/comp/post/${id}`, post);
+};
 const deleteComment = (id) => {
-  return axios.delete(`${API_URL}api/cv/comment/${id}`)
-}
+  return axios.delete(`${API_URL}api/cv/comment/${id}`);
+};
 const uploadStudentComment = (postId, comment) => {
-  return axios.post(
-    `${API_URL}api/cv/post/${postId}/comment`, comment,
-    {
-      headers: authHeader(),
-    }
-  )
-}
+  return axios.post(`${API_URL}api/cv/post/${postId}/comment`, comment, {
+    headers: authHeader(),
+  });
+};
 const uploadCompanyComment = (postId, comment) => {
-  return axios.post(
-    `${API_URL}api/comp/post/${postId}/comment`,
-    comment,
-    {
-      headers: authHeader(),
-    }
-  )
-}
+  return axios.post(`${API_URL}api/comp/post/${postId}/comment`, comment, {
+    headers: authHeader(),
+  });
+};
 const updateStudentComment = (id, comment) => {
   return axios.put(`${API_URL}api/cv/comment/${id}`, comment);
-}
+};
 const updateCompanyComment = (id, comment) => {
   return axios.put(`${API_URL}api/comp/comment/${id}`, comment);
-}
+};
 const likeComment = (commentId, userId) => {
-  return axios.put(`${API_URL}api/cv/comment/${commentId}/${userId}/liking`
-  )
-}
+  return axios.put(`${API_URL}api/cv/comment/${commentId}/${userId}/liking`);
+};
 const deletePostById = (postId) => {
-  return axios.delete(`${API_URL}api/cv/post/${postId}`)
-}
+  return axios.delete(`${API_URL}api/cv/post/${postId}`);
+};
 const unlikeComment = (commentId) => {
   return axios.delete(`${API_URL}api/cv/comment/${commentId}/unliking`, {
     headers: authHeader(),
-  })
-}
+  });
+};
 const likePost = (postId, userId) => {
-  return axios.put(`${API_URL}api/cv/post/${postId}/${userId}/liking`)
-}
+  return axios.put(`${API_URL}api/cv/post/${postId}/${userId}/liking`);
+};
 const unlikePost = (postId) => {
   return axios.delete(`${API_URL}api/cv/post/${postId}/unliking`, {
     headers: authHeader(),
-  })
-}
+  });
+};
 const uploadStudentPost = (post) => {
   return axios.post(`${API_URL}api/cv/uploadPost`, post, {
     headers: authHeader(),
-  })
-}
+  });
+};
 const uploadCompanyPost = (post) => {
   return axios.post(`${API_URL}api/comp/uploadPost`, post, {
     headers: authHeader(),
-  })
-}
+  });
+};
 const uploadAboutCompany = (address, city, number, bio, socials) => {
   return axios.post(
     `${API_URL}api/comp/about`,
@@ -226,19 +225,19 @@ const uploadAboutCompany = (address, city, number, bio, socials) => {
       socials,
     },
     { headers: authHeader() }
-  )
-}
+  );
+};
 const flagCompany = (id) => {
   return axios.put(`${API_URL}api/comp/flag/${id}`);
-}
+};
 const flagStudent = (id) => {
   return axios.put(`${API_URL}api/cv/flag/${id}`);
-}
+};
 const getDevLang = () => {
   return axios.get(`${API_URL}api/cv/dev`, {
     headers: authHeader(),
-  })
-}
+  });
+};
 const uploadDevLang = (name, value, icon) => {
   return axios.post(
     `${API_URL}api/cv/dev`,
@@ -248,16 +247,16 @@ const uploadDevLang = (name, value, icon) => {
       icon,
     },
     { headers: authHeader() }
-  )
-}
+  );
+};
 const deleteDevLang = (id) => {
   return axios.delete(`${API_URL}api/cv/dev/${id}`);
-}
+};
 const getNormalLang = () => {
   return axios.get(`${API_URL}api/cv/normal`, {
     headers: authHeader(),
-  })
-}
+  });
+};
 const uploadNormalLang = (name, value) => {
   return axios.post(
     `${API_URL}api/cv/normal`,
@@ -266,120 +265,139 @@ const uploadNormalLang = (name, value) => {
       value,
     },
     { headers: authHeader() }
-  )
-}
+  );
+};
 const deleteNormalLang = (id) => {
-  return axios.delete(`${API_URL}api/cv/normal/${id}`)
-}
+  return axios.delete(`${API_URL}api/cv/normal/${id}`);
+};
 const getSoftware = (id) => {
   return axios.get(`${API_URL}api/cv/software`, {
     headers: authHeader(),
-  })
-}
+  });
+};
 const uploadSoftware = (name, value, icon) => {
-  return axios
-    .post(
-      `${API_URL}api/cv/software`,
-      {
-        name,
-        value,
-        icon,
-      },
-      { headers: authHeader() }
-    )
-}
+  return axios.post(
+    `${API_URL}api/cv/software`,
+    {
+      name,
+      value,
+      icon,
+    },
+    { headers: authHeader() }
+  );
+};
 const deleteSoftware = (id) => {
-  return axios.delete(`${API_URL}api/cv/software/${id}`)
-}
+  return axios.delete(`${API_URL}api/cv/software/${id}`);
+};
 const getAward = () => {
   return axios.get(`${API_URL}api/cv/award`, {
     headers: authHeader(),
-  })
-}
-const uploadAbout = (firstName, lastName, address, city, number, bio, socials, interests, domaine) => {
+  });
+};
+const uploadAbout = (
+  firstName,
+  lastName,
+  address,
+  city,
+  number,
+  bio,
+  socials,
+  interests,
+  domaine
+) => {
   return axios.post(
     `${API_URL}api/cv/about`,
-    { firstName, lastName, address, city, number, bio, socials, interests, domaine },
+    {
+      firstName,
+      lastName,
+      address,
+      city,
+      number,
+      bio,
+      socials,
+      interests,
+      domaine,
+    },
     { headers: authHeader() }
-  )
-}
+  );
+};
 const uploadAward = (organizer, name, position) => {
-  return axios
-    .post(
-      `${API_URL}api/cv/award`,
-      {
-        organizer,
-        name,
-        position,
-      },
-      { headers: authHeader() }
-    )
-}
+  return axios.post(
+    `${API_URL}api/cv/award`,
+    {
+      organizer,
+      name,
+      position,
+    },
+    { headers: authHeader() }
+  );
+};
 const deleteAward = (id) => {
-  return axios.delete(`${API_URL}api/cv/award/${id}`)
-}
+  return axios.delete(`${API_URL}api/cv/award/${id}`);
+};
 const getEducation = () => {
   return axios.get(`${API_URL}api/cv/education`, {
     headers: authHeader(),
   });
-}
+};
 const uploadEducation = (school, diploma, dateStart, dateEnd, field) => {
-  return axios
-    .post(
-      `${API_URL}api/cv/education`,
-      {
-        school, diploma, dateStart, dateEnd, field
-      },
-      { headers: authHeader() }
-    )
-}
-const deleteEducation = (id) => {
-  return axios
-    .delete(`${API_URL}api/cv/education/${id}`)
-}
-const getExperience = () => {
-  return axios.get(
-    `${API_URL}api/cv/experience`,
+  return axios.post(
+    `${API_URL}api/cv/education`,
     {
-      headers: authHeader(),
-    }
+      school,
+      diploma,
+      dateStart,
+      dateEnd,
+      field,
+    },
+    { headers: authHeader() }
   );
-}
-const uploadExperience = (occupation, company, dateStart, dateEnd, description) => {
-  return axios
-    .post(
-      `${API_URL}api/cv/experience`,
-      { occupation, company, dateStart, dateEnd, description },
-      { headers: authHeader() }
-    )
-}
+};
+const deleteEducation = (id) => {
+  return axios.delete(`${API_URL}api/cv/education/${id}`);
+};
+const getExperience = () => {
+  return axios.get(`${API_URL}api/cv/experience`, {
+    headers: authHeader(),
+  });
+};
+const uploadExperience = (
+  occupation,
+  company,
+  dateStart,
+  dateEnd,
+  description
+) => {
+  return axios.post(
+    `${API_URL}api/cv/experience`,
+    { occupation, company, dateStart, dateEnd, description },
+    { headers: authHeader() }
+  );
+};
 const getExperienceById = (id) => {
-  return axios.get(
-    `${API_URL}api/cv/getexperiencebyid/${id}`
-  );
-}
+  return axios.get(`${API_URL}api/cv/getexperiencebyid/${id}`);
+};
 const deleteExperience = (id) => {
-  return axios.delete(`${API_URL}api/cv/experience/${id}`)
-}
+  return axios.delete(`${API_URL}api/cv/experience/${id}`);
+};
 const updateAboutCompany = (id, about) => {
-  return axios.put(`${API_URL}api/comp/about/${id}`, about)
-}
+  return axios.put(`${API_URL}api/comp/about/${id}`, about);
+};
 const updateAbout = (id, about) => {
-  return axios.put(`${API_URL}api/cv/updateAbout/${id}`, about)
-}
+  return axios.put(`${API_URL}api/cv/updateAbout/${id}`, about);
+};
 const getEducationById = (id) => {
-  return axios.get(`${API_URL}api/cv/geteducationbyid/${id}`
-  );
-}
+  return axios.get(`${API_URL}api/cv/geteducationbyid/${id}`);
+};
 const editEducation = (id, education) => {
-  return axios.put(`${API_URL}api/cv/updateEducation/${id}`, education)
-}
+  return axios.put(`${API_URL}api/cv/updateEducation/${id}`, education);
+};
 const getUnenabledManagers = () => {
   return axios.get(`${API_URL}api/comp/unenabledcompanies`);
-}
+};
 const editExperience = (id, experience) => {
-  return axios.put(`${API_URL}api/cv/updateExperience/${id}`, experience)
-}
+  return axios.put(`${API_URL}api/cv/updateExperience/${id}`, experience);
+};
 const imageLink = `${API_URL}upload/static/images/`;
 const uploadImageUrl = `${API_URL}api/cv/image`;
 const uploadImageUrlCompany = `${API_URL}api/comp/image`;
@@ -460,6 +478,6 @@ const userService = {
   unlikeComment,
   imageLink,
   uploadImageUrl,
-  uploadImageUrlCompany
+  uploadImageUrlCompany,
 };
 export default userService;

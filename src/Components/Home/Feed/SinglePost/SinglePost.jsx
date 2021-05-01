@@ -164,7 +164,7 @@ export default function SinglePost(props) {
   };
 
   const deleteById = (id) => {
-    axios.delete(`http://134.122.94.140:5000/api/cv/post/${id}`).then((response) => {
+    userService.deletePostById(id).then((response) => {
       setRefresh(!refresh);
     });
   };
@@ -175,19 +175,17 @@ export default function SinglePost(props) {
       role: user?.roles[0]?.id,
     };
     if (user?.roles[0]?.id === 1) {
-      axios
-        .put(`http://134.122.94.140:5000/api/cv/post/${id}`, post)
-        .then((response) => {
-          setRefresh(true);
-          setRefresh(false);
-        });
+      userService.updateStudentPost(id, post).then((response) => {
+        setOpen(false);
+        setRefresh(true);
+        setRefresh(false);
+      });
     } else if (user?.roles[0]?.id === 3) {
-      axios
-        .put(`http://134.122.94.140:5000/api/comp/post/${id}`, post)
-        .then((response) => {
-          setRefresh(true);
-          setRefresh(false);
-        });
+      userService.updateCompanyPost(id, post).then((response) => {
+        setOpen(false);
+        setRefresh(true);
+        setRefresh(false);
+      });
     }
   };
 
@@ -298,199 +296,195 @@ export default function SinglePost(props) {
   );
 
   return (
-    <div className="posth">
-      {loading && (
-        <Loader
-          type="Oval"
-          // color="rgb(63, 63, 63)"
-          color="#6573c3"
-          height={30}
-          width={30}
-          timeout={1500}
-          className="loading_spinner"
-        />
-      )}
-      {!errorMessage && !loading && (
-        <>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-          >
-            {body}
-          </Modal>
+    <div className="feed">
+      <div className="post">
+        {loading && (
+          <Loader
+            type="Oval"
+            // color="rgb(63, 63, 63)"
+            color="#6573c3"
+            height={30}
+            width={30}
+            timeout={1500}
+            className="loading_spinner"
+          />
+        )}
+        {!errorMessage && !loading && (
+          <>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+            >
+              {body}
+            </Modal>
 
-          <div className="post_header">
-            <Link to={`/view/${ownerId}`} style={{ textDecoration: "none" }}>
-              {role === 1 && (
-                <Avatar
-                  src={
-                    userService.imageLink+
-                    owner?.cv?.image
-                  }
-                  className={classes.large}
-                />
-              )}
-              {role === 3 && (
-                <Avatar
-                  variant="square"
-                  src={
-                    userService.imageLink +
-                    owner?.company?.companyImage
-                  }
-                  className={classes.large}
-                />
-              )}
-            </Link>
+            <div className="post_header">
+              <Link to={`/view/${ownerId}`} style={{ textDecoration: "none" }}>
+                {role === 1 && (
+                  <Avatar
+                    src={userService.imageLink + owner?.cv?.image}
+                    className={classes.large}
+                  />
+                )}
+                {role === 3 && (
+                  <Avatar
+                    variant="square"
+                    src={userService.imageLink + owner?.company?.companyImage}
+                    className={classes.large}
+                  />
+                )}
+              </Link>
 
-            <div className="post_info">
-              <h2 style={{ display: "flex" }}>
-                {role === 1 &&
-                  owner?.cv?.about?.firstName +
-                    " " +
-                    owner?.cv?.about?.lastName}
-                {role === 3 && owner?.company?.aboutCompany?.name}
-              </h2>
-              <p>{`@${username}  - ${
-                role === 1 ? "Student" : "Enterprise"
-              }`}</p>
-              <span></span>
-              <div className="post_date">
-                <h6 style={{ color: "#000" }}>{timestamp} &nbsp;</h6>
-                <PublicIcon className="global" style={{ color: "#000" }} />
+              <div className="post_info">
+                <h2 style={{ display: "flex" }}>
+                  {role === 1 &&
+                    owner?.cv?.about?.firstName +
+                      " " +
+                      owner?.cv?.about?.lastName}
+                  {role === 3 && owner?.company?.aboutCompany?.name}
+                </h2>
+                <p>{`@${username}  - ${
+                  role === 1 ? "Student" : "Enterprise"
+                }`}</p>
+                <span></span>
+                <div className="post_date">
+                  <h6 style={{ color: "#000" }}>{timestamp} &nbsp;</h6>
+                  <PublicIcon className="global" style={{ color: "#000" }} />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="post_body">
-            <div className="post_message">{message}</div>
-            {console.log(`hhh ${postId}`)}
-            {imageType && (
-              <ModalImage
-                className="post_image"
-                small={
-                  "http://134.122.94.140:5000/upload/static/images/post" +
-                  postId +
-                  "." +
-                  imageType
-                }
-                large={
-                  "http://134.122.94.140:5000/upload/static/images/post" +
-                  postId +
-                  "." +
-                  imageType
-                }
-                alt=""
-              />
-            )}
-          </div>
-          <div className="post_stats">
-            <p style={{ fontSize: "13px" }}>
-              {shownLikes} likes&nbsp;&nbsp;-&nbsp;&nbsp;
-              {comments?.length} comments
-            </p>
-          </div>
-          <div className="post_buttons">
-            {toggleLike && (
+            <div className="post_body">
+              <div className="post_message">{message}</div>
+              {console.log(`hhh ${postId}`)}
+              {imageType && (
+                <ModalImage
+                  className="post_image"
+                  small={
+                    "http://134.122.94.140:5000/upload/static/images/post" +
+                    postId +
+                    "." +
+                    imageType
+                  }
+                  large={
+                    "http://134.122.94.140:5000/upload/static/images/post" +
+                    postId +
+                    "." +
+                    imageType
+                  }
+                  alt=""
+                />
+              )}
+            </div>
+            <div className="post_stats">
+              <p style={{ fontSize: "13px" }}>
+                {shownLikes} likes&nbsp;&nbsp;-&nbsp;&nbsp;
+                {comments?.length} comments
+              </p>
+            </div>
+            <div className="post_buttons">
+              {toggleLike && (
+                <InputOption
+                  Icon={ThumbUpIcon}
+                  title="Like"
+                  color="blue"
+                  onClick={() => unlikePost(postId)}
+                />
+              )}{" "}
+              {/* dislike */}
+              {!toggleLike && (
+                <InputOption
+                  Icon={ThumbUpAltOutlinedIcon}
+                  title="Like"
+                  color="blue"
+                  onClick={() => likePost(postId)}
+                />
+              )}
+              {/* like */}
               <InputOption
-                Icon={ThumbUpIcon}
-                title="Like"
-                color="blue"
-                onClick={() => unlikePost(postId)}
+                Icon={CommentIcon}
+                title="Comment"
+                color="green"
+                onClick={() => setToggleComment(!toggleComment)}
               />
-            )}{" "}
-            {/* dislike */}
-            {!toggleLike && (
-              <InputOption
-                Icon={ThumbUpAltOutlinedIcon}
-                title="Like"
-                color="blue"
-                onClick={() => likePost(postId)}
-              />
-            )}
-            {/* like */}
-            <InputOption
-              Icon={CommentIcon}
-              title="Comment"
-              color="green"
-              onClick={() => setToggleComment(!toggleComment)}
-            />
-            {/* {currentUserId !== ownerId && (
+              {/* {currentUserId !== ownerId && (
             <InputOption Icon={ShareIcon} title="Share" color="purple" />
           )} */}
-            {currentUserId === ownerId && (
-              <>
-                <InputOption
-                  Icon={EditTwoToneIcon}
-                  title="Edit"
-                  color="purple"
-                  onClick={handleOpen}
-                />
-                <InputOption
-                  Icon={DeleteTwoToneIcon}
-                  title="Delete"
-                  color="red"
-                  onClick={() => {
-                    deleteById(postId);
-                  }}
-                />
-              </>
-            )}
-          </div>
+              {currentUserId === ownerId && (
+                <>
+                  <InputOption
+                    Icon={EditTwoToneIcon}
+                    title="Edit"
+                    color="purple"
+                    onClick={handleOpen}
+                  />
+                  <InputOption
+                    Icon={DeleteTwoToneIcon}
+                    title="Delete"
+                    color="red"
+                    onClick={() => {
+                      deleteById(postId);
+                    }}
+                  />
+                </>
+              )}
+            </div>
 
-          {comments.length !== 0 && (
-            <div className="comments-header">
-              <h4>Comments</h4>
-            </div>
-          )}
-          {toggleComment && (
-            <div className="add-comment">
-              <Avatar
-                src={
-                  role == 1
-                    ? userService.imageLink + ownerImage
-                    : userService.imageLink + ownerImage
-                }
-                className={classes.large}
+            {comments.length !== 0 && (
+              <div className="comments-header">
+                <h4>Comments</h4>
+              </div>
+            )}
+            {toggleComment && (
+              <div className="add-comment">
+                <Avatar
+                  src={
+                    role == 1
+                      ? userService.imageLink + ownerImage
+                      : userService.imageLink + ownerImage
+                  }
+                  className={classes.large}
+                />
+                <textarea
+                  rows="4"
+                  className="add-text-area"
+                  placeholder="Add a public comment"
+                  value={commentInput}
+                  onChange={(e) => setCommentInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                />
+              </div>
+            )}
+            {comments?.map((e, key) => (
+              <Comment
+                key={key}
+                onChange={() => {
+                  setRefresh(!refresh);
+                }}
+                refresh={refresh}
+                user={user}
+                commentId={e?.id}
+                message={e?.message}
+                timestamp={e?.updatedAt.substring(0, 10)}
+                username={e?.ownerUsername}
+                firstName={e?.ownerFirstName}
+                lastName={e?.ownerLastName}
+                companyName={e?.companyName}
+                role={e?.role}
+                ownerId={e?.ownersId}
+                currentUserId={user?.id}
+                likes={e?.likes}
+                onChange={(value) => setRefresh(value)}
+                onDelete={() => {
+                  doReload();
+                }}
               />
-              <textarea
-                rows="4"
-                className="add-text-area"
-                placeholder="Add a public comment"
-                value={commentInput}
-                onChange={(e) => setCommentInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-              />
-            </div>
-          )}
-          {comments?.map((e, key) => (
-            <Comment
-              key={key}
-              onChange={() => {
-                setRefresh(!refresh);
-              }}
-              refresh={refresh}
-              user={user}
-              commentId={e?.id}
-              message={e?.message}
-              timestamp={e?.updatedAt.substring(0, 10)}
-              username={e?.ownerUsername}
-              firstName={e?.ownerFirstName}
-              lastName={e?.ownerLastName}
-              companyName={e?.companyName}
-              role={e?.role}
-              ownerId={e?.ownersId}
-              currentUserId={user?.id}
-              likes={e?.likes}
-              onChange={(value) => setRefresh(value)}
-              onDelete={() => {
-                doReload();
-              }}
-            />
-          ))}
-        </>
-      )}
-      {errorMessage && !loading && <span>{errorMessage}</span>}
+            ))}
+          </>
+        )}
+        {errorMessage && !loading && <span>{errorMessage}</span>}
+      </div>
     </div>
   );
 }
