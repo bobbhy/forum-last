@@ -191,44 +191,31 @@ export default function SinglePost(props) {
 
   const uploadComment = (id) => {
     const errors = [];
+    let comment;
     if (commentInput.length === 0) errors.push("Comment cannot be empty.\n");
     if (errors.length !== 0) {
       return 0;
     }
     if (user?.roles[0]?.id === 1) {
-      axios
-        .post(
-          `http://134.122.94.140:5000/api/cv/post/${id}/comment`,
-          {
-            message: commentInput,
-            role: 1,
-          },
-          {
-            headers: authHeader(),
-          }
-        )
-        .then((response) => {
-          setRefresh(!refresh);
+      comment = {
+        message: commentInput,
+        role: 1,
+      };
+      userService.uploadStudentComment(id, comment).then((response) => {
+        setRefresh(!refresh);
 
-          setCommentInput("");
-        });
+        setCommentInput("");
+      });
     } else if (user?.roles[0]?.id === 3) {
-      axios
-        .post(
-          `http://134.122.94.140:5000/api/comp/post/${id}/comment`,
-          {
-            message: commentInput,
-            role: 3,
-          },
-          {
-            headers: authHeader(),
-          }
-        )
-        .then((response) => {
-          // window.location.reload();
-          setRefresh(!refresh);
-          setCommentInput("");
-        });
+      comment = {
+        message: commentInput,
+        role: 3,
+      };
+      userService.uploadCompanyComment(id, comment).then((response) => {
+        // window.location.reload();
+        setRefresh(!refresh);
+        setCommentInput("");
+      });
     }
   };
 

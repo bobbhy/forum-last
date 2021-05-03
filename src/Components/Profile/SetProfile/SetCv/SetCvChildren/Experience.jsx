@@ -5,8 +5,8 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { TextField } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -15,8 +15,6 @@ import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "react-bootstrap/Modal";
-import axios from "axios";
-import authHeader from "../../../../../services/authHeader";
 import AddCircleOutlinedIcon from "@material-ui/icons/AddCircleOutlined";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -27,7 +25,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
-import userService from "../../../../../services/userService"
+import userService from "../../../../../services/userService";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -36,7 +35,7 @@ function Alert(props) {
 const useStyles = makeStyles((theme) => ({
   root: {},
   textfield: {
-    marginTop: "10px",
+    marginTop: "25px",
     marginRight: "1vw",
     width: "100%",
   },
@@ -49,10 +48,9 @@ const useStyles = makeStyles((theme) => ({
     width: "60%",
     outline: "none",
   },
-  checkbox:
-  {
+  checkbox: {
     paddingTop: "40px",
-    marginLeft: "5px"
+    marginLeft: "5px",
   },
   heading: {
     fontSize: theme.typography.pxToRem(20),
@@ -72,11 +70,13 @@ const FormModal = (props) => {
   const [occupation, setOccupaton] = useState("");
   const [description, setDescription] = useState("");
   const [company, setCompany] = useState("");
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(false);
+  const [isProject, setIsProject] = useState(false);
 
   // STYLE STATES
-  const [open, setOpen] = React.useState(false);
-  const [modalShow, setModalShow] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const [modal2Show, setModal2Show] = useState(false);
 
   // RESPONSE STATES
   const [successful, setSuccessful] = useState(false);
@@ -88,19 +88,19 @@ const FormModal = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await userService.getExperience()
+      const result = await userService.getExperience();
       setData(result.data);
     };
     fetchData();
-    props.onChange(true)
+    props.onChange(true);
   }, [successful]);
 
   const handleStart = (date) => {
     setStartDate(date);
   };
   const handleChecked = (e) => {
-    setChecked(!checked)
-  }
+    setChecked(!checked);
+  };
 
   const handleEnd = (date) => {
     setEndDate(date);
@@ -139,13 +139,20 @@ const FormModal = (props) => {
     setModalShow(false);
     dateStart = dateStart.toString().substring(4, 15);
     if (checked) {
-      dateEnd = "Present"
-    }
-    else {
+      dateEnd = "Present";
+    } else {
       dateEnd = dateEnd.toString().substring(4, 15);
     }
-    setChecked(false)
-    userService.uploadExperience(occupation, company, dateStart, dateEnd, description)
+    setChecked(false);
+    userService
+      .uploadExperience(
+        occupation,
+        company,
+        dateStart,
+        dateEnd,
+        description,
+        isProject
+      )
       .then(
         (response) => {
           setMessage(response.data.message);
@@ -171,34 +178,49 @@ const FormModal = (props) => {
   };
 
   const deleteById = (id) => {
-    userService.deleteExperience(id)
-      .then((response) => {
-        setSuccessful(true);
-        setSuccessful(false);
-      });
+    userService.deleteExperience(id).then((response) => {
+      setSuccessful(true);
+      setSuccessful(false);
+    });
   };
 
   return (
     <div>
       <div className={classes.root}>
-        <Button
-          onClick={() => setModalShow(true)}
-          variant="outlined"
+        <ButtonGroup
           color="primary"
-          size="medium"
-          startIcon={
-            <AddCircleOutlinedIcon
-              style={{
-                maxWidth: "30px",
-                maxHeight: "30px",
-                minWidth: "30px",
-                minHeight: "30px",
-              }}
-            />
-          }
+          aria-label="contained  primary button group"
+          style={{ marginBottom: "10px" }}
         >
-          Add New
-        </Button>
+          <Button
+            onClick={() => {
+              setModalShow(true);
+              setIsProject(false);
+            }}
+            startIcon={
+              <AddCircleOutlinedIcon
+                style={{
+                  maxWidth: "30px",
+                  maxHeight: "30px",
+                  minWidth: "30px",
+                  minHeight: "30px",
+                }}
+              />
+            }
+          >
+            Ajoutez une experience
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              setModal2Show(true);
+              setIsProject(true);
+              setCompany(" ");
+            }}
+          >
+            Ou un projet que vous avez réalisé
+          </Button>
+        </ButtonGroup>
         <Modal
           show={modalShow}
           color="primary"
@@ -265,8 +287,13 @@ const FormModal = (props) => {
                     <FormControlLabel
                       className={classes.checkbox}
                       value="end"
-                      control={<Checkbox checked={checked}
-                        onChange={handleChecked} color="primary" />}
+                      control={
+                        <Checkbox
+                          checked={checked}
+                          onChange={handleChecked}
+                          color="primary"
+                        />
+                      }
                       label="Present"
                       labelPlacement="end"
                     />
@@ -282,11 +309,11 @@ const FormModal = (props) => {
                 {typeof message == "string"
                   ? message
                   : message?.map((message1) => (
-                    <span>
-                      -{message1}
-                      <br />
-                    </span>
-                  ))}
+                      <span>
+                        -{message1}
+                        <br />
+                      </span>
+                    ))}
               </Alert>
             </Snackbar>
           </Modal.Body>
@@ -304,6 +331,97 @@ const FormModal = (props) => {
           </Modal.Footer>
         </Modal>
 
+        <Modal
+          show={modal2Show}
+          color="primary"
+          onHide={() => setModal2Show(false)}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Body>
+            <FormControl>
+              <Grid container justify="space-between">
+                <Grid item xs={6}>
+                  <TextField
+                    variant="outlined"
+                    label="Titre"
+                    value={occupation}
+                    onChange={handleOccupation}
+                    className={classes.textfield}
+                  />
+                  <TextField
+                    variant="outlined"
+                    label="Description"
+                    value={description}
+                    onChange={handleDescription}
+                    className={classes.textfield}
+                  />
+                </Grid>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <Grid item xs={6}>
+                    <KeyboardDatePicker
+                      disableToolbar
+                      className={classes.dates}
+                      variant="inline"
+                      format="dd/MM/yyyy"
+                      margin="normal"
+                      label="Start Date"
+                      value={dateStart}
+                      onChange={handleStart}
+                      KeyboardButtonProps={{
+                        "aria-label": "change date",
+                      }}
+                    />
+                    <KeyboardDatePicker
+                      disabled={checked ? true : false}
+                      disableToolbar
+                      className={classes.dates}
+                      variant="inline"
+                      format="dd/MM/yyyy"
+                      margin="normal"
+                      label="End Date"
+                      value={dateEnd}
+                      onChange={handleEnd}
+                      KeyboardButtonProps={{
+                        "aria-label": "change date",
+                      }}
+                    />
+                  </Grid>
+                </MuiPickersUtilsProvider>
+              </Grid>
+            </FormControl>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert
+                onClose={handleClose}
+                severity={successful ? "success" : "error"}
+              >
+                {typeof message == "string"
+                  ? message
+                  : message?.map((message1) => (
+                      <span>
+                        -{message1}
+                        <br />
+                      </span>
+                    ))}
+              </Alert>
+            </Snackbar>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                upload();
+                setSuccessful(false);
+                setModal2Show(false);
+              }}
+            >
+              Upload
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
         <TableContainer component={Paper}>
           <Table
             className={classes.table}
@@ -312,8 +430,8 @@ const FormModal = (props) => {
           >
             <TableHead>
               <TableRow>
-                <TableCell>Occupation</TableCell>
                 <TableCell>Company</TableCell>
+                <TableCell>Occupation (Titre)</TableCell>
                 <TableCell>Start Date</TableCell>
                 <TableCell>End Date</TableCell>
                 <TableCell>Description</TableCell>
@@ -323,10 +441,10 @@ const FormModal = (props) => {
             <TableBody>
               {data?.map((obj) => (
                 <TableRow key={obj}>
+                  <TableCell>{obj.company}</TableCell>
                   <TableCell component="th" scope="row">
                     {obj.occupation}
                   </TableCell>
-                  <TableCell>{obj.company}</TableCell>
                   <TableCell>{obj.dateStart}</TableCell>
                   <TableCell>{obj.dateEnd}</TableCell>
                   <TableCell>{obj.description}</TableCell>

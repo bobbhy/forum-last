@@ -214,6 +214,11 @@ const uploadCompanyPost = (post) => {
     headers: authHeader(),
   });
 };
+const getAbout = () => {
+  return axios.get(`${API_URL}api/cv/about`, {
+    headers: authHeader(),
+  });
+};
 const uploadAboutCompany = (address, city, number, bio, socials) => {
   return axios.post(
     `${API_URL}api/comp/about`,
@@ -366,11 +371,12 @@ const uploadExperience = (
   company,
   dateStart,
   dateEnd,
-  description
+  description,
+  isProject
 ) => {
   return axios.post(
     `${API_URL}api/cv/experience`,
-    { occupation, company, dateStart, dateEnd, description },
+    { occupation, company, dateStart, dateEnd, description, isProject },
     { headers: authHeader() }
   );
 };
@@ -405,6 +411,7 @@ const userService = {
   getApiState,
   getSoftware,
   getAward,
+  getAbout,
   uploadSoftware,
   uploadAbout,
   deleteSoftware,

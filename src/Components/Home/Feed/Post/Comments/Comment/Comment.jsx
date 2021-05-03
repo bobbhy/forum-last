@@ -166,36 +166,34 @@ export default function Comment({
   };
 
   const likeComment = (commentId) => {
-    userService.likeComment(commentId, user.id)
-      .then(
-        (response) => {
-          setToggleLike(!toggleLike);
-          setShownLikes(shownLikes + 1);
-          // onChange(true);
-          // onChange(false);
-        },
-        (error) => {
-          setSuccessful(false);
-          setUpdateMessage("Couldn't like post!");
-          setSnackOpen(true);
-        }
-      );
+    userService.likeComment(commentId, user.id).then(
+      (response) => {
+        setToggleLike(!toggleLike);
+        setShownLikes(shownLikes + 1);
+        // onChange(true);
+        // onChange(false);
+      },
+      (error) => {
+        setSuccessful(false);
+        setUpdateMessage("Couldn't like post!");
+        setSnackOpen(true);
+      }
+    );
   };
   const unlikeComment = (commentId) => {
-    userService.unlikeComment(commentId)
-      .then(
-        (response) => {
-          setToggleLike(!toggleLike);
-          // onChange(true);
-          // onChange(false);
-          setShownLikes(shownLikes - 1);
-        },
-        (error) => {
-          setSuccessful(false);
-          setUpdateMessage("Couldn't unlike comment");
-          setSnackOpen(true);
-        }
-      );
+    userService.unlikeComment(commentId).then(
+      (response) => {
+        setToggleLike(!toggleLike);
+        // onChange(true);
+        // onChange(false);
+        setShownLikes(shownLikes - 1);
+      },
+      (error) => {
+        setSuccessful(false);
+        setUpdateMessage("Couldn't unlike comment");
+        setSnackOpen(true);
+      }
+    );
   };
 
   const body = (
@@ -265,7 +263,12 @@ export default function Comment({
           {body}
         </Modal>
         <Link to={`/view/${ownerId}`} style={{ textDecoration: "none" }}>
-          {role === 1 && <Avatar src={image} className={classes.large} />}
+          {role === 1 && (
+            <Avatar
+              src={userService.imageLink + ownerId}
+              className={classes.large}
+            />
+          )}
           {role === 3 && (
             <Avatar src={image} variant="square" className={classes.large} />
           )}
@@ -278,8 +281,8 @@ export default function Comment({
                 .split(" ")
                 .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
                 .join(" ") +
-              " - " +
-              lastName}
+                " - " +
+                lastName}
           </div>
           <p className="comment-timestamp">{timestamp}</p>
           <span className="message">{message}</span>

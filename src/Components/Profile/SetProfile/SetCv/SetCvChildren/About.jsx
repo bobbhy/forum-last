@@ -1,4 +1,4 @@
-import React, { useState, initialState } from "react";
+import React, { useState, initialState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const About = (props) => {
-  // MATERIAL UI STYLING AL3ABD
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  // const [fullAbout, setFullAbout] = useState();
 
   const handleClick = (e) => {
     const errors1 = [];
@@ -71,6 +71,7 @@ const About = (props) => {
   const [social, setSocials] = useState({});
   const [interests, setInterests] = useState("");
   const [domaine, setDomaine] = useState("");
+  const [gottenName, setGottenName] = useState("");
 
   // RESPONSE MESSAGE AL3ABD
   const [successful, setSuccessful] = useState(false);
@@ -115,7 +116,18 @@ const About = (props) => {
 
   const upload = (e) => {
     const socials = JSON.stringify(social);
-    userService.uploadAbout(firstName, lastName, address, city, number, bio, socials, interests, domaine)
+    userService
+      .uploadAbout(
+        firstName,
+        lastName,
+        address,
+        city,
+        number,
+        bio,
+        socials,
+        interests,
+        domaine
+      )
       .then(
         (response) => {
           setMessage(response.data.message);
@@ -135,6 +147,31 @@ const About = (props) => {
       );
   };
 
+  useEffect(() => {
+    // userService.getAbout().then((response) => {
+    //   setFullAbout(response?.data?.cv);
+    //   console.log("hh");
+    //   console.log(response?.data?.cv);
+    // });
+    userService.getUserData().then((res) => {
+      setGottenName(res?.data?.name);
+      setFirstName(
+        res?.data?.name
+          ?.split(" ")
+          .slice(0, 1)
+          ?.map((e) => e.charAt(0).toUpperCase() + e.slice(1))
+          .join(" ")
+      );
+      setLastName(
+        res?.data?.name
+          ?.split(" ")
+          ?.slice(1)
+          ?.map((e) => e.charAt(0).toUpperCase() + e.slice(1))
+          .join(" ")
+      );
+    });
+  }, []);
+
   return (
     <div className={classes.route}>
       <form>
@@ -150,6 +187,7 @@ const About = (props) => {
               }}
               type="text"
               placeholder="First Name"
+              defaultValue={firstName}
               value={firstName
                 .split(" ")
                 .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
@@ -167,6 +205,7 @@ const About = (props) => {
               type="text"
               id="number"
               placeholder="Last Name"
+              defaultValue={lastName}
               value={lastName
                 .split(" ")
                 .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
@@ -261,14 +300,14 @@ const About = (props) => {
           ></textarea>
         </div>
         <div class="form-group">
-          <label for="bio" class="col-sm-2 col-form-label">
+          <label for="interests" class="col-sm-2 col-form-label">
             Interests:
           </label>
           <br />
           <textarea
             className="inputs form-control col-sm-12"
             rows="4"
-            name="bio"
+            name="interests"
             id="comment"
             maxLength="400"
             placeholder="What interests you?"
@@ -298,11 +337,11 @@ const About = (props) => {
               {typeof message == "string"
                 ? message
                 : message?.map((message1) => (
-                  <span>
-                    -{message1}
-                    <br />
-                  </span>
-                ))}
+                    <span>
+                      -{message1}
+                      <br />
+                    </span>
+                  ))}
             </Alert>
           </Snackbar>
         </div>

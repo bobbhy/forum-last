@@ -138,7 +138,6 @@ const About = (props) => {
           {data?.address + "· " + data?.city + "· " + data?.number + "· "}
           <span className="text-primary">{email}</span>
         </div>
-        <p className=" mb-3">Domaine d'étude: {data?.domaine}</p>
         {/* <p className=" mb-3">
           Domaine d'étude:{" "}
           {data?.domaine[0].toUpperCase() +

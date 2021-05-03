@@ -9,8 +9,8 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -49,10 +49,9 @@ const useStyles = makeStyles((theme) => ({
     width: "60%",
     outline: "none",
   },
-  checkbox:
-  {
+  checkbox: {
     paddingTop: "40px",
-    marginLeft: "5px"
+    marginLeft: "5px",
   },
   heading: {
     fontSize: theme.typography.pxToRem(20),
@@ -72,7 +71,7 @@ const FormModal = (props) => {
   const [school, setSchool] = useState("");
   const [diploma, setDiploma] = useState("");
   const [field, setField] = useState("");
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(false);
 
   // STYLE STATES
   const [open, setOpen] = React.useState(false);
@@ -90,7 +89,7 @@ const FormModal = (props) => {
     const fetchData = async () => {
       const result = await userService.getEducation();
       if (result.data.length != 0) {
-        props.onChange(true)
+        props.onChange(true);
       }
       setData(result.data);
     };
@@ -101,8 +100,8 @@ const FormModal = (props) => {
     setStartDate(date);
   };
   const handleChecked = (e) => {
-    setChecked(!checked)
-  }
+    setChecked(!checked);
+  };
   const handleEnd = (date) => {
     setEndDate(date);
   };
@@ -140,15 +139,15 @@ const FormModal = (props) => {
     setModalShow(false);
     dateStart = dateStart.toString().substring(4, 15);
     if (checked) {
-      dateEnd = "Present"
-    }
-    else {
+      dateEnd = "Present";
+    } else {
       dateEnd = dateEnd.toString().substring(4, 15);
     }
-    console.log(dateEnd)
-    setChecked(false)
+    console.log(dateEnd);
+    setChecked(false);
 
-    userService.uploadEducation(school, diploma, dateStart, dateEnd, field)
+    userService
+      .uploadEducation(school, diploma, dateStart, dateEnd, field)
       .then(
         (response) => {
           setMessage(response.data.message);
@@ -173,11 +172,10 @@ const FormModal = (props) => {
     setEndDate(new Date());
   };
   const deleteById = (id) => {
-    userService.deleteEducation(id)
-      .then((response) => {
-        setSuccessful(true);
-        setSuccessful(false);
-      });
+    userService.deleteEducation(id).then((response) => {
+      setSuccessful(true);
+      setSuccessful(false);
+    });
   };
 
   return (
@@ -188,6 +186,7 @@ const FormModal = (props) => {
           variant="outlined"
           color="primary"
           size="medium"
+          style={{ marginBottom: "10px" }}
           startIcon={
             <AddCircleOutlinedIcon
               style={{
@@ -267,8 +266,13 @@ const FormModal = (props) => {
                     <FormControlLabel
                       className={classes.checkbox}
                       value="end"
-                      control={<Checkbox checked={checked}
-                        onChange={handleChecked} color="primary" />}
+                      control={
+                        <Checkbox
+                          checked={checked}
+                          onChange={handleChecked}
+                          color="primary"
+                        />
+                      }
                       label="Present"
                       labelPlacement="end"
                     />
@@ -284,11 +288,11 @@ const FormModal = (props) => {
                 {typeof message == "string"
                   ? message
                   : message?.map((message1) => (
-                    <span>
-                      -{message1}
-                      <br />
-                    </span>
-                  ))}
+                      <span>
+                        -{message1}
+                        <br />
+                      </span>
+                    ))}
               </Alert>
             </Snackbar>
           </Modal.Body>

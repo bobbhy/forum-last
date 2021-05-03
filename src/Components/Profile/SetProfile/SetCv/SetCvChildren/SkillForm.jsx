@@ -10,8 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import DevLanguage from "./SkillForm Children/DevLanguage";
 import NormalLanguage from "./SkillForm Children/NormalLanguage";
 import Software from "./SkillForm Children/Software";
-import Other from "./SkillForm Children/Other"
-
+import Other from "./SkillForm Children/Other";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -59,7 +58,7 @@ function getSteps() {
     "Programming Languages",
     "Languages you can speak",
     "Softwares",
-    "Others"
+    "Others",
   ];
 }
 
@@ -79,7 +78,7 @@ export default function SkillForm(props) {
       case 2:
         return <Software />;
       case 3:
-        return <Other />
+        return <Other />;
       default:
         return "Unknown step";
     }
@@ -93,7 +92,7 @@ export default function SkillForm(props) {
     <React.Fragment>
       <CssBaseline />
       <main className={classes.layout}>
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={0}>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((label) => (
               <Step key={label}>
