@@ -228,29 +228,23 @@ export default function SinglePost(props) {
   };
 
   const likePost = (postId) => {
-    axios
-      .put(`http://134.122.94.140:5000/api/cv/post/${postId}/${user.id}/liking`)
-      .then(
-        (response) => {
-          setToggleLike(true);
-          setShownLikes(shownLikes + 1);
-          // setRefresh(true);
-          // setRefresh(false);
-        },
-        (error) => {}
-      );
-  };
-  const unlikePost = (postId) => {
-    axios
-      .delete(`http://134.122.94.140:5000/api/cv/post/${postId}/unliking`, {
-        headers: authHeader(),
-      })
-      .then((response) => {
+    userService.likePost(postId, user.id).then(
+      (response) => {
+        setToggleLike(true);
+        setShownLikes(shownLikes + 1);
         // setRefresh(true);
         // setRefresh(false);
-        setShownLikes(shownLikes - 1);
-        setToggleLike(false);
-      });
+      },
+      (error) => {}
+    );
+  };
+  const unlikePost = (postId) => {
+    userService.unlikePost(postId).then((response) => {
+      // setRefresh(true);
+      // setRefresh(false);
+      setShownLikes(shownLikes - 1);
+      setToggleLike(false);
+    });
   };
 
   const body = (
@@ -349,16 +343,10 @@ export default function SinglePost(props) {
                 <ModalImage
                   className="post_image"
                   small={
-                    "http://134.122.94.140:5000/upload/static/images/post" +
-                    postId +
-                    "." +
-                    imageType
+                    userService.imageLink + "post" + postId + "." + imageType
                   }
                   large={
-                    "http://134.122.94.140:5000/upload/static/images/post" +
-                    postId +
-                    "." +
-                    imageType
+                    userService.imageLink + "post" + postId + "." + imageType
                   }
                   alt=""
                 />
