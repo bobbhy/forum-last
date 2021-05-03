@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./authHeader";
 
-const API_URL = "http://134.122.94.140/";
+const API_URL = "https://134.122.94.140/";
 // const API_URL = "http://localhost:5000/";
 
 const getApiState = () => {
