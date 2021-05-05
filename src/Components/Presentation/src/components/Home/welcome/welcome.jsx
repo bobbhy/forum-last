@@ -6,6 +6,7 @@ import img5 from "./assets/img/clients/client-5.png";
 import img6 from "./assets/img/clients/client-6.png";
 import img7 from "./assets/img/clients/client-7.png";
 import img8 from "./assets/img/clients/client-8.png";
+import { useHistory } from "react-router-dom";
 
 import imgbanner from "./img/banner.jpeg";
 import imgvideo from "./assets1/img/about.jpg";
@@ -14,7 +15,7 @@ import welcomecss from "./welcome.module.css";
 import { Link } from "react-router-dom";
 import FooterPage from "../../../../../Footer/FooterPage";
 import "./welcome.css";
-import headpng from "./assets/img/head.png";
+import headpng from "./assets/img/ecoles.jpeg"; 
 //import "./assets1/js/main.js";
 //import "./assets/css/style.css";  
 import GroupIcon from '@material-ui/icons/Group';
@@ -25,6 +26,7 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import authHeader from "../../../../../../services/authHeader";
 
 export default function Welcome() {
+  const history = useHistory();
   const settings = {
     slidesToShow: 4,
     slideToScroll: 1,
@@ -85,6 +87,7 @@ export default function Welcome() {
   };
   // componentDidMount
   useEffect(() => {
+    console.log(authHeader());
     startTimer();
     return () => {
       clearInterval(interval.current);
@@ -228,8 +231,28 @@ export default function Welcome() {
                   <div className="card-body">
                     <h5 className="card-title"><a href="">E-Entreprise</a></h5>
                     <p className="card-text">Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor ut labore et dolore magna aliqua.</p>
-                    <a className="cta-btn" href="#">Se connecter</a><br />
-                    <a className="cta-btn2" href="#">S'inscrire</a>
+                    <Link
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        history.push("/login");
+                      }}
+                      
+                      className="cta-btn"
+                    >
+                      Se connecter
+                    </Link><br/>
+                    <Link
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        history.push("/register");
+                      }}
+                      
+                      className="cta-btn2"
+                    >
+                      S'inscrire
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -238,8 +261,32 @@ export default function Welcome() {
                   <div className="card-body">
                     <h5 className="card-title"><a href="">E-Etudiant</a></h5>
                     <p className="card-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque laudantium, totam rem.</p>
-                    <a className="cta-btn" href="#">Se connecter</a><br />
-                    <a className="cta-btn2" href="#">S'inscrire</a>
+                    
+                    
+                    <Link
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        history.push("/login");
+                      }}
+                      
+                      className="cta-btn"
+                    >
+                      Se connecter
+                    </Link><br/>
+                    <Link
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        history.push("/register");
+                      }}
+                      
+                      className="cta-btn2"
+                    >
+                      S'inscrire
+                    </Link>
+                    
+                   
                   </div>
                 </div>
               </div>

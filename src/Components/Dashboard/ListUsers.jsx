@@ -69,7 +69,7 @@ export default function ListUsers({ user }) {
         <TableBody>
           {accounts?.map(
             (account) =>
-              account.id != user.id && (
+              account?.id != user?.id && (
                 <TableRow key={account.id}>
                   <TableCell>{account.id}</TableCell>
                   <TableCell>
@@ -91,7 +91,7 @@ export default function ListUsers({ user }) {
                     {account.roles[0].id === 3 && (
                       <Avatar
                         src={
-                          "http://localhost:5000/upload/static/images/" +
+                          userService.imageLink +
                           account.company.companyImage
                         }
                       />

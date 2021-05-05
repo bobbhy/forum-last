@@ -25,7 +25,7 @@ export default function Messages() {
     const [count, setCount] = useState(0)
     const handleDelete = async (id) => {
         setLoading(true)
-        await axios.delete(`http://localhost:5000/contact/message/${id}`).then((response) => {
+        await axios.delete(`http://134.122.94.140/contact/message/${id}`).then((response) => {
             setCount(count + 1)
         })
         setLoading(false)
@@ -34,7 +34,7 @@ export default function Messages() {
     useEffect(() => {
         async function getAll() {
             await axios
-                .get("http://localhost:5000/contact/messages")
+                .get("http://134.122.94.140/contact/messages")
                 .then((response) => {
                     setMessages(response?.data);
                 });

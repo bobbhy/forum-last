@@ -1,4 +1,4 @@
-import React, { useEffect, useState, initialState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -26,18 +26,22 @@ const useStyles = makeStyles((theme) => ({
 export default function ListUsers({ refresh, onChange }) {
   const classes = useStyles();
   const [count, setCount] = useState(0);
-  const [accounts, setAccounts] = useState(initialState)
-
+  const [accounts,setAccounts]=useState([])
   useEffect(() => {
-    userService.getUnenabledManagers().then((response) => {
-      setAccounts(response?.data)
-      console.log(response?.data)
-    })
-  }, [])
+    function getAll() {
+      userService.getAll()
+        .then((response) => {
+          console.log(response?.data)
+          setAccounts(response?.data);
+        });
+    }
+    getAll();
+  }, [count]);
 
   const enableManager = (id) => {
-    function enabling() {
-      userService.enable(id)
+    async function enabling() {
+      await axios
+        .put(`http://134.122.94.140/api/cv/enable/${id}`)
         .then((response) => {
           onChange(!refresh);
           setCount(count + 1);
@@ -80,7 +84,8 @@ export default function ListUsers({ refresh, onChange }) {
                     {account.roles[0].id === 3 && (
                       <Avatar
                         src={
-                          userService.imageLink +
+                          userService.imageLink
+                           +
                           account.company.companyImage
                         }
                       />

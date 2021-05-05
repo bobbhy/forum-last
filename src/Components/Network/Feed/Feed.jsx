@@ -58,7 +58,7 @@ function Feed({ user }) {
       <div className={styles.block}>
         <h1 className={styles.title}>All Companies</h1>
         {companies
-          ?.filter((company) => company.enabled)
+          ?.filter((company) => company.enabled && company.company.flag)
           ?.map(
             (company, index) =>
               user?.id != company?.id && (
@@ -181,7 +181,7 @@ function Feed({ user }) {
       <div className={styles.block}>
         <h1 className={styles.title}>Students</h1>
         {students
-          ?.filter((student) => student.enabled)
+          ?.filter((student) => student.enabled && student.cv.flag)
           ?.map(
             (student, index) =>
               user?.id != student?.id && (

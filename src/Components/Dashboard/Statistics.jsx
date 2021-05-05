@@ -107,7 +107,7 @@ export default function ListUsers({ user }) {
   useEffect(() => {
     async function getAll() {
       await axios
-        .get("http://localhost:5000/api/profile/getall", {
+        .get("http://134.122.94.140/api/profile/getall", {
           headers: authHeader(),
         })
         .then((response) => {
@@ -258,7 +258,7 @@ export default function ListUsers({ user }) {
                               {account.roles[0].id === 3 && (
                                 <Avatar
                                   src={
-                                    "http://localhost:5000/upload/static/images/" +
+                                    "http://134.122.94.140/upload/static/images/" +
                                     account.company.companyImage
                                   }
                                 />
