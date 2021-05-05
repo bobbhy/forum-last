@@ -138,9 +138,9 @@ export default function SignUp({ user }) {
     setEmail(email);
     if (email.length === 0) {
       setErrors({ ...errors, email: "Email is required" });
-    } //else if (!email.endsWith('@uit.ac.ma') && value === 0) {
-    //   setErrors({ ...errors, email: "Use your university email" })
-    // }
+    } else if (!email.endsWith('@uit.ac.ma') && value === 0) {
+      setErrors({ ...errors, email: "Use your university email" })
+    }
     else {
       setErrors({ ...errors, email: null });
       if (!validateEmail(email)) {
