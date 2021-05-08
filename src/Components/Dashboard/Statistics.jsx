@@ -107,11 +107,10 @@ export default function ListUsers({ user }) {
   useEffect(() => {
     async function getAll() {
       await axios
-        .get("http://134.122.94.140/api/profile/getall", {
+        .get("https://www.forum-uit.codes/api/profile/getall", {
           headers: authHeader(),
         })
         .then((response) => {
-          console.table(response?.data);
           setAccounts(response?.data);
         });
     }
@@ -258,7 +257,7 @@ export default function ListUsers({ user }) {
                               {account.roles[0].id === 3 && (
                                 <Avatar
                                   src={
-                                    "http://134.122.94.140/upload/static/images/" +
+                                    "https://www.forum-uit.codes/upload/static/images/" +
                                     account.company.companyImage
                                   }
                                 />

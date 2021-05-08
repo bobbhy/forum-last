@@ -8,7 +8,6 @@ import img6 from "./img/tm1.jpg";
 import "./team.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import FooterPage from "../../../Components/Footer/FooterPage";
 
 export default function Team() {
   useEffect(() => {

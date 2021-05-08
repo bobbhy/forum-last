@@ -8,8 +8,6 @@ import img5 from "./img/ALTEN.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import FooterPage from "../../../../../../Components/Footer/FooterPage"
-
 export default function Sponsor() {
   const settings = {
     slidesToShow: 4,
@@ -65,7 +63,6 @@ export default function Sponsor() {
           </Slider>
         </div>
       </div>
-      <FooterPage />
     </div>
   );
 }

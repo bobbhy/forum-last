@@ -14,7 +14,7 @@
 }
 .headerOption:hover,
 .active {
-  color: black;
+  color: rgb(184, 175, 175);
   text-decoration: none;
 }
 .headerOption_icon {

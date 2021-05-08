@@ -9,7 +9,6 @@ function Sidebar({ forceId, data, setActive, NewConversation }) {
     const [activeId, setActiveId] = useState("")
     useEffect(() => {
         if (forceId) {
-            console.log("ok")
             setActiveId(forceId)
 
         }

@@ -136,7 +136,6 @@ function Feed({ user }) {
 
       {user?.roles[0]?.id == 3 && recommendedStudents?.length != 0 && (
         <div className={styles.block}>
-          {console.log(students)}
 
           <h1 className={styles.title}>Recommended Students for you</h1>
           {students

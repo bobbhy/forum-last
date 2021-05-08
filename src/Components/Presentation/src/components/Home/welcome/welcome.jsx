@@ -7,13 +7,13 @@ import img6 from "./assets/img/clients/client-6.png";
 import img7 from "./assets/img/clients/client-7.png";
 import img8 from "./assets/img/clients/client-8.png";
 import { useHistory } from "react-router-dom";
+import logo from "./logo.png";
 
 import imgbanner from "./img/banner.jpeg";
 import imgvideo from "./assets1/img/about.jpg";
 import Slider from "react-slick";
 import welcomecss from "./welcome.module.css";
 import { Link } from "react-router-dom";
-import FooterPage from "../../../../../Footer/FooterPage";
 import "./welcome.css";
 import headpng from "./assets/img/ecoles.jpeg"; 
 //import "./assets1/js/main.js";
@@ -87,7 +87,6 @@ export default function Welcome() {
   };
   // componentDidMount
   useEffect(() => {
-    console.log(authHeader());
     startTimer();
     return () => {
       clearInterval(interval.current);
@@ -107,7 +106,7 @@ export default function Welcome() {
                   <h2>Le rôle du digitale à l’université pour une meilleur ouverture des lauréats & étudiants</h2>
                   <div className={welcomecss.dlgflex}>
                     <a href="#about" className={welcomecss.btngetstarted}>Plus de détails</a>
-                    <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" className={welcomecss.btnwatchvideo} data-vbtype="video" data-autoplay="true"> Regarder la vidéo <i className="far fa-play-circle"></i></a>
+                    <a href="https://www.youtube.com/watch?v=6YQwLMsjoFU&ab_channel=HassanBERRAGRAGUI" target="_blank" className={welcomecss.btnwatchvideo} data-vbtype="video" data-autoplay="true"> Regarder la vidéo <i className="far fa-play-circle"></i></a>
                   </div>
                 </div>
               </div>
@@ -432,7 +431,9 @@ export default function Welcome() {
             <div className="row">
               <div className="col-md-6 col-lg-3">
                 <div className="footer-contact">
-                  <h2>HNA LOGO</h2>
+                  <Link to="/">
+                  <img src={logo} alt="Logo" className="logo" />
+                  </Link>
                   <hr />
                   <p className="pp">Le Forum Annuel Virtuel De L’Université Ibn Tofail est d’une part un moment d’échange et d’ouverture de l’université sur son environnement régional et national, puis d’autre part, c’est un moment ou le lauréat et étudiant se positionne et se projette.</p>
                 </div>

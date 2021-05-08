@@ -25,7 +25,6 @@ function Feed() {
     }, [count]);
     const accept = async (e, id) => {
         try {
-            console.log(id)
             setLoading(true)
             const resp = await userService.accept(id);
             setLoading(false)

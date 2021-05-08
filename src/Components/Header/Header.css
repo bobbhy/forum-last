@@ -1,5 +1,7 @@
 .header {
   position: sticky;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+  0 3px 6px rgba(0, 0, 0, 0.23);
   top: 0;
   left: 0;
   display: flex;
@@ -110,7 +112,7 @@
   min-width: 30px;
 }
 .header_right > .button:hover {
-  background: none;
-  color: black;
+  background: transparent;
+  color: rgb(184, 175, 175);
   box-shadow: none;
 }

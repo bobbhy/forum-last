@@ -270,9 +270,6 @@ export default function SignUp({ user }) {
           </div>
         )}
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
           <Paper className={classes.root}>
             <Tabs
               value={value}

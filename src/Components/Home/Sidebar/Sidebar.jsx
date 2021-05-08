@@ -49,7 +49,7 @@ function Sidebar({ image, user }) {
       <div className="sidebar_stats">
         <div className="sidebar_stat">
           <p>Connections</p>
-          <p className="sidebar_statNumber">0</p>
+          <p className="sidebar_statNumber">{user?.friendshipSended.length + user?.friendshipReceived.length}</p>
         </div>
         <div className="sidebar_stat">
           <p>Profile's views</p>

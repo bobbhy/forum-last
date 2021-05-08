@@ -219,7 +219,7 @@ function Feed({ id, isNew, name, date, img, user }) {
                         })}
                     </div>
                     <div className={styles.message}>
-                        <TextareaAutosize placeholder="Write a message" onKeyPress={(e) => e.key === 'Enter' && sendMessage()} value={messagex} onChange={handleChange} rowsMin="2" rowsMax="2" />
+                        <TextareaAutosize className={styles.textarea} placeholder="Write a message" onKeyPress={(e) => e.key === 'Enter' && sendMessage()} value={messagex} onChange={handleChange} rowsMin="2" rowsMax="2" />
                         <div className={styles.footer}>
                             <div className={styles.types}>
                                 <IconButton aria-label="File" >

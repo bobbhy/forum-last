@@ -31,7 +31,6 @@ export default function ListUsers({ refresh, onChange }) {
     function getAll() {
       userService.getAll()
         .then((response) => {
-          console.log(response?.data)
           setAccounts(response?.data);
         });
     }
