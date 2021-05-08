@@ -40,7 +40,7 @@ export default function ListUsers({ refresh, onChange }) {
   const enableManager = (id) => {
     async function enabling() {
       await axios
-        .put(`http://134.122.94.140/api/cv/enable/${id}`)
+        .put(`https://www.forum-uit.codes/api/cv/enable/${id}`)
         .then((response) => {
           onChange(!refresh);
           setCount(count + 1);
