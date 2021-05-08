@@ -289,7 +289,7 @@ const About = (props) => {
             rows="4"
             name="bio"
             id="comment"
-            maxLength="400"
+            maxLength="800"
             placeholder="Bio"
             style={{
               backgroundColor: "#f3f2ef",
@@ -309,7 +309,7 @@ const About = (props) => {
             rows="4"
             name="interests"
             id="comment"
-            maxLength="400"
+            maxLength="800"
             placeholder="What interests you?"
             style={{
               backgroundColor: "#f3f2ef",
