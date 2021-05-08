@@ -2,7 +2,6 @@ import React from "react";
 import "./Experience.css";
 const Experience = (props) => {
   const data = props.data;
-  console.log(props.data);
   return (
     <>
       <section className="resume-section" id="experience">

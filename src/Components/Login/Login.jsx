@@ -104,14 +104,15 @@ export default function Login({ user, userInfo }) {
           window.location.reload();
         },
         (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-          setLoading(false);
-          setMessage(resMessage);
+          if(error?.response?.status==511)
+          {
+            setMessage("Network error! We will get back soon");
+          }
+          else
+          {
+            setMessage("Bad Credentials");      
+        }
+          setLoading(false);     
         }
       );
     } else {

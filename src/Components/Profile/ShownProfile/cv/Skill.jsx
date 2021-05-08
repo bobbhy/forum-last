@@ -14,7 +14,9 @@ const Skill = (props) => {
     <section className="resume-section m-0" id="skills">
       <div className="resume-section-content">
         <h2 className="mb-5">Skills</h2>
-        <div className="subheading mb-3">Programming Languages</div>
+        {
+          dev.length!=0 && (<>
+          <div className="subheading mb-3">Programming Languages</div>
         <div className="d-flex flex-row" style={{ flexWrap: "wrap" }}>
           {dev?.map((e) => (
             <div className="col-2 mr-4 d-block mb-2">
@@ -25,7 +27,11 @@ const Skill = (props) => {
             </div>
           ))}
         </div>
-        <div className="subheading mb-3 mt-3">Softwares and Other Skills</div>
+          </>)
+        }
+        {
+          software.length!=0 && (<>
+          <div className="subheading mb-3 mt-3">Softwares and Other Skills</div>
         <div className="d-flex flex-row" style={{ flexWrap: "wrap" }}>
           {software?.map((e) => (
             <div className="col-2 mr-4 d-block">
@@ -36,7 +42,12 @@ const Skill = (props) => {
             </div>
           ))}
         </div>
-        <div className="subheading mb-3 mt-3">Languages</div>
+          </>)
+        }
+        {
+          normal?.length !=0 &&
+          (<>
+          <div className="subheading mb-3 mt-3">Languages</div>
         <div className="d-flex flex-row" style={{ flexWrap: "wrap" }}>
           {normal?.map((e) => (
             <div className="col-5 mr-4 d-block">
@@ -47,6 +58,10 @@ const Skill = (props) => {
             </div>
           ))}
         </div>
+          </>)
+        }
+        
+        
       </div>
     </section >
   );
