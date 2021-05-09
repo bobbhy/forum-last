@@ -628,7 +628,7 @@ const Cv = (props) => {
                 </div>
               )}
               <Nav id={id} image={image} />
-              <AboutCompany data={company?.aboutCompany} email={email} />
+              <AboutCompany data={company} email={email} />
             </div>
           )}
         </div>

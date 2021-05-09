@@ -1,83 +1,62 @@
 import React from "react";
 
 const About = (props) => {
-  const data = props?.data;
+  const data = props?.data?.aboutCompany;
   const email = props?.email;
-  const Fb = () => {
-    const str = data?.socials
-      .substring(0, data?.socials.length - 1)
-      .substring(1);
-    const socArray = str.split(",");
-    let a;
-    for (const e of socArray) {
-      a = e.split(":");
-      if (a[0] === '"Facebook"') {
+
+  
+const Fb = () => {
+    for (let i = 0; i < props?.data?.links?.length; i++) {
+      if (props?.data?.links[i]?.name == "Facebook") {
         return (
           <a
             rel="noreferrer"
             target="_blank"
             className="social-icon"
-            href={`https://${a[a.length - 1]
-              .substring(0, a[a.length - 1].length - 1)
-              .substring(1)}`}
+            href={`${props?.data?.links[i]?.url}`}
           >
             <i className="fab fa-facebook-f" />
           </a>
         );
       }
     }
-    return <div></div>;
-  };
-  const Website = () => {
-    const str = data?.socials
-      .substring(0, data?.socials.length - 1)
-      .substring(1);
-    const socArray = str.split(",");
-    let a;
-    for (const e of socArray) {
-      a = e.split(":");
-      if (a[0] === '"Website"') {
-        return (
-          <a
-            rel="noreferrer"
-            target="_blank"
-            className="social-icon"
-            href={`https://${a[a.length - 1]
-              .substring(0, a[a.length - 1].length - 1)
-              .substring(1)}`}
-          >
-            <i class="fas fa-globe" />{" "}
-          </a>
-        );
-      }
-    }
-    return <div></div>;
+    return <></>;
   };
   const Ln = () => {
-    const str = data?.socials
-      .substring(0, data?.socials.length - 1)
-      .substring(1);
-    const socArray = str.split(",");
-    let a;
-    for (const e of socArray) {
-      a = e.split(":");
-      if (a[0] === '"LinkedIn"') {
+    for (let i = 0; i < props?.data?.links?.length; i++) {
+      if (props?.data?.links[i]?.name == "LinkedIn") {
         return (
           <a
             rel="noreferrer"
             target="_blank"
             className="social-icon"
-            href={`https://${a[a.length - 1]
-              .substring(0, a[a.length - 1].length - 1)
-              .substring(1)}`}
+            href={`${props?.data?.links[i]?.url}`}
           >
             <i className="fab fa-linkedin-in" />
           </a>
         );
       }
     }
-    return <div></div>;
+    return <></>;
   };
+const Web = () => {
+    for (let i = 0; i < props?.data?.links?.length; i++) {
+      if (props?.data?.links[i]?.name == "Website") {
+        return (
+          <a
+            rel="noreferrer"
+            target="_blank"
+            className="social-icon"
+            href={`${props?.data?.links[i]?.url}`}
+          >
+            <i className="fas fa-globe" />
+          </a>
+        );
+      }
+    }
+    return <></>;
+  };
+
   return (
     <section className="resume-section" id="about">
       <div className="resume-section-content">
@@ -99,9 +78,9 @@ const About = (props) => {
         <h4>Company Bio :</h4>
         <p className="lead mb-5">{data?.bio}</p>
         <div className="social-icons d-flex">
-          {data && <Fb />}
-          {data && <Website />}
-          {data && <Ln />}
+          <Fb />
+          <Web />
+          <Ln />
         </div>
       </div>
     </section>

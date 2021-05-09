@@ -8,6 +8,7 @@ import Input from "react-phone-number-input/input";
 import "react-phone-number-input/style.css";
 import axios from "axios";
 import userService from "../../../../services/userService";
+import Socials from "../../SetProfile/SetCompany/AddCompany Components/CompanySocials"
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -166,6 +167,7 @@ const About = (props) => {
             onChange={handleBioChange}
           ></textarea>
         </div>
+        <Socials />
         <div className={classes.root + " btnholder"}>
           <Button
             variant="outlined"

@@ -26,7 +26,7 @@ const About = (props) => {
   };
   const Ln = () => {
     for (let i = 0; i < props?.data?.cv?.links?.length; i++) {
-      if (props?.data?.cv?.links[i]?.name == "Facebook") {
+      if (props?.data?.cv?.links[i]?.name == "LinkedIn") {
         return (
           <a
             rel="noreferrer"
@@ -95,7 +95,7 @@ const About = (props) => {
           {data?.domaine[0].toUpperCase() +
             data?.domaine.slice(1, data?.domaine.length)}
         </p> */}
-        <p>Ecole: {etablishment}</p>
+        <p className="p-3 h5 text-primary">{etablishment}.</p>
 
         <p className="lead mb-5">{data?.bio}</p>
         <div className="social-icons d-flex">

@@ -50,12 +50,17 @@ const Socials = (props) => {
     }
   };
 
+
   const onChangeHandler = (e) => {
     setUrl(e.target.value);
   };
 
   const upload = () => {
-    const link = { name: id, url: url };
+    let ur = url;
+    if(!url.startsWith("https://")){
+        ur = "https://" + url
+    }
+    const link = { name: id, url: ur };
     console.log(link);
     userService.uploadCompanyLink(link).then((res) => {
       setId("");

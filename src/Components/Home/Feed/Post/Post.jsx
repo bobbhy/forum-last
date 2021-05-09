@@ -140,6 +140,7 @@ function Post({
     }
     bzaf();
     userService.getPostComments(postId).then((response) => {
+      console.log(response.data)
       setComments(response?.data);
       setToggleComment(!toggleComment);
     });
@@ -506,6 +507,7 @@ function Post({
       {toggleComment &&
         comments?.map((e, key) => (
           <Comment
+            ownerImage={ownerImage}
             key={key}
             onChange={() => {
               setRefresh(!refresh);

@@ -66,7 +66,11 @@ const Socials = (props) => {
   };
 
   const upload = () => {
-    const link = { name: id, url: url };
+    let ur = url;
+    if(!url.startsWith("https://")){
+        ur = "https://" + url
+    }
+    const link = { name: id, url: ur };
     userService.uploadCvLink(link).then(
       (res) => {
         setId("");

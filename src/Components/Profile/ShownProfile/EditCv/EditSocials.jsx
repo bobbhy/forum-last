@@ -7,7 +7,6 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import Tooltip from "@material-ui/core/Tooltip";
 import userService from "../../../../services/userService";
-
 const Socials = (props) => {
   const [id, setId] = useState("");
   const [toggle, setToggle] = useState(false);
@@ -66,7 +65,11 @@ const Socials = (props) => {
   };
 
   const upload = () => {
-    const link = { name: id, url: url };
+    let ur = url;
+    if(!url.startsWith("https://")){
+        ur = "https://" + url
+    }
+    const link = { name: id, url: ur };
     userService.uploadCvLink(link).then(
       (res) => {
         setId("");

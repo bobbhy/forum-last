@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Comment({
+  ownerImage,
   onChange,
   refresh,
   user,
@@ -263,9 +264,9 @@ export default function Comment({
           {body}
         </Modal>
         <Link to={`/view/${ownerId}`} style={{ textDecoration: "none" }}>
-          {role === 1 && <Avatar src={image} className={classes.large} />}
+          {role === 1 && <Avatar src={userService.imageLink+ownerImage}  className={classes.large} />}
           {role === 3 && (
-            <Avatar src={image} variant="square" className={classes.large} />
+            <Avatar src={userService.imageLink+ownerImage} variant="square" className={classes.large} />
           )}
         </Link>
         <div>
