@@ -6,8 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Input from "react-phone-number-input/input";
 import "react-phone-number-input/style.css";
 import Socials from "./Socials";
-import axios from "axios";
-import authHeader from "../../../../../services/authHeader";
 import "../SetCv.css";
 import Form from "react-bootstrap/Form";
 import userService from "../../../../../services/userService";
@@ -37,13 +35,13 @@ const About = (props) => {
     const errors1 = [];
     if (firstName.length === 0 || lastName.length === 0)
       errors1.push("Name cannot be empty");
-    if (address.length === 0 || city.length === 0)
-      errors1.push("Adrress cannot be empty");
-    if (!number) errors1.push("Number cannot be empty");
-    if (number?.length < 11)
-      errors1.push("Your number should be like 0663-123123");
+    // if (address.length === 0 || city.length === 0)
+    //   errors1.push("Adrress cannot be empty");
+    // if (!number) errors1.push("Number cannot be empty");
+    // if (number?.length < 11)
+    //   errors1.push("Your number should be like 0663-123123");
     if (bio?.length === 0) errors1.push("Bio must not be empty");
-    if (interests?.length === 0) errors1.push("Interests must not be empty");
+    // if (interests?.length === 0) errors1.push("Interests must not be empty");
     if (errors1.length > 0) {
       setMessage(errors1);
       setTimeout(setOpen(true), 500);
@@ -68,7 +66,6 @@ const About = (props) => {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [number, setNumber] = useState("");
-  const [social, setSocials] = useState({});
   const [interests, setInterests] = useState("");
   const [domaine, setDomaine] = useState("");
   const [gottenName, setGottenName] = useState("");
@@ -115,7 +112,6 @@ const About = (props) => {
   };
 
   const upload = (e) => {
-    const socials = JSON.stringify(social);
     userService
       .uploadAbout(
         firstName,
@@ -124,7 +120,6 @@ const About = (props) => {
         city,
         number,
         bio,
-        socials,
         interests,
         domaine
       )
@@ -268,14 +263,19 @@ const About = (props) => {
         </div>
         <div className="form-group row align-items-center">
           <label for="example-tel-input" class="col-sm-2 col-form-label">
-            Votre domaine d'étude :
+            Filiere :
           </label>
           <div className="col-sm-5">
             <Form.Control as="select" onChange={handleDomaineChange}>
               <option value="Informatique">Informatique</option>
               <option value="Electrique">Electrique</option>
               <option value="Mécanique">Mécanique</option>
+              <option value="Industriel">Industriel</option>
+              <option value="Réseau et Télecommunications">
+                Réseau et Télecommunications
+              </option>
               <option value="Economie">Economie</option>
+              <option value="Autre">Autre</option>
             </Form.Control>
           </div>
         </div>
@@ -319,7 +319,7 @@ const About = (props) => {
             onChange={handleInterestsChange}
           ></textarea>
         </div>
-        <Socials onChange={(value) => setSocials(value)} />
+        <Socials />
         <div className={classes.root + " btnholder"}>
           <Button
             variant="outlined"

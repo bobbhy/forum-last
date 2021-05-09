@@ -33,10 +33,10 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import SendIcon from "@material-ui/icons/Send";
 import EditAboutCompany from "./EditCompany/EditAboutCompany";
 import EditImage from "./EditCv/EditImage";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from "@material-ui/core/Tooltip";
 
 import "./Cv.css";
 
@@ -67,7 +67,7 @@ const Cv = (props) => {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState();
   const [flag, setFlag] = useState(false);
-  const id = props?.match?.params?.id;
+  const { id } = useParams();
   const [data, setData] = useState({});
   const [toggle, setToggle] = useState(false);
   const [image, setImage] = useState();
@@ -78,14 +78,9 @@ const Cv = (props) => {
   const [switchState, setSwitchState] = useState(true);
   const handleSwitchChange = () => {
     if (switchState) {
-      userService.unpriveCv(currentUserId).then(
-        (res) => {
-          setSwitchState(!switchState);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+      userService.unpriveCv(currentUserId).then((res) => {
+        setSwitchState(!switchState);
+      });
     } else {
       userService.priveCv(currentUserId).then((res) => {
         setSwitchState(!switchState);
@@ -129,9 +124,7 @@ const Cv = (props) => {
         setEmail(response?.data?.email);
         setRole(response?.data?.roles[0]?.id);
         if (response?.data?.roles[0]?.id === 1) {
-          setImage(
-            userService.imageLink + response?.data?.cv?.image
-          );
+          setImage(userService.imageLink + response?.data?.cv?.image);
         }
         if (response?.data?.roles[0]?.id === 3) {
           setImage(
@@ -168,6 +161,18 @@ const Cv = (props) => {
       });
     }
     getUserData();
+    async function sendViewNotif() {
+      if (
+        currentUserId != id &&
+        currentUser?.roles[0]?.id == 3 &&
+        data?.roles[0]?.id == 1
+      ) {
+        await userService.sendViewNotification(id, currentUserId);
+      }
+    }
+    sendViewNotif().then((res) => {
+      console.log(res);
+    });
   }, [count, currentUserId, toggle]);
 
   function MyVerticallyCenteredModal(props) {
@@ -507,12 +512,15 @@ const Cv = (props) => {
                 </div>
                 {/* About*/}
 
-                {currentUserId != id && switchState && currentUser?.roles[0]?.id == 1 && isFriend != 1 ? (
+                {currentUserId != id &&
+                switchState &&
+                currentUser?.roles[0]?.id == 1 &&
+                isFriend != 1 ? (
                   <h2>Cet utilisateur a un profil privé</h2>
-                ): (
+                ) : (
                   <>
                     {" "}
-                    <About data={cv?.about} email={email} />
+                    <About data={data} email={email} />
                     {isExperience && (
                       <>
                         <hr className="m-0" />

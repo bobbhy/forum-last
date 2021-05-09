@@ -19,11 +19,11 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import login from "../../login.jfif";
 import userService from "../../services/userService";
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -97,7 +97,7 @@ export default function SignUp({ user }) {
     async function getEtablishments() {
       await userService.getEtablishements().then((response) => {
         setEtablishments(response.data);
-      })
+      });
     }
     getEtablishments();
   }, []);
@@ -138,10 +138,10 @@ export default function SignUp({ user }) {
     setEmail(email);
     if (email.length === 0) {
       setErrors({ ...errors, email: "Email is required" });
-    } else if (!email.endsWith('@uit.ac.ma') && value === 0) {
-      setErrors({ ...errors, email: "Use your university email" })
-    }
-    else {
+      // } else if (!email.endsWith('@uit.ac.ma') && value === 0) {
+      //   setErrors({ ...errors, email: "Use your university email" })
+      // }
+    } else {
       setErrors({ ...errors, email: null });
       if (!validateEmail(email)) {
         setErrors({ ...errors, email: "Invalid email format" });
@@ -153,9 +153,8 @@ export default function SignUp({ user }) {
     setEtablishment(etablishment);
     if (etablishment == 0) {
       setErrors({ ...errors, etablishment: "Etablishement is required" });
-    }
-    else {
-      setErrors({ ...errors, etablishment: null })
+    } else {
+      setErrors({ ...errors, etablishment: null });
     }
   };
 
@@ -199,30 +198,30 @@ export default function SignUp({ user }) {
         lastName.split(" ").join("").toLowerCase();
       const userNamex = userName.toLowerCase();
       const emailx = email.toLowerCase();
-      authService.register(name, "", userNamex, emailx, password, 1, etablishment).then(
-        (response) => {
-          setMessage(response.data.message);
-          setSuccessful(true);
-          setLoading(false);
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+      authService
+        .register(name, "", userNamex, emailx, password, 1, etablishment)
+        .then(
+          (response) => {
+            setMessage(response.data.message);
+            setSuccessful(true);
+            setLoading(false);
+          },
+          (error) => {
+            const resMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
 
-          setMessage(resMessage);
-          setSuccessful(false);
-          setLoading(false);
-        }
-      );
+            setMessage(resMessage);
+            setSuccessful(false);
+            setLoading(false);
+          }
+        );
+    } else {
+      setLoading(false);
     }
-    else {
-      setLoading(false)
-    }
-
   };
   const handleManagerSignup = (e) => {
     e.preventDefault();
@@ -348,7 +347,9 @@ export default function SignUp({ user }) {
                   </Grid>
                   <Grid item xs={12}>
                     <FormControl variant="filled" xs={12} sm={6}>
-                      <InputLabel id="demo-simple-select-label">Etablissement</InputLabel>
+                      <InputLabel id="demo-simple-select-label">
+                        Etablissement
+                      </InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
@@ -358,10 +359,16 @@ export default function SignUp({ user }) {
                       >
                         <MenuItem value={0}>Choose Your Etablishement</MenuItem>
                         {etablishments.map((etablishment) => {
-                          return (<MenuItem value={etablishment.id}>{etablishment.name}</MenuItem>)
+                          return (
+                            <MenuItem value={etablishment.id}>
+                              {etablishment.name}
+                            </MenuItem>
+                          );
                         })}
                       </Select>
-                      <FormHelperText error={Boolean(errors?.etablishment)}>{errors?.etablishment}</FormHelperText>
+                      <FormHelperText error={Boolean(errors?.etablishment)}>
+                        {errors?.etablishment}
+                      </FormHelperText>
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>

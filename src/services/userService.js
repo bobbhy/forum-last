@@ -2,7 +2,7 @@ import axios from "axios";
 import authHeader from "./authHeader";
 
 const API_URL = "https://www.forum-uit.codes/";
-// const API_URL = "http://localhost:5000/";
+//const API_URL = "http://localhost:5000/";
 
 const getApiState = () => {
   return axios.get(API_URL + "hello");
@@ -392,14 +392,35 @@ const updateAboutCompany = (id, about) => {
 const updateAbout = (id, about) => {
   return axios.put(`${API_URL}api/cv/updateAbout/${id}`, about);
 };
+const deleteMessage = (id) => {
+  return axios.delete(`https://www.forum-uit.codes/contact/message/${id}`);
+};
 const getEducationById = (id) => {
   return axios.get(`${API_URL}api/cv/geteducationbyid/${id}`);
 };
 const editEducation = (id, education) => {
   return axios.put(`${API_URL}api/cv/updateEducation/${id}`, education);
 };
+const getCvLinks = () => {
+  return axios.get(`${API_URL}api/cv/link`, { headers: authHeader() });
+};
+const getCompanyLinks = () => {
+  return axios.get(`${API_URL}api/comp/link`, { headers: authHeader() });
+};
+const getDashMessages = () => {
+  return axios.get("https://www.forum-uit.codes/contact/messages");
+};
+const sendViewNotification = (id, pid) => {
+  return axios.post(`${API_URL}api/comp/notif/${id}/${pid}`);
+};
+const uploadCvLink = (link) => {
+  return axios.put(`${API_URL}api/cv/link`, link, { headers: authHeader() });
+};
+const uploadCompanyLink = (link) => {
+  return axios.put(`${API_URL}api/comp/link`, link, { headers: authHeader() });
+};
 const getUnenabledManagers = () => {
-  return axios.get(`${API_URL}api/comp/unenabledcompanies`);
+  return axios.get(`${API_URL}api/comp/unenabled`);
 };
 const editExperience = (id, experience) => {
   return axios.put(`${API_URL}api/cv/updateExperience/${id}`, experience);
@@ -427,6 +448,7 @@ const userService = {
   uploadEducation,
   deleteEducation,
   getExperience,
+  getDashMessages,
   uploadExperience,
   updateAboutCompany,
   deleteExperience,
@@ -436,6 +458,7 @@ const userService = {
   getEducationById,
   editEducation,
   updateAbout,
+  sendViewNotification,
   accept,
   deleteNotification,
   getAllCompanies,
@@ -456,6 +479,8 @@ const userService = {
   handleSingleNotif,
   uploadCompanyPost,
   sendMessage,
+  uploadCvLink,
+  uploadCompanyLink,
   getMessages,
   likePost,
   flagStudent,
@@ -475,7 +500,10 @@ const userService = {
   getNonPrivatePosts,
   getAll,
   updateStudentPost,
+  getCvLinks,
+  getCompanyLinks,
   enable,
+  deleteMessage,
   deleteComment,
   updateStudentComment,
   updateCompanyComment,

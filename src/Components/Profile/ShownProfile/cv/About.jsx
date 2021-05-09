@@ -1,127 +1,79 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import userService from "../../../../services/userService";
 import "./About.css";
 
 const About = (props) => {
-  const data = props.data;
+  const etablishment = props?.data?.etablishment?.name;
+  const data = props?.data?.cv?.about;
   const email = props.email;
-  // const [domaine, setDomaine] = useState("");
-  // useEffect(() => {
-  //   switch (data?.domaine) {
-  //     case "informatique":
-  //       setDomaine("Informatique");
-  //       break;
-  //     case "electrique":
-  //       setDomaine("Electrique");
-  //       break;
-  //     case "economie":
-  //       setDomaine("Economie");
-  //       break;
-  //     case "mecanique":
-  //       setDomaine("Mécanique");
-  //       break;
-  //   }
-  // }, []);
 
   const Fb = () => {
-    const str = data?.socials
-      .substring(0, data?.socials.length - 1)
-      .substring(1);
-    const socArray = str.split(",");
-    let a;
-    for (const e of socArray) {
-      a = e.split(":");
-      if (a[0] === '"Facebook"') {
+    for (let i = 0; i < props?.data?.cv?.links?.length; i++) {
+      if (props?.data?.cv?.links[i]?.name == "Facebook") {
         return (
           <a
             rel="noreferrer"
             target="_blank"
             className="social-icon"
-            href={`https://${a[a.length - 1]
-              .substring(0, a[a.length - 1].length - 1)
-              .substring(1)}`}
+            href={`${props?.data?.cv?.links[i]?.url}`}
           >
             <i className="fab fa-facebook-f" />
           </a>
         );
       }
     }
-    return <div></div>;
-  };
-  const Git = () => {
-    const str = data?.socials
-      .substring(0, data?.socials.length - 1)
-      .substring(1);
-    const socArray = str.split(",");
-    let a;
-    for (const e of socArray) {
-      a = e.split(":");
-      if (a[0] === '"GitHub"') {
-        return (
-          <a
-            rel="noreferrer"
-            target="_blank"
-            className="social-icon"
-            href={`https://${a[a.length - 1]
-              .substring(0, a[a.length - 1].length - 1)
-              .substring(1)}`}
-          >
-            <i className="fab fa-github" />{" "}
-          </a>
-        );
-      }
-    }
-    return <div></div>;
+    return <></>;
   };
   const Ln = () => {
-    const str = data?.socials
-      .substring(0, data?.socials.length - 1)
-      .substring(1);
-    const socArray = str.split(",");
-    let a;
-    for (const e of socArray) {
-      a = e.split(":");
-      if (a[0] === '"LinkedIn"') {
+    for (let i = 0; i < props?.data?.cv?.links?.length; i++) {
+      if (props?.data?.cv?.links[i]?.name == "Facebook") {
         return (
           <a
             rel="noreferrer"
             target="_blank"
             className="social-icon"
-            href={`https://${a[a.length - 1]
-              .substring(0, a[a.length - 1].length - 1)
-              .substring(1)}`}
+            href={`${props?.data?.cv?.links[i]?.url}`}
           >
             <i className="fab fa-linkedin-in" />
           </a>
         );
       }
     }
-    return <div></div>;
+    return <></>;
   };
-  const Yt = () => {
-    const str = data?.socials
-      .substring(0, data?.socials.length - 1)
-      .substring(1);
-    const socArray = str.split(",");
-    let a;
-    for (const e of socArray) {
-      a = e.split(":");
-      if (a[0] === '"YouTube"') {
-        console.log(a[0]);
+  const Git = () => {
+    for (let i = 0; i < props?.data?.cv?.links?.length; i++) {
+      if (props?.data?.cv?.links[i]?.name == "GitHub") {
         return (
           <a
             rel="noreferrer"
             target="_blank"
             className="social-icon"
-            href={`https://${a[a.length - 1]
-              .substring(0, a[a.length - 1].length - 1)
-              .substring(1)}`}
+            href={`${props?.data?.cv?.links[i]?.url}`}
+          >
+            <i className="fab fa-github" />
+          </a>
+        );
+      }
+    }
+    return <></>;
+  };
+  const Yt = () => {
+    for (let i = 0; i < props?.data?.cv?.links?.length; i++) {
+      if (props?.data?.cv?.links[i]?.name == "YouTube") {
+        return (
+          <a
+            rel="noreferrer"
+            target="_blank"
+            className="social-icon"
+            href={`${props?.data?.cv?.links[i]?.url}`}
           >
             <i class="fab fa-youtube"></i>
           </a>
         );
       }
     }
-    return <div></div>;
+    return <></>;
   };
 
   return (
@@ -143,12 +95,14 @@ const About = (props) => {
           {data?.domaine[0].toUpperCase() +
             data?.domaine.slice(1, data?.domaine.length)}
         </p> */}
+        <p>Ecole: {etablishment}</p>
+
         <p className="lead mb-5">{data?.bio}</p>
         <div className="social-icons d-flex">
-          {data && <Fb />}
-          {data && <Git />}
-          {data && <Ln />}
-          {data && <Yt />}
+          <Fb />
+          <Git />
+          <Ln />
+          <Yt />
         </div>
       </div>
     </section>

@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Input from "react-phone-number-input/input";
 import "react-phone-number-input/style.css";
-import axios from "axios";
+import Socials from "./EditSocials";
 import Form from "react-bootstrap/Form";
 import userService from "../../../../services/userService";
 
@@ -26,15 +26,9 @@ const EditAbout = (props) => {
 
   const handleClick = (e) => {
     const errors1 = [];
-    if (firstName.length === 0 || lastName.length === 0)
-      errors1.push("Name cannot be empty");
-    if (address.length === 0 || city.length === 0)
-      errors1.push("Adrress cannot be empty");
-    if (!number) errors1.push("Number cannot be empty");
-    if (number?.length < 11)
-      errors1.push("Your number should be like 0663-123123");
-    if (bio?.length === 0) errors1.push("Bio must not be empty");
-    if (interests?.length === 0) errors1.push("Interests must not be empty");
+
+    // if (bio?.length === 0) errors1.push("Bio must not be empty");
+    // if (interests?.length === 0) errors1.push("Interests must not be empty");
     if (errors1.length > 0) {
       setMessage(errors1);
       return 0;
@@ -43,8 +37,6 @@ const EditAbout = (props) => {
   };
 
   const [bio, setBio] = useState(data?.bio);
-  const [firstName, setFirstName] = useState(data?.firstName);
-  const [lastName, setLastName] = useState(data?.lastName);
   const [address, setAddress] = useState(data?.address);
   const [city, setCity] = useState(data?.city);
   const [number, setNumber] = useState(data?.number);
@@ -53,16 +45,6 @@ const EditAbout = (props) => {
 
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState(initialState);
-
-  const handleFirstNameChange = (e) => {
-    const value = e.target.value;
-    setFirstName(value);
-  };
-
-  const handleLastNameChange = (e) => {
-    const value = e.target.value;
-    setLastName(value);
-  };
 
   const handleAddressChange = (e) => {
     const value = e.target.value;
@@ -92,8 +74,6 @@ const EditAbout = (props) => {
 
   const update = (e) => {
     let abut = {
-      firstName: firstName,
-      lastName: lastName,
       address: address,
       city: city,
       number: number,
@@ -102,67 +82,28 @@ const EditAbout = (props) => {
       domaine: domaine,
     };
     console.log(abut);
-    userService.updateAbout(props?.id, abut)
-      .then(
-        (response) => {
-          setMessage(response.data.message);
-          setSuccessful(!props.toggle);
-          props.onChange(true);
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-          setMessage(resMessage);
-          setSuccessful(false);
-        }
-      );
+    userService.updateAbout(props?.id, abut).then(
+      (response) => {
+        setMessage(response.data.message);
+        setSuccessful(!props.toggle);
+        props.onChange(true);
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        setMessage(resMessage);
+        setSuccessful(false);
+      }
+    );
   };
 
   return (
     <div className="container">
       <form>
-        <div className="form-group row align-items-center">
-          <label for="number" className="col-1  col-form-label">
-            Full Name:
-          </label>
-          <div className="col-5 mt-2 mr-5">
-            <input
-              className="form-control"
-              style={{
-                backgroundColor: "#f3f2ef",
-              }}
-              type="text"
-              placeholder="First Name"
-              value={firstName
-                .split(" ")
-                .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
-                .join(" ")}
-              onChange={handleFirstNameChange}
-              required
-            />
-          </div>
-          <div className="col-4 mt-2">
-            <input
-              className="form-control"
-              style={{
-                backgroundColor: "#f3f2ef",
-              }}
-              type="text"
-              id="number"
-              placeholder="Last Name"
-              value={lastName
-                .split(" ")
-                .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
-                .join(" ")}
-              onChange={handleLastNameChange}
-              required
-            />
-          </div>
-        </div>
         <div className="form-group row  align-items-center">
           <label for="number" className="col-1 col-form-label">
             Address:
@@ -215,7 +156,7 @@ const EditAbout = (props) => {
         </div>
         <div className="form-group row align-items-center">
           <label for="example-tel-input" class="col-sm-2 col-form-label">
-            Votre domaine d'étude :
+            Filière:
           </label>
           <div className="col-sm-5">
             <Form.Control
@@ -226,7 +167,12 @@ const EditAbout = (props) => {
               <option value="Informatique">Informatique</option>
               <option value="Electrique">Electrique</option>
               <option value="Mécanique">Mécanique</option>
+              <option value="Industriel">Industriel</option>
+              <option value="Réseau et Télecommunications">
+                Réseau et Télecommunications
+              </option>
               <option value="Economie">Economie</option>
+              <option value="Autre">Autre</option>
             </Form.Control>
           </div>
         </div>
@@ -270,6 +216,7 @@ const EditAbout = (props) => {
             onChange={handleInterestsChange}
           ></textarea>
         </div>
+        <Socials />
         <div className={classes.root + " btnholder"}>
           <Button
             variant="outlined"

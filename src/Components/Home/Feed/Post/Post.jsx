@@ -139,11 +139,10 @@ function Post({
       }
     }
     bzaf();
-    userService.getPostComments(postId)
-      .then((response) => {
-        setComments(response?.data);
-        setToggleComment(!toggleComment);
-      });
+    userService.getPostComments(postId).then((response) => {
+      setComments(response?.data);
+      setToggleComment(!toggleComment);
+    });
     setToggleComment(!toggleComment); //problem here
   }, [refresh]);
 
@@ -205,12 +204,7 @@ function Post({
           <img
             className="post_image"
             onClick={() => setModalShow(true)}
-            src={
-              userService.imageLink +
-              postId +
-              "." +
-              imageType
-            }
+            src={userService.imageLink + postId + "." + imageType}
           />
         </ModalB.Body>
       </ModalB>
@@ -278,36 +272,35 @@ function Post({
       let comment = {
         message: commentInput,
         role: 1,
-      }
-      userService.uploadStudentComment(postId, comment)
-        .then(
-          (response) => {
-            setRefresh(!refresh);
-            setSnackOpen(true);
-            setSuccessful(true);
-            setCommentInput("");
-            setUploadMessage("Comment uploaded!");
-          },
-          (error) => {
-            setSuccessful(false);
-            setSnackOpen(true);
-            setUploadMessage("Could not upload comment!");
-          }
-        );
-    } else if (user?.roles[0]?.id === 3) {
-      let comment = {
-        message: commentInput,
-        role: 3,
-      }
-      userService.uploadCompanyComment
-        .then((response) => {
-          // window.location.reload();
+      };
+      userService.uploadStudentComment(postId, comment).then(
+        (response) => {
           setRefresh(!refresh);
           setSnackOpen(true);
           setSuccessful(true);
           setCommentInput("");
-          setUploadMessage("Message uploaded!");
-        });
+          setUploadMessage("Comment uploaded!");
+        },
+        (error) => {
+          setSuccessful(false);
+          setSnackOpen(true);
+          setUploadMessage("Could not upload comment!");
+        }
+      );
+    } else if (user?.roles[0]?.id === 3) {
+      let comment = {
+        message: commentInput,
+        role: 3,
+      };
+      console.log(comment);
+      userService.uploadCompanyComment(postId, comment).then((response) => {
+        // window.location.reload();
+        setRefresh(!refresh);
+        setSnackOpen(true);
+        setSuccessful(true);
+        setCommentInput("");
+        setUploadMessage("Message uploaded!");
+      });
     }
   };
 
@@ -320,34 +313,32 @@ function Post({
   };
 
   const likePost = (postId) => {
-    userService.likePost(postId, user?.id)
-      .then(
-        (response) => {
-          setToggleLike(true);
-          setShownLikes(shownLikes + 1);
-          // onChange(true);
-          // onChange(false);
-        },
-        (error) => {
-          setSuccessful(false);
-          setUploadMessage("Couldn't like post!");
-          setSnackOpen(true);
-        }
-      );
+    userService.likePost(postId, user?.id).then(
+      (response) => {
+        setToggleLike(true);
+        setShownLikes(shownLikes + 1);
+        // onChange(true);
+        // onChange(false);
+      },
+      (error) => {
+        setSuccessful(false);
+        setUploadMessage("Couldn't like post!");
+        setSnackOpen(true);
+      }
+    );
   };
   const unlikePost = (postId) => {
-    userService.unlikePost(postId)
-      .then(
-        (response) => {
-          setShownLikes(shownLikes - 1);
-          setToggleLike(false);
-        },
-        (error) => {
-          setSuccessful(false);
-          setUploadMessage("404 Couldn't unlike post!");
-          setSnackOpen(true);
-        }
-      );
+    userService.unlikePost(postId).then(
+      (response) => {
+        setShownLikes(shownLikes - 1);
+        setToggleLike(false);
+      },
+      (error) => {
+        setSuccessful(false);
+        setUploadMessage("404 Couldn't unlike post!");
+        setSnackOpen(true);
+      }
+    );
   };
 
   return (
@@ -366,19 +357,14 @@ function Post({
         <Link to={`/view/${ownerId}`} style={{ textDecoration: "none" }}>
           {role === 1 && (
             <Avatar
-              src={
-                userService.imageLink + owner?.cv?.image
-              }
+              src={userService.imageLink + owner?.cv?.image}
               className={classes.large}
             />
           )}
           {role === 3 && (
             <Avatar
               variant="square"
-              src={
-                userService.imageLink +
-                owner?.company?.companyImage
-              }
+              src={userService.imageLink + owner?.company?.companyImage}
               className={classes.large}
             />
           )}
@@ -409,18 +395,8 @@ function Post({
         {imageType && (
           <ModalImage
             className="post_image"
-            small={
-              userService.imageLink + "post" +
-              postId +
-              "." +
-              imageType
-            }
-            large={
-              userService.imageLink + "post" +
-              postId +
-              "." +
-              imageType
-            }
+            small={userService.imageLink + "post" + postId + "." + imageType}
+            large={userService.imageLink + "post" + postId + "." + imageType}
             alt=""
           />
         )}

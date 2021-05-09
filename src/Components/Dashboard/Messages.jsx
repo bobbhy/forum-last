@@ -10,83 +10,74 @@ import Title from "./Title";
 import axios from "axios";
 import CloseIcon from "@material-ui/icons/Close";
 import Button from "@material-ui/core/Button";
-
+import userService from "../../services/userService";
 
 const useStyles = makeStyles((theme) => ({
-    seeMore: {
-        marginTop: theme.spacing(3),
-    },
+  seeMore: {
+    marginTop: theme.spacing(3),
+  },
 }));
 
-
 export default function Messages() {
-    const [loading, setLoading] = useState(false)
-    const [messages, setMessages] = useState();
-    const [count, setCount] = useState(0)
-    const handleDelete = async (id) => {
-        setLoading(true)
-        await axios.delete(`https://www.forum-uit.codes/contact/message/${id}`).then((response) => {
-            setCount(count + 1)
-        })
-        setLoading(false)
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState();
+  const [count, setCount] = useState(0);
+  const handleDelete = async (id) => {
+    setLoading(true);
+    await userService.deleteMessage(id).then((response) => {
+      setCount(count + 1);
+    });
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    async function getAll() {
+      await userService.getDashMessages().then((response) => {
+        setMessages(response?.data);
+      });
     }
+    getAll();
+  }, [count]);
+  return (
+    <React.Fragment>
+      <Title>All Messages</Title>
+      <Table size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell>Id</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Message</TableCell>
+            <TableCell align="center">Delete</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {messages?.map((message) => (
+            <TableRow key={message.id}>
+              <TableCell>{message.id}</TableCell>
+              <TableCell>{message.name}</TableCell>
+              <TableCell>{message.email}</TableCell>
+              <TableCell>{message.message}</TableCell>
+              <TableCell align="center">
+                <Button
+                  disabled={loading}
+                  onClick={() => {
+                    handleDelete(message.id);
+                  }}
+                >
+                  <CloseIcon color="secondary" />
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
 
-    useEffect(() => {
-        async function getAll() {
-            await axios
-                .get("https://www.forum-uit.codes/contact/messages")
-                .then((response) => {
-                    setMessages(response?.data);
-                });
-        }
-        getAll();
-    }, [count]);
-    return (
-        <React.Fragment>
-            <Title>All Messages</Title>
-            <Table size="small">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Id</TableCell>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Email</TableCell>
-                        <TableCell>Message</TableCell>
-                        <TableCell align="center">Delete</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {messages?.map(
-                        (message) =>
-                        (
-                            <TableRow key={message.id}>
-                                <TableCell>{message.id}</TableCell>
-                                <TableCell>
-                                    {message.name}
-                                </TableCell>
-                                <TableCell>
-                                    {message.email}
-                                </TableCell>
-                                <TableCell>{message.message}</TableCell>
-                                <TableCell align="center">
-                                    <Button disabled={loading} onClick={() => {
-                                        handleDelete(message.id)
-                                    }}>
-                                        <CloseIcon
-                                            color="secondary"
-                                        />
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
-                        )
-                    )}
-                </TableBody>
-            </Table>
-
-            {/* <div className={classes.seeMore}>
+      {/* <div className={classes.seeMore}>
         <Link color="primary" href="#" onClick={preventDefault}>
           See more
         </Link>
       </div> */}
-        </React.Fragment>
-    );
+    </React.Fragment>
+  );
 }

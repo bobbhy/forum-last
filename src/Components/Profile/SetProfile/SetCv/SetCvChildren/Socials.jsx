@@ -6,63 +6,78 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import Tooltip from "@material-ui/core/Tooltip";
+import userService from "../../../../../services/userService";
 
 const Socials = (props) => {
   const [id, setId] = useState("");
   const [toggle, setToggle] = useState(false);
-  const [socials, setSocials] = useState({});
+  const [url, setUrl] = useState("");
 
   const fbToggler = (e) => {
-    if (toggle === false) {
+    setId("Facebook");
+    if (!toggle) {
       setToggle(true);
-      setId("Facebook");
     } else {
-      setId("Facebook");
+      if (id == "Facebook") {
+        setToggle(false);
+        setId("Facebook");
+      }
     }
   };
 
   const inToggler = (e) => {
-    if (toggle === false) {
+    setId("LinkedIn");
+    if (!toggle) {
       setToggle(true);
-      setId("LinkedIn");
     } else {
-      setId("LinkedIn");
+      if (id == "LinkedIn") {
+        setId("LinkedIn");
+        setToggle(false);
+      }
     }
   };
 
   const gitToggler = (e) => {
-    if (toggle === false) {
+    setId("GitHub");
+    if (!toggle) {
       setToggle(true);
-      setId("GitHub");
     } else {
-      setId("Github");
+      if (id == "GitHub") {
+        setToggle(false);
+        setId("GitHub");
+      }
     }
   };
 
   const ytToggler = () => {
+    setId("YouTube");
     if (!toggle) {
       setToggle(true);
-      setId("YouTube");
     } else {
-      setId("YouTube");
+      if (id == "YouTube") {
+        setToggle(false);
+        setId("YouTube");
+      }
     }
-  };
-
-  const close = () => {
-    setToggle(false);
   };
 
   const onChangeHandler = (e) => {
-    const value = e.target.value;
-    if (e.target.id === "Facebook") {
-      setSocials({ ...socials, Facebook: value });
-    } else if (e.target.id === "LinkedIn") {
-      setSocials({ ...socials, LinkedIn: value });
-    } else if (e.target.id === "GitHub") {
-      setSocials({ ...socials, GitHub: value });
-    } else if (e.target.id === "YouTube") {
-      setSocials({ ...socials, YouTube: value });
-    }
+    setUrl(e.target.value);
+  };
+
+  const upload = () => {
+    const link = { name: id, url: url };
+    userService.uploadCvLink(link).then(
+      (res) => {
+        setId("");
+        setUrl("");
+        setToggle(false);
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   };
 
   return (
@@ -118,10 +133,10 @@ const Socials = (props) => {
             <input
               class="form-control col-sm-8"
               type="text"
-              placeholder={`${id} Link`}
+              placeholder={`Lien ${id}`}
               style={{ backgroundColor: "#f3f2ef" }}
               id={id}
-              value={socials[id]}
+              value={url}
               onChange={onChangeHandler}
               required
             />
@@ -130,9 +145,8 @@ const Socials = (props) => {
             variant="contained"
             color="info"
             style={{ marginLeft: "3px", fontWeight: "bolder" }}
-            onClick={(event) => {
-              props.onChange(socials);
-              close();
+            onClick={() => {
+              upload();
             }}
           >
             Add

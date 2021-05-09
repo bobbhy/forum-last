@@ -2,29 +2,37 @@ import axios from "axios";
 import authHeader from "./authHeader";
 
 const API_URL = "https://www.forum-uit.codes/api/auth/";
-// const API_URL = "http://localhost:5000/api/auth/";
+//const API_URL = "http://localhost:5000/api/auth/";
 
-const register = (name, companyName, username, email, password, role, etablishment_idx = 0) => {
+const register = (
+  name,
+  companyName,
+  username,
+  email,
+  password,
+  role,
+  etablishment_idx = 0
+) => {
   name = name.toLowerCase();
   username = username.toLowerCase();
-  const etablishment_id = parseInt(etablishment_idx)
+  const etablishment_id = parseInt(etablishment_idx);
   return role === 1
     ? axios.post(API_URL + "signup/1", {
-      name,
-      companyName,
-      username,
-      email,
-      password,
-      etablishment_id
-    })
+        name,
+        companyName,
+        username,
+        email,
+        password,
+        etablishment_id,
+      })
     : axios.post(API_URL + "signup/3", {
-      name,
-      companyName,
-      username,
-      email,
-      password,
-      etablishment_id
-    });
+        name,
+        companyName,
+        username,
+        email,
+        password,
+        etablishment_id,
+      });
 };
 
 const login = (usernameOrEmail, password) => {
@@ -62,8 +70,8 @@ const deleteUser = (id) => {
     method: "delete",
     url: API_URL + "deleteUser/" + id,
     headers: authHeader(),
-  })
-}
+  });
+};
 
 const authService = {
   register,
@@ -71,7 +79,7 @@ const authService = {
   logout,
   verify,
   getCurrentUser,
-  deleteUser
+  deleteUser,
 };
 
 export default authService;

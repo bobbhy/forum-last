@@ -1,85 +1,104 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
-import { MDBIcon, MDBContainer, MDBBtn } from "mdbreact";
+import { MDBContainer, MDBBtn } from "mdbreact";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import YouTubeIcon from "@material-ui/icons/YouTube";
+import Tooltip from "@material-ui/core/Tooltip";
+import userService from "../../../../../services/userService";
+import LanguageIcon from "@material-ui/icons/Language";
 
 const Socials = (props) => {
   const [id, setId] = useState("");
   const [toggle, setToggle] = useState(false);
-  const [socials, setSocials] = useState({});
+  const [url, setUrl] = useState("");
 
   const fbToggler = (e) => {
-    if (toggle === false) {
+    setId("Facebook");
+    if (!toggle) {
       setToggle(true);
-      setId("Facebook");
     } else {
-      setId("Facebook");
+      if (id == "Facebook") {
+        setToggle(false);
+        setId("Facebook");
+      }
     }
   };
 
   const inToggler = (e) => {
-    if (toggle === false) {
+    setId("LinkedIn");
+    if (!toggle) {
       setToggle(true);
-      setId("LinkedIn");
     } else {
-      setId("LinkedIn");
+      if (id == "LinkedIn") {
+        setId("LinkedIn");
+        setToggle(false);
+      }
     }
   };
 
   const webToggler = (e) => {
-    if (toggle === false) {
+    setId("Website");
+    if (!toggle) {
       setToggle(true);
-      setId("Website");
     } else {
-      setId("Website");
+      if (id == "Website") {
+        setToggle(false);
+        setId("Website");
+      }
     }
-  };
-
-  const close = () => {
-    setToggle(false);
   };
 
   const onChangeHandler = (e) => {
-    const value = e.target.value;
-    if (e.target.id === "Facebook") {
-      setSocials({ ...socials, Facebook: value });
-    } else if (e.target.id === "LinkedIn") {
-      setSocials({ ...socials, LinkedIn: value });
-    } else if (e.target.id === "Website") {
-      setSocials({ ...socials, Website: value });
-    }
+    setUrl(e.target.value);
+  };
+
+  const upload = () => {
+    const link = { name: id, url: url };
+    console.log(link);
+    userService.uploadCompanyLink(link).then((res) => {
+      setId("");
+      setUrl("");
+      setToggle(false);
+    });
   };
 
   return (
-    <div cls>
-      <div class="form-group row col-sm-12">
+    <div>
+      <div class="form-group row col-sm-12 align-items-center">
         <label class="col-sm-2 col-form-label">Add Socials:</label>
         <MDBContainer className="col-sm-10 flex-row mt-3">
-          <MDBBtn
-            size="lg"
-            className="col-sm-3 col-4"
-            social="fb"
-            onClick={fbToggler}
-          >
-            <MDBIcon fab icon="facebook-f" />
-          </MDBBtn>
-
-          <MDBBtn
-            size="lg"
-            className="col-sm-3 col-4"
-            social="li"
-            onClick={webToggler}
-          >
-            <MDBIcon icon="globe" />
-          </MDBBtn>
-
-          <MDBBtn
-            size="lg"
-            className="col-sm-3 col-4"
-            social="li"
-            onClick={inToggler}
-          >
-            <MDBIcon fab icon="linkedin-in" />
-          </MDBBtn>
+          <Tooltip title="Lien pour le profil Facebook">
+            <MDBBtn
+              size="lg"
+              className="col-sm-3 col-4"
+              social="fb"
+              onClick={fbToggler}
+            >
+              <FacebookIcon />
+            </MDBBtn>
+          </Tooltip>
+          <Tooltip title="Lien pour le profil LinkedIn">
+            <MDBBtn
+              size="lg"
+              className="col-sm-3 col-4"
+              social="li"
+              onClick={inToggler}
+            >
+              <LinkedInIcon />
+            </MDBBtn>
+          </Tooltip>
+          <Tooltip title="Lien pour votre site Web">
+            <MDBBtn
+              size="lg"
+              className="col-sm-3 col-4"
+              social="git"
+              onClick={webToggler}
+            >
+              <LanguageIcon />
+            </MDBBtn>
+          </Tooltip>
         </MDBContainer>
       </div>
       {toggle && (
@@ -88,10 +107,10 @@ const Socials = (props) => {
             <input
               class="form-control col-sm-8"
               type="text"
-              placeholder={`${id} Link`}
+              placeholder={`Lien ${id}`}
               style={{ backgroundColor: "#f3f2ef" }}
               id={id}
-              value={socials[id]}
+              value={url}
               onChange={onChangeHandler}
               required
             />
@@ -100,9 +119,8 @@ const Socials = (props) => {
             variant="contained"
             color="info"
             style={{ marginLeft: "3px", fontWeight: "bolder" }}
-            onClick={(event) => {
-              props.onChange(socials);
-              close();
+            onClick={() => {
+              upload();
             }}
           >
             Add

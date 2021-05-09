@@ -26,27 +26,21 @@ const useStyles = makeStyles((theme) => ({
 export default function ListUsers({ refresh, onChange }) {
   const classes = useStyles();
   const [count, setCount] = useState(0);
-  const [accounts,setAccounts]=useState([])
+  const [accounts, setAccounts] = useState([]);
   useEffect(() => {
     function getAll() {
-      userService.getAll()
-        .then((response) => {
-          setAccounts(response?.data);
-        });
+      userService.getUnenabledManagers().then((response) => {
+        setAccounts(response?.data);
+      });
     }
     getAll();
   }, [count]);
 
   const enableManager = (id) => {
-    async function enabling() {
-      await axios
-        .put(`https://www.forum-uit.codes/api/cv/enable/${id}`)
-        .then((response) => {
-          onChange(!refresh);
-          setCount(count + 1);
-        });
-    }
-    enabling();
+    userService.enable(id).then((response) => {
+      onChange(!refresh);
+      setCount(count + 1);
+    });
   };
 
   return (
@@ -65,53 +59,40 @@ export default function ListUsers({ refresh, onChange }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {accounts?.map(
-            (account) =>
-              account.roles[0].id === 3 &&
-              !account.enabled && (
-                <TableRow key={account.id}>
-                  <TableCell>{account.id}</TableCell>
-                  <TableCell>
-                    {account.roles[0].id === 1 && (
-                      <Avatar
-                        src={
-                          userService.imageLink +
-                          account.cv.image
-                        }
-                      />
-                    )}
-                    {account.roles[0].id === 3 && (
-                      <Avatar
-                        src={
-                          userService.imageLink
-                           +
-                          account.company.companyImage
-                        }
-                      />
-                    )}
-                  </TableCell>
+          {accounts?.map((account) => (
+            <TableRow key={account.id}>
+              <TableCell>{account.id}</TableCell>
+              <TableCell>
+                {account.roles[0].id === 1 && (
+                  <Avatar src={userService.imageLink + account.cv.image} />
+                )}
+                {account.roles[0].id === 3 && (
+                  <Avatar
+                    src={userService.imageLink + account.company.companyImage}
+                  />
+                )}
+              </TableCell>
 
-                  <TableCell>
-                    {account.name
-                      .split(" ")
-                      .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
-                      .join(" ")}
-                  </TableCell>
-                  <TableCell>{account.username}</TableCell>
-                  <TableCell>{account.email}</TableCell>
-                  <TableCell>Manager</TableCell>
-                  <TableCell>
-                    <Button
-                      onClick={() => {
-                        enableManager(account.id);
-                      }}
-                    >
-                      <CheckIcon style={{ color: "green" }} />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              )
-          )}
+              <TableCell>
+                {account.name
+                  .split(" ")
+                  .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
+                  .join(" ")}
+              </TableCell>
+              <TableCell>{account.username}</TableCell>
+              <TableCell>{account.email}</TableCell>
+              <TableCell>Manager</TableCell>
+              <TableCell>
+                <Button
+                  onClick={() => {
+                    enableManager(account.id);
+                  }}
+                >
+                  <CheckIcon style={{ color: "green" }} />
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
