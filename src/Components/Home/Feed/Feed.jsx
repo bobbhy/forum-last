@@ -209,7 +209,6 @@ function Feed(props) {
       } else {
         result = await userService.getPosts();
       }
-      console.log(result?.data)
       setRes(result?.data);
       setTimeout(() => {
         // setLoaded(true);

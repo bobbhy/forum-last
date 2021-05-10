@@ -5,7 +5,6 @@ import userService from "../../../../services/userService"
 import "./SearchMenu.css";
 function SearchMenu(profiles) {
   useEffect(() => {
-    console.log(profiles[0]);
   }, [profiles]);
   const close = () => {
     profiles.handleClose()

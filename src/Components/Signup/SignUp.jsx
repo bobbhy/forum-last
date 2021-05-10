@@ -19,11 +19,12 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import login from "../../login.jfif";
 import userService from "../../services/userService";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Modal from "react-bootstrap/Modal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -89,7 +90,7 @@ export default function SignUp({ user }) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  
   useEffect(() => {
     if (user) {
       history.push("/profile");
@@ -97,7 +98,7 @@ export default function SignUp({ user }) {
     async function getEtablishments() {
       await userService.getEtablishements().then((response) => {
         setEtablishments(response.data);
-      });
+      })
     }
     getEtablishments();
   }, []);
@@ -138,10 +139,10 @@ export default function SignUp({ user }) {
     setEmail(email);
     if (email.length === 0) {
       setErrors({ ...errors, email: "Email is required" });
-      // } else if (!email.endsWith('@uit.ac.ma') && value === 0) {
-      //   setErrors({ ...errors, email: "Use your university email" })
-      // }
-    } else {
+    } else if (!email.endsWith('@uit.ac.ma') && value === 0) {
+      setErrors({ ...errors, email: "Use your university email" })
+    }
+    else {
       setErrors({ ...errors, email: null });
       if (!validateEmail(email)) {
         setErrors({ ...errors, email: "Invalid email format" });
@@ -153,8 +154,9 @@ export default function SignUp({ user }) {
     setEtablishment(etablishment);
     if (etablishment == 0) {
       setErrors({ ...errors, etablishment: "Etablishement is required" });
-    } else {
-      setErrors({ ...errors, etablishment: null });
+    }
+    else {
+      setErrors({ ...errors, etablishment: null })
     }
   };
 
@@ -198,30 +200,30 @@ export default function SignUp({ user }) {
         lastName.split(" ").join("").toLowerCase();
       const userNamex = userName.toLowerCase();
       const emailx = email.toLowerCase();
-      authService
-        .register(name, "", userNamex, emailx, password, 1, etablishment)
-        .then(
-          (response) => {
-            setMessage(response.data.message);
-            setSuccessful(true);
-            setLoading(false);
-          },
-          (error) => {
-            const resMessage =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-              error.message ||
-              error.toString();
+      authService.register(name, "", userNamex, emailx, password, 1, etablishment).then(
+        (response) => {
+          setMessage(response.data.message);
+          setSuccessful(true);
+          setLoading(false);
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
 
-            setMessage(resMessage);
-            setSuccessful(false);
-            setLoading(false);
-          }
-        );
-    } else {
-      setLoading(false);
+          setMessage(resMessage);
+          setSuccessful(false);
+          setLoading(false);
+        }
+      );
     }
+    else {
+      setLoading(false)
+    }
+
   };
   const handleManagerSignup = (e) => {
     e.preventDefault();
@@ -258,6 +260,7 @@ export default function SignUp({ user }) {
         );
     }
   };
+  const [show, setShow] = useState(false);
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -347,9 +350,7 @@ export default function SignUp({ user }) {
                   </Grid>
                   <Grid item xs={12}>
                     <FormControl variant="filled" xs={12} sm={6}>
-                      <InputLabel id="demo-simple-select-label">
-                        Etablissement
-                      </InputLabel>
+                      <InputLabel id="demo-simple-select-label">Etablissement</InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
@@ -359,16 +360,10 @@ export default function SignUp({ user }) {
                       >
                         <MenuItem value={0}>Choose Your Etablishement</MenuItem>
                         {etablishments.map((etablishment) => {
-                          return (
-                            <MenuItem value={etablishment.id}>
-                              {etablishment.name}
-                            </MenuItem>
-                          );
+                          return (<MenuItem value={etablishment.id}>{etablishment.name}</MenuItem>)
                         })}
                       </Select>
-                      <FormHelperText error={Boolean(errors?.etablishment)}>
-                        {errors?.etablishment}
-                      </FormHelperText>
+                      <FormHelperText error={Boolean(errors?.etablishment)}>{errors?.etablishment}</FormHelperText>
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
@@ -403,13 +398,63 @@ export default function SignUp({ user }) {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox value="allowExtraEmails" color="primary" />
-                      }
-                      label="I agree to use my personnal information for academic researches"
-                    />
+                    <Button variant="primary" onClick={() => setShow(true)}>
+                      <FormControlLabel
+                          control={
+                            <Checkbox value="allowExtraEmails" color="primary" />
+                          }
+                          label="j'accepte les conditions d'utilisations"
+                        />
+                    </Button>
                   </Grid>
+                  
+
+                  <Modal
+                    size="lg"
+                    show={show}
+                    onHide={() => setShow(false)}
+                    dialogClassName="modal-220w"
+                    aria-labelledby="example-custom-modal-styling-title"
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title id="example-custom-modal-styling-title">
+                        <h3>les conditions d'utilisations</h3>
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <p>
+                      Vous êtes actuellement connecté(e) au Site Internet (www.forum-uit.ma) de La 1ère Edition du Forum Virtuel à L’Université Ibn Tofail.
+Tout accès et navigation sur le site (www.forum-uit.ma) supposent l'acceptation de l’utilisateur et son respect de l'ensemble de nos Conditions Générales d’utilisation décrites ci-après :<br/>
+	
+<h5>1.	ACCESSIBILITE :</h5>
+L'accès au site (www.forum-uit.ma) est gratuit.
+Ce site est accessible 24h sur 24h et 7 jours sur 7. Cependant, l'équipe qui coordonne l'administration du site peut être amenée à interrompre le site ou une partie des services, notamment pour des opérations de maintenance.
+
+<br/>
+<h5>2.	LES DONNEES PERSONNELLES :</h5>
+
+Le site (wwww.forum-uit.ma) collecte des informations provenant des visiteurs du site internet au moyen de formulaire figurant sur ledit site internet. 
+Les informations personnelles qui sont collectées, notamment à travers les formulaires d’inscription, ou de création de CV se limitent à celles qui sont nécessaires pour générer un CV décrivant de manière détaillée le parcours de l'étudiant(e) dans l'université IBN TOFAIL.
+<br/>
+Par ailleurs, Vous disposez des droits suivants :
+<ul>
+  <li>- Demander la mise à jour de vos données, si celles-ci sont inexactes.</li>
+  <li>- Demander la suppression de vos données.</li>
+  <li>- Demander la limitation du traitement de vos données.</li>
+  <li>- Vous opposer ou retirer votre consentement à l’utilisation, par nos services, de vos coordonnées.</li>
+</ul>
+Il est important à préciser que nous mettons en place tous les moyens adaptés à assurer la confidentialité et la sécurité de vos données personnelles, de manière à empêcher leur endommagement, effacement ou accès par des tiers non autorisés.
+L’accès à vos données est strictement limité aux responsables de la gestion du site (WWW.forum-uit.ma).
+Cependant les données collectées pourront éventuellement être communiquées à des Manager d'entreprises chargés de recrutement ou représentant des entreprises participant dans le forum. 
+Il est à préciser que dans le cadre de l’exécution de leurs prestations, les représentants des entreprises n’ont qu’un accès limité à vos données et ont une obligation contractuelle de les utiliser en conformité avec les dispositions de la législation applicable en matière de protection des données personnelles.
+
+<br/>
+<h5>3.	MODIFICATION DES CONDITIONS D’UTILISATION :</h5>
+L'équipe qui coordonne l'administration du site se réserve la possibilité de modifier, à tout moment et sans préavis, les Présentes Conditions d’utilisation afin de les adapter aux évolutions du site et/ou de son exploitation.
+
+                      </p>
+                    </Modal.Body>
+                  </Modal>
                 </Grid>
                 <Button
                   type="submit"
@@ -547,13 +592,62 @@ export default function SignUp({ user }) {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox value="allowExtraEmails" color="primary" />
-                      }
-                      label="I agre to use my data in ..."
-                    />
+                  <Button variant="primary" onClick={() => setShow(true)}>
+                      <FormControlLabel
+                          control={
+                            <Checkbox value="allowExtraEmails" color="primary" />
+                          }
+                          label="j'accepte les conditions d'utilisations"
+                        />
+                    </Button>
                   </Grid>
+                  
+
+                  <Modal
+                    show={show}
+                    onHide={() => setShow(false)}
+                    dialogClassName="modal-190w"
+                    aria-labelledby="example-custom-modal-styling-title"
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title id="example-custom-modal-styling-title">
+                        <h3>les conditions d'utilisations</h3>
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <p>
+                      Vous êtes actuellement connecté(e) au Site Internet (www.forum-uit.ma) de La 1ère Edition du Forum Virtuel à L’Université Ibn Tofail.
+Tout accès et navigation sur le site (www.forum-uit.ma) supposent l'acceptation de l’utilisateur et son respect de l'ensemble de nos Conditions Générales d’utilisation décrites ci-après :<br/>
+	
+<h5>1.	ACCESSIBILITE :</h5>
+L'accès au site (www.forum-uit.ma) est gratuit.
+Ce site est accessible 24h sur 24h et 7 jours sur 7. Cependant, l'équipe qui coordonne l'administration du site peut être amenée à interrompre le site ou une partie des services, notamment pour des opérations de maintenance.
+
+<br/>
+<h5>2.	LES DONNEES PERSONNELLES :</h5>
+
+Le site (wwww.forum-uit.ma) collecte des informations provenant des visiteurs du site internet au moyen de formulaire figurant sur ledit site internet. 
+Les informations personnelles qui sont collectées, notamment à travers les formulaires d’inscription, ou de création de CV se limitent à celles qui sont nécessaires pour générer un CV décrivant de manière détaillée le parcours de l'étudiant(e) dans l'université IBN TOFAIL.
+<br/>
+Par ailleurs, Vous disposez des droits suivants :
+<ul>
+  <li>- Demander la mise à jour de vos données, si celles-ci sont inexactes.</li>
+  <li>- Demander la suppression de vos données.</li>
+  <li>- Demander la limitation du traitement de vos données.</li>
+  <li>- Vous opposer ou retirer votre consentement à l’utilisation, par nos services, de vos coordonnées.</li>
+</ul>
+Il est important à préciser que nous mettons en place tous les moyens adaptés à assurer la confidentialité et la sécurité de vos données personnelles, de manière à empêcher leur endommagement, effacement ou accès par des tiers non autorisés.
+L’accès à vos données est strictement limité aux responsables de la gestion du site (WWW.forum-uit.ma).
+Cependant les données collectées pourront éventuellement être communiquées à des Manager d'entreprises chargés de recrutement ou représentant des entreprises participant dans le forum. 
+Il est à préciser que dans le cadre de l’exécution de leurs prestations, les représentants des entreprises n’ont qu’un accès limité à vos données et ont une obligation contractuelle de les utiliser en conformité avec les dispositions de la législation applicable en matière de protection des données personnelles.
+
+<br/>
+<h5>3.	MODIFICATION DES CONDITIONS D’UTILISATION :</h5>
+L'équipe qui coordonne l'administration du site se réserve la possibilité de modifier, à tout moment et sans préavis, les Présentes Conditions d’utilisation afin de les adapter aux évolutions du site et/ou de son exploitation.
+
+                      </p>
+                    </Modal.Body>
+                  </Modal>
                 </Grid>
                 <Button
                   type="submit"

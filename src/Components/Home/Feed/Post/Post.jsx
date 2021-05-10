@@ -140,7 +140,6 @@ function Post({
     }
     bzaf();
     userService.getPostComments(postId).then((response) => {
-      console.log(response.data)
       setComments(response?.data);
       setToggleComment(!toggleComment);
     });

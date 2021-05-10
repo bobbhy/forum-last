@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 const Cv = (props) => {
   const history = useHistory();
   const [currentUserId, setCurrentUserId] = useState();
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUserRole, setCurrentUserRole] = useState();
   const [isFriend, setIsFriend] = useState(-1);
   const [cv, setCv] = useState({});
   const [company, setCompany] = useState({});
@@ -139,7 +139,7 @@ const Cv = (props) => {
     async function getUserData() {
       await userService.getUserData().then((response) => {
         setCurrentUserId(response?.data?.id);
-        setCurrentUser(response?.data);
+        setCurrentUserRole(response?.data?.roles[0]?.id) ;
         response?.data?.friendshipSended.forEach((friendship) => {
           if (friendship.id.receiverId == id) {
             if (friendship.status === false) {
@@ -164,16 +164,14 @@ const Cv = (props) => {
     async function sendViewNotif() {
       if (
         currentUserId != id &&
-        currentUser?.roles[0]?.id == 3 &&
+        currentUserRole == 3 &&
         data?.roles[0]?.id == 1
       ) {
         await userService.sendViewNotification(id, currentUserId);
       }
     }
-    sendViewNotif().then((res) => {
-      console.log(res);
-    });
-  }, [count, currentUserId, toggle]);
+    sendViewNotif()
+  }, [count, currentUserId,currentUserRole, toggle]);
 
   function MyVerticallyCenteredModal(props) {
     return (
@@ -514,7 +512,7 @@ const Cv = (props) => {
 
                 {currentUserId != id &&
                 switchState &&
-                currentUser?.roles[0]?.id == 1 &&
+                currentUserRole== 1 &&
                 isFriend != 1 ? (
                   <h2>Cet utilisateur a un profil privé</h2>
                 ) : (

@@ -10,6 +10,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MessageIcon from '@material-ui/icons/Message';
 import { Link } from "react-router-dom";
 import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
+import createPalette from '@material-ui/core/styles/createPalette';
 function Feed() {
     const [loading, setLoading] = useState(false);
     const [count, setCount] = useState(0);
@@ -34,7 +35,11 @@ function Feed() {
             console.error(err);
         }
     }
-    const handleClick = (id) => {
+    const handleClick = (id,idNotif=0,message="") => {
+        if(message=="has viewed your profile")
+        {
+            handleSingleNotif(idNotif)
+        }
         history.push('/view/' + id)
         // window.location.reload()
     }
@@ -72,7 +77,7 @@ function Feed() {
                     <div className={`${styles.notif} ${!notification.status && styles.new}`} >
                         <Avatar className={styles.image} src={userService.imageLink + notification.ownerImage} />
                         <div className={styles.info}>
-                            <h3><span className={styles.name} onClick={() => handleClick(notification.ownersId)}>{notification.ownerName}</span> <span className={styles.follow}>{notification.message}</span></h3>
+                            <h3><span className={styles.name} onClick={() => handleClick(notification.ownersId,notification.id,notification.message)}>{notification.ownerName}</span> <span className={styles.follow}>{notification.message}</span></h3>
                             <div className="buttons">
                                 {notification.message === "Followed you" && notification.status === false && <Button
                                     size="small"
