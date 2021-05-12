@@ -12,6 +12,8 @@ a .svg-inline--fa:hover{
 }
 .svg2{
   z-index: 4;
+  width: 450px;
+  margin-left: 20px;
 }
 h1,h2,h3,h4,h5,h6{font-family: "Raleway", sans-serif!important;}
 .row{

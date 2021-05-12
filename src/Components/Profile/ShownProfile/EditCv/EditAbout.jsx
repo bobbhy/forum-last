@@ -74,6 +74,8 @@ const EditAbout = (props) => {
 
   const update = (e) => {
     let abut = {
+      firstName:data?.firstName,
+      lastName:data?.lastName,
       address: address,
       city: city,
       number: number,

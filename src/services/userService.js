@@ -514,5 +514,6 @@ const userService = {
   imageLink,
   uploadImageUrl,
   uploadImageUrlCompany,
+  updateCompanyPost 
 };
 export default userService;
