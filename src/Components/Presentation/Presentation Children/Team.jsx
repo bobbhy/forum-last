@@ -17,6 +17,9 @@ export default function Team() {
   return (
     <div className="w-100">
       <section id="team" class="team section-bg">
+        <div className="section-title">
+              <h2>Team </h2>
+            </div>
         <div class="container mt-4 mb-4" data-aos="fade-up">
 
           <div class="row mb-5">

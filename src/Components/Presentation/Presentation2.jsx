@@ -3,6 +3,7 @@ import {
   Nav,
   NavLink,
   NavLink2,
+  NavLink3,
   Bars,
   NavMenu,
   NavBtn,
@@ -35,9 +36,9 @@ const Navbar = () => {
   return (
     <div className="d-flex flex-wrap">
       <Nav>
-        <NavLink to='/'>
+        <NavLink3 to='/'>
           <img src={logo} className="logo" alt='logo' />
-        </NavLink>
+        </NavLink3>
         <Bars onClick={handleClick}/>
         <NavMenu>
           <NavLink href={`${window.location.pathname}#home`} activeStyle>

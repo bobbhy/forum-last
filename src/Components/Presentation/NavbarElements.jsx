@@ -11,12 +11,13 @@ export const Nav = styled.nav`
   background: #3f51b5;
   height: 80px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 0.5rem calc((100vw - 1000px) / 2);
   z-index: 999;
   width:100vw;
   /* Third Nav */
   /* justify-content: flex-start; */
+  padding-left:150px;
 `;
 export const Offset=styled.div`
 height:80px;
@@ -31,7 +32,21 @@ export const NavLink = styled.a`
   padding: 0 1rem;
   height: 100%;
   cursor: pointer;
-
+  &.active {
+    color: #15cdfc;
+  }
+`;
+export const NavLink3 = styled.a`
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  cursor: pointer;
+  position:fixed;
+  top:20px;
+  left:20px;
+  float:left
   &.active {
     color: #15cdfc;
   }
@@ -54,7 +69,7 @@ export const Bars = styled(FaBars)`
   display: none;
   color: #fff;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 940px) {
     display: block;
     position: absolute;
     top: 0;
@@ -68,7 +83,6 @@ export const Bars = styled(FaBars)`
 export const NavMenu = styled.div`
   display: flex;
   align-items: center;
-  margin-right: -24px;
 
   /* Second Nav */
   /* margin-right: 24px; */
@@ -77,7 +91,7 @@ export const NavMenu = styled.div`
   /* width: 100vw;
   white-space: nowrap; */
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 940px) {
     display: none;
   }
 `;
@@ -92,7 +106,7 @@ export const NavBtn = styled.nav`
   /* justify-content: flex-end;
   width: 100vw; */
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 940px) {
     display: none;
   }
 `;
@@ -132,7 +146,6 @@ export const Collapse=styled.div`
 export const CollapseItem=styled.a`
 
 
-@media screen and (max-width: 768px) {
   height: 70px;
   font-size:20px;
   border-bottom:0.5px solid lightgray;
@@ -146,13 +159,11 @@ export const CollapseItem=styled.a`
   &.active {
     color: #15cdfc;
   }
-  }
-  
+
 `
 export const CollapseItem2=styled(Link)`
 
 
-@media screen and (max-width: 768px) {
   height: 70px;
   font-size:20px;
   border-bottom:0.5px solid lightgray;
@@ -165,7 +176,6 @@ export const CollapseItem2=styled(Link)`
 
   &.active {
     color: #15cdfc;
-  }
   }
   
 `
