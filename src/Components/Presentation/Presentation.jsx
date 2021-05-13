@@ -10,10 +10,10 @@ import Box from "@material-ui/core/Box";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 //component imports
-import Welcome from "./src/components/Home/welcome/welcome";
+import Welcome from "./Presentation Children/welcome";
 import Team from "./Presentation Children/Team"
-import Sponsor from "./src/components/Home/welcome/sponsor";
-import ContactUs from "./src/components/Home/welcome/ContactUs";
+import ContactUs from "./Presentation Children/ContactUs";
+import Footer from "./Presentation Children/Footer";
 
 
 function Alert(props) {
@@ -135,6 +135,7 @@ const Presentation = () => {
         <TabPanel value={value} index={2}>
           <ContactUs />
         </TabPanel>
+        <Footer/>
       </div>
       <Snackbar open={open} autoHideDuration={20000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="info">

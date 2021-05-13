@@ -1,11 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import img1 from "./assets/img/clients/client-1.png";
-import img3 from "./assets/img/clients/client-3.png";
-import img4 from "./assets/img/clients/client-4.png";
-import img5 from "./assets/img/clients/client-5.png";
-import img6 from "./assets/img/clients/client-6.png";
-import img7 from "./assets/img/clients/client-7.png";
-import img8 from "./assets/img/clients/client-8.png";
 import imgc1 from "./assets/img/clubs/club-1.png";
 import imgc2 from "./assets/img/clubs/club-2.png";
 import imgc3 from "./assets/img/clubs/club-3.png";
@@ -22,9 +16,10 @@ import imgpa7 from "./assets/img/pacademiques/7.png";
 import imgpa8 from "./assets/img/pacademiques/8.png";
 import imgpa9 from "./assets/img/pacademiques/9.png";
 import imgpa10 from "./assets/img/pacademiques/10.png";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { useHistory } from "react-router-dom";
-import logo from "./logo.png";
+
 
 
 import imgbanner from "./img/banner.jpeg";
@@ -40,8 +35,6 @@ import GroupIcon from '@material-ui/icons/Group';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import Aos from "aos";
 import "aos/dist/aos.css";
-import AssignmentIcon from "@material-ui/icons/Assignment";
-import authHeader from "../../../../../../services/authHeader";
  
 export default function Welcome() {
   const history = useHistory();
@@ -113,11 +106,12 @@ export default function Welcome() {
 
   return (
     <>
-      <div className="landing">
-        <div className={welcomecss.s1}>
+      <section id="home"></section>
+      <div className="landing" >
+        <div className={welcomecss.s1} >
           <div className="container">
             <div className="row">
-              <div className="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1">
+              <div className="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" id="#landing">
                 <div className={welcomecss.s10}>
                   <h1>La première édition du Forum Virtuel à l’Université Ibn Tofail,et la 7 ieme édition du Forum ENSAK-ENTREPRISES</h1>
                   <h5>Sous le thème</h5>
@@ -477,71 +471,7 @@ export default function Welcome() {
             </div>
           </div>
         </div>
-        <div className="footer">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6 col-lg-3">
-                <div className="footer-contact">
-                  <Link to="/">
-                  <img src={logo} alt="Logo" className="logo" />
-                  </Link>
-                  <hr />
-                  <p className="pp">Le Forum Annuel Virtuel De L’Université Ibn Tofail est d’une part un moment d’échange et d’ouverture de l’université sur son environnement régional et national, puis d’autre part, c’est un moment ou le lauréat et étudiant se positionne et se projette.</p>
-                </div>
-              </div>
-              <div className="col-md-6 col-lg-3">
-                <div className="footer-link">
-                  <h2>Allez </h2>
-                  <a href=""><i class="fas fa-caret-right"></i>Accueil</a>
-                  <a href="#cliens"><i class="fas fa-caret-right"></i>A propos</a>
-                  <a href="#partenairess"><i class="fas fa-caret-right"></i>Partenaires</a>
-                  <a href=""><i class="fas fa-caret-right"></i>Contactez-nous</a>
-                </div>
-              </div>
-              <div className="col-md-6 col-lg-3">
-                <div className="footer-link">
-                  <h2>Liens utiles</h2>
-                  <a href="https://www.uit.ac.ma/"><i class="fas fa-caret-right"></i>Université IBN tofail </a>
-                  <a href="https://ensa.uit.ac.ma/"><i class="fas fa-caret-right"></i>ENSA- KENITRA</a>
-                  <a href="https://encg.uit.ac.ma/"><i class="fas fa-caret-right"></i>ENCG- KENITRA</a>
-                  <a href="https://cdc.uit.ac.ma/"><i class="fas fa-caret-right"></i>CDC- KENITRA</a>
-                  <a href="https://fsjes.uit.ac.ma/"><i class="fas fa-caret-right"></i>FSJES- KENITRA</a>
-                </div>
-              </div>
-              <div className="col-md-6 col-lg-3">
-                <div className="footer-contact">
-                  <h2>Nous contacter</h2>
-                  <p><i className="fa fa-map-marker-alt"></i>&nbsp;Campus universitaire, B.P 241, Kénitra - 14 000 - Maroc</p>
-                  <p><i className="fa fa-phone-alt"></i>&nbsp;+212 6 29 10 21 64</p>
-                  <p><i className="fa fa-envelope"></i>&nbsp;info@example.com</p>
-
-                  <h2 className="hh">Nous suivre</h2>
-                  <div className="footer-social">
-                    <a href=""><i class="fab fa-twitter"></i></a>
-                    <a href=""><i class="fab fa-facebook-f"></i></a>
-                    <a href=""><i class="fab fa-youtube"></i></a>
-                    <a href=""><i class="fab fa-instagram"></i></a>
-                    <a href=""><i class="fab fa-linkedin-in"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="container footer-menu">
-            <div className="f-menu">
-              <a href="">E-ENTREPRISE</a>
-              <a href="">E-ETUDIANT</a>
-            </div>
-          </div>
-          <div className="container copyright">
-            <div className="row">
-              <div className="col-md-6">
-                <p>&copy; <a href="#">2021 FORUM Université IBN TOFAIL</a>. Tous droits réservés</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        
 
       </div>
 

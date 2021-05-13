@@ -5,7 +5,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import stylecontact from "./stylecontact.module.css"
 import messageimg from "./img/letter.svg"
 import contact from "./contact.module.css"
-import userService from "../../../../../../services/userService";
+import userService from "../../../services/userService";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -86,7 +86,8 @@ export default function ContactUs() {
 
   };
   return (
-    <div classNameName={stylecontact.head}>
+    <section id="contact-us">
+    <div className={`${stylecontact.head}`}>
 
       <div className={contact.contact1} data-aos="fade-up " data-aos-duration="1000">
         <div className={contact.container1contact1}>
@@ -151,6 +152,7 @@ export default function ContactUs() {
         </Alert>
       </Snackbar>
     </div>
+    </section>
 
 
   );

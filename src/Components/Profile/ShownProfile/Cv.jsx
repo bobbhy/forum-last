@@ -165,19 +165,19 @@ const Cv = (props) => {
       if (
         currentUserId != id &&
         currentUserRole == 3 &&
-        data?.roles[0]?.id == 1
+        role==1 
       ) {
         await userService.sendViewNotification(id, currentUserId);
       }
     }
     sendViewNotif();
-    if (currentUserId != id && currentUserRole !== 3) {
+    if (currentUserId != id ) {
       function viewProfile() {
         userService.viewProfile(currentUserId, id);
       }
       viewProfile();
     }
-  }, [count, currentUserRole, toggle]);
+  }, [count, currentUserRole, toggle,role]);
 
   function MyVerticallyCenteredModal(props) {
     return (

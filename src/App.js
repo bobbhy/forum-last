@@ -16,7 +16,9 @@ import Cv from "./Components/Profile/ShownProfile/Cv";
 import Messages from "./Components/Messages/Messages";
 import SinglePostMain from "./Components/Home/Feed/SinglePost/SinglePostMain";
 import authHeader from "./services/authHeader";
-import { useSelector, useDispatch } from "react-redux";
+import Presentation2 from "./Components/Presentation/Presentation2";
+
+
 
 function App() {
   const [user, setUser] = useState(initialState);
@@ -60,7 +62,7 @@ function App() {
     <div className="app">
       {/* Header */}
       {user?.roles[0]?.id === 2 && <Redirect to="/admin" />}
-      {!(user?.roles[0]?.id === 2) && (
+      {!(user?.roles[0]?.id === 2 && user!=null) &&  (
         <Header
           image={image}
           user={user}
@@ -71,7 +73,7 @@ function App() {
       {/* App Body */}
       <div className="app_body">
         <Switch>
-          <Route exact path={"/"} component={Presentation} />
+          {user!=null && <Route exact path={"/"} component={Presentation} />}
           <Route
             exact
             path={"/confirm"}
@@ -91,57 +93,41 @@ function App() {
             path={"/register"}
             component={() => <SignUp user={user ? true : false} />}
           />
-          {user === null ? (
-            <>
-              <Route component={() => <Presentation />} />
-            </>
-          ) : (user?.roles[0]?.id === 1 && user.cv.flag == false) ||
-            (user?.roles[0]?.id === 3 && user.company.flag == false) ? (
-            <>
-              <Route component={() => <Profile user={user} image={image} />} />
-            </>
-          ) : (
-            <>
-              <Route
-                exact
-                path={"/home"}
-                render={() => (
-                  <Home image={image} user={user} refreshHome={refreshHome} />
-                )}
-              />
-              <Route
-                exact
-                path={"/profile"}
-                component={() => <Profile user={user} image={image} />}
-              />
-              <Route exact path="/view/:id" component={Cv} />
-              <Route
-                exact
-                path={"/post/:postId"}
-                component={() => <SinglePostMain user={user} image={image} />}
-              />
-              <Route
-                exact
-                path="/admin"
-                component={() => <Dashboard user={user} />}
-              />
-              <Route
-                exact
-                path="/MyNetwork"
-                component={() => <Network user={user} />}
-              />
-              <Route
-                exact
-                path={"/Notifications"}
-                component={() => <Notification user={user} image={image} />}
-              />
-              <Route
-                exact
-                path={"/Messages/:id?/"}
-                component={() => <Messages user={user} />}
-              />
-            </>
-          )}
+          {user === null ? (<><Route
+            component={() => <Presentation2 />}
+          /></>) : (user?.roles[0]?.id === 1 && user.cv.flag == false) || (user?.roles[0]?.id === 3 && user.company.flag == false) ? (<>
+            <Route
+              component={() => <Profile user={user} image={image} />}
+            />
+          </>) : (<>
+            <Route
+              exact
+              path={"/home"}
+              render={() => <Home image={image} user={user} refreshHome={refreshHome} />}
+            />
+            <Route
+              exact
+              path={"/profile"}
+              component={() => <Profile user={user} image={image} />}
+            />
+            <Route exact path="/view/:id" component={Cv} />
+            <Route exact path={"/post/:postId"} component={() => <SinglePostMain user={user} image={image} />} />
+            <Route
+              exact
+              path="/admin"
+              component={() => <Dashboard user={user} />}
+            />
+            <Route exact path="/MyNetwork" component={() => <Network user={user} />} />
+            <Route
+              exact
+              path={"/Notifications"}
+              component={() => <Notification user={user} image={image} />}
+            />
+            <Route
+              exact
+              path={"/Messages/:id?/"}
+              component={() => <Messages user={user} />} />
+          </>)}
         </Switch>
       </div>
     </div>

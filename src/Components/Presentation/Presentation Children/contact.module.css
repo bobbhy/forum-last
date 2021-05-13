@@ -98,8 +98,8 @@
     width: 100%;
     min-height: 100%;
     padding: 15px;
-    
-    
+    background: #f1f1f1;
+    z-index: 0;
     
     display: -webkit-box;
     display: -webkit-flex;
@@ -109,7 +109,6 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background-image: url(/src/Components/Presentation/src/components/Home/welcome/img/background.svg);
   }
   
   .container1contact1 {
