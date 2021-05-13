@@ -167,7 +167,7 @@ export default function Comment({
   };
 
   const likeComment = (commentId) => {
-    userService.likeComment(commentId, user.id).then(
+    userService.likeComment(commentId, user?.id).then(
       (response) => {
         setToggleLike(!toggleLike);
         setShownLikes(shownLikes + 1);
@@ -264,9 +264,18 @@ export default function Comment({
           {body}
         </Modal>
         <Link to={`/view/${ownerId}`} style={{ textDecoration: "none" }}>
-          {role === 1 && <Avatar src={userService.imageLink+ownerImage}  className={classes.large} />}
+          {role === 1 && (
+            <Avatar
+              src={userService.imageLink + ownerImage}
+              className={classes.large}
+            />
+          )}
           {role === 3 && (
-            <Avatar src={userService.imageLink+ownerImage} variant="square" className={classes.large} />
+            <Avatar
+              src={userService.imageLink + ownerImage}
+              variant="square"
+              className={classes.large}
+            />
           )}
         </Link>
         <div>

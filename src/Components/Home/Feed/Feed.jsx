@@ -152,6 +152,7 @@ function Feed(props) {
     setTimeout(() => {
       setLoading(false);
     }, 1500);
+    window.scrollTo(0, 0);
   };
 
   // fin img
@@ -230,7 +231,7 @@ function Feed(props) {
 
   useEffect(() => {
     loadingSpinner();
-  }, [childLoaderRefresh]);
+  }, [childLoaderRefresh, props?.refreshHome]);
 
   const uploadPost = () => {
     const errors = [];
@@ -251,45 +252,43 @@ function Feed(props) {
     }
 
     if (user?.roles[0]?.id === 1) {
-      userService.uploadStudentPost(post)
-        .then(
-          (response) => {
-            if (newImage) {
-              fileUpload(response?.data);
-            }
-            setSuccessful(true);
-            setMessage("Message uploaded!");
-            setOpen(true);
-            loadingSpinner();
-            // window.location.reload();
-            setInput("");
-          },
-          (error) => {
-            setSuccessful(false);
-            setMessage("Couldn't upload message");
-            setOpen(true);
+      userService.uploadStudentPost(post).then(
+        (response) => {
+          if (newImage) {
+            fileUpload(response?.data);
           }
-        );
+          setSuccessful(true);
+          setMessage("Message uploaded!");
+          setOpen(true);
+          loadingSpinner();
+          // window.location.reload();
+          setInput("");
+        },
+        (error) => {
+          setSuccessful(false);
+          setMessage("Couldn't upload message");
+          setOpen(true);
+        }
+      );
     } else if (user?.roles[0]?.id === 3) {
-      userService.uploadCompanyPost(post)
-        .then(
-          (response) => {
-            if (newImage) {
-              fileUpload(response?.data);
-            }
-            setSuccessful(true);
-            setMessage("Message uploaded!");
-            setOpen(true);
-            loadingSpinner();
-            // window.location.reload();
-            setInput("");
-          },
-          (error) => {
-            setSuccessful(false);
-            setMessage("Couldn't upload message");
-            setOpen(true);
+      userService.uploadCompanyPost(post).then(
+        (response) => {
+          if (newImage) {
+            fileUpload(response?.data);
           }
-        );
+          setSuccessful(true);
+          setMessage("Message uploaded!");
+          setOpen(true);
+          loadingSpinner();
+          // window.location.reload();
+          setInput("");
+        },
+        (error) => {
+          setSuccessful(false);
+          setMessage("Couldn't upload message");
+          setOpen(true);
+        }
+      );
     }
   };
 

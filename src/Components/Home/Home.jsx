@@ -14,7 +14,7 @@ function Home(props) {
       }}
     >
       <Sidebar image={image} user={user} />
-      <Feed image={image} user={user} />
+      <Feed image={image} user={user} refreshHome={props?.refreshHome} />
       <Sidebarl />
     </div>
   );

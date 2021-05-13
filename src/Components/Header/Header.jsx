@@ -16,7 +16,7 @@ import SearchMenu from "./Search/SearchMenu/SearchMenu";
 import userService from "../../services/userService";
 import logo from "../../logo.png";
 
-function Header({ image }) {
+function Header({ image, onChange, refreshHome }) {
   const [user, setUser] = useState(initialState);
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -39,7 +39,7 @@ function Header({ image }) {
   const handleNotif = () => {
     try {
       userService.handleNotif();
-      setCount(count + 1)
+      setCount(count + 1);
     } catch (err) {
       // Handle Error Here
       console.error(err);
@@ -62,7 +62,15 @@ function Header({ image }) {
       <div className="header_right align-items-center" id="myDiv">
         {user ? (
           <>
-            <HeaderOption Icon={HomeIcon} title="Home" isMobile={isMobile} onClick={handleNotif} />
+            <HeaderOption
+              Icon={HomeIcon}
+              title="Home"
+              isMobile={isMobile}
+              onClick={() => {
+                handleNotif();
+                onChange(!refreshHome);
+              }}
+            />
             <HeaderOption
               Icon={SupervisorAccountIcon}
               title="MyNetwork"
@@ -85,10 +93,8 @@ function Header({ image }) {
             <HeaderOption
               image={
                 user?.roles[0]?.id === 1
-                  ? userService.imageLink +
-                  user?.cv?.image
-                  : userService.imageLink +
-                  user?.company?.companyImage
+                  ? userService.imageLink + user?.cv?.image
+                  : userService.imageLink + user?.company?.companyImage
               }
               className="wrapper button"
               title={"@" + user?.username.split(" ")[0]}
@@ -117,7 +123,7 @@ function Header({ image }) {
           </>
         )}
       </div>
-    </div >
+    </div>
   );
 }
 

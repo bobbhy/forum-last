@@ -310,7 +310,7 @@ const uploadAbout = (
   interests,
   domaine
 ) => {
-  return axios.post(
+  return axios.put(
     `${API_URL}api/cv/about`,
     {
       firstName,
@@ -419,8 +419,14 @@ const uploadCvLink = (link) => {
 const uploadCompanyLink = (link) => {
   return axios.put(`${API_URL}api/comp/link`, link, { headers: authHeader() });
 };
+const viewProfile = (viewer, viewed) => {
+  return axios.post(`${API_URL}api/cv/profileview/${viewer}/${viewed}`);
+};
 const getUnenabledManagers = () => {
   return axios.get(`${API_URL}api/comp/unenabled`);
+};
+const getProfileViews = () => {
+  return axios.get(`${API_URL}api/cv`, { headers: authHeader() });
 };
 const editExperience = (id, experience) => {
   return axios.put(`${API_URL}api/cv/updateExperience/${id}`, experience);
@@ -439,6 +445,7 @@ const userService = {
   getAllConversations,
   getUserData,
   getAllStudents,
+  getProfileViews,
   getExperienceById,
   editExperience,
   connectTo,
@@ -453,6 +460,7 @@ const userService = {
   updateAboutCompany,
   deleteExperience,
   uploadAward,
+  viewProfile,
   getUnenabledManagers,
   flagCompany,
   getEducationById,
@@ -465,6 +473,7 @@ const userService = {
   getUserById,
   getCurrentImage,
   deleteDevLang,
+  updateCompanyPost,
   uploadAboutCompany,
   getImageById,
   getNormalLang,
@@ -514,6 +523,6 @@ const userService = {
   imageLink,
   uploadImageUrl,
   uploadImageUrlCompany,
-  updateCompanyPost 
+  updateCompanyPost,
 };
 export default userService;

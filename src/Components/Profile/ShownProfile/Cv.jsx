@@ -139,7 +139,7 @@ const Cv = (props) => {
     async function getUserData() {
       await userService.getUserData().then((response) => {
         setCurrentUserId(response?.data?.id);
-        setCurrentUserRole(response?.data?.roles[0]?.id) ;
+        setCurrentUserRole(response?.data?.roles[0]?.id);
         response?.data?.friendshipSended.forEach((friendship) => {
           if (friendship.id.receiverId == id) {
             if (friendship.status === false) {
@@ -170,8 +170,14 @@ const Cv = (props) => {
         await userService.sendViewNotification(id, currentUserId);
       }
     }
-    sendViewNotif()
-  }, [count, currentUserId,currentUserRole, toggle]);
+    sendViewNotif();
+    if (currentUserId != id && currentUserRole !== 3) {
+      function viewProfile() {
+        userService.viewProfile(currentUserId, id);
+      }
+      viewProfile();
+    }
+  }, [count, currentUserRole, toggle]);
 
   function MyVerticallyCenteredModal(props) {
     return (
@@ -512,7 +518,7 @@ const Cv = (props) => {
 
                 {currentUserId != id &&
                 switchState &&
-                currentUserRole== 1 &&
+                currentUserRole == 1 &&
                 isFriend != 1 ? (
                   <h2>Cet utilisateur a un profil privé</h2>
                 ) : (

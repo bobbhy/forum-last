@@ -3,7 +3,15 @@ import React, { useEffect, useState } from "react";
 import userService from "../../../services/userService";
 import "./Sidebar.css";
 
-function Sidebar({ image, user }) {
+function Sidebar({ user }) {
+  const [profileViews, setProfileViews] = useState(0);
+  useEffect(() => {
+    userService.getProfileViews().then((res) => {
+      console.log(res?.data?.profileViewers);
+      setProfileViews(res?.data?.profileViewers?.length);
+    });
+  }, []);
+
   const recentItem = (topic) => (
     <div className="sidebar_recentItem">
       <div className="sidebar_hash">#</div>
@@ -16,18 +24,13 @@ function Sidebar({ image, user }) {
         <img src="https://picsum.photos/seed/picsum/400/200" alt="" />
         {user?.roles[0]?.id === 1 ? (
           <Avatar
-            src={
-              userService.imageLink + user?.cv?.image
-            }
+            src={userService.imageLink + user?.cv?.image}
             className="sidebar_avatar"
             alt={`Image of ${user?.name}`}
           />
         ) : (
           <Avatar
-            src={
-              userService.imageLink +
-              user?.company?.companyImage
-            }
+            src={userService.imageLink + user?.company?.companyImage}
             className="sidebar_avatar"
             variant="square"
             alt={`Image of ${user?.name}`}
@@ -41,19 +44,21 @@ function Sidebar({ image, user }) {
               .split(" ")
               .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
               .join(" ") +
-            " - " +
-            user?.company?.aboutCompany?.name}
+              " - " +
+              user?.company?.aboutCompany?.name}
         </h2>
         <h5>{user?.email}</h5>
       </div>
       <div className="sidebar_stats">
         <div className="sidebar_stat">
           <p>Connections</p>
-          <p className="sidebar_statNumber">{user?.friendshipSended.length + user?.friendshipReceived.length}</p>
+          <p className="sidebar_statNumber">
+            {user?.friendshipSended.length + user?.friendshipReceived.length}
+          </p>
         </div>
         <div className="sidebar_stat">
-          <p>Profile's views</p>
-          <p className="sidebar_statNumber">1223</p>
+          <p>Nombre de vues: </p>
+          <p className="sidebar_statNumber">{profileViews}</p>
         </div>
       </div>
       <div className="sidebar_bottom">
