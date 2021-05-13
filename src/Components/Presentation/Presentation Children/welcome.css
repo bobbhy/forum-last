@@ -249,6 +249,9 @@ a {
     font-size: 32px;
     top: 7px;
   }
+  .gtco-feature {
+    display: none;
+  }
 }
 
 

@@ -44,7 +44,7 @@ export const NavLink3 = styled.a`
   padding: 0 1rem;
   cursor: pointer;
   position:fixed;
-  top:20px;
+  top:15px;
   left:20px;
   float:left
   &.active {
