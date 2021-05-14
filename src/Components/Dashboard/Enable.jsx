@@ -10,7 +10,6 @@ import Title from "./Title";
 import CheckIcon from "@material-ui/icons/Check";
 import { Avatar } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import axios from "axios";
 import userService from "../../services/userService";
 
 function preventDefault(event) {

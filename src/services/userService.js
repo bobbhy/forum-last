@@ -422,6 +422,9 @@ const uploadCompanyLink = (link) => {
 const viewProfile = (viewer, viewed) => {
   return axios.post(`${API_URL}api/cv/profileview/${viewer}/${viewed}`);
 };
+const getReported = () => {
+  return axios.get(`${API_URL}api/profile/reported`);
+};
 const getUnenabledManagers = () => {
   return axios.get(`${API_URL}api/comp/unenabled`);
 };
@@ -430,6 +433,11 @@ const getProfileViews = () => {
 };
 const editExperience = (id, experience) => {
   return axios.put(`${API_URL}api/cv/updateExperience/${id}`, experience);
+};
+const getIsReported = () => {
+  return axios.get(`${API_URL}api/profile/isreported`, {
+    headers: authHeader(),
+  });
 };
 const imageLink = `${API_URL}upload/static/images/`;
 const uploadImageUrl = `${API_URL}api/cv/image`;
@@ -447,6 +455,7 @@ const userService = {
   getAllStudents,
   getProfileViews,
   getExperienceById,
+  getIsReported,
   editExperience,
   connectTo,
   deleteAward,
@@ -465,6 +474,7 @@ const userService = {
   flagCompany,
   getEducationById,
   editEducation,
+  getReported,
   updateAbout,
   sendViewNotification,
   accept,
@@ -523,6 +533,5 @@ const userService = {
   imageLink,
   uploadImageUrl,
   uploadImageUrlCompany,
-  updateCompanyPost,
 };
 export default userService;

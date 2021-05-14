@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,11 +6,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
-import axios from "axios";
-import authHeader from "../../services/authHeader";
 import { Avatar } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import { Close } from "@material-ui/icons";
+import CheckIcon from "@material-ui/icons/Check";
 import Button from "@material-ui/core/Button";
 import authService from "../../services/authService";
 import userService from "../../services/userService";
@@ -26,18 +23,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ListUsers({ user }) {
+export default function ReportedUsers({ user }) {
   const classes = useStyles();
   const [accounts, setAccounts] = useState();
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
-  const handleDelete = async (id) => {
-    setLoading(true);
-    await authService.deleteUser(id).then((response) => {
-      setCount(count + 1);
-    });
-    setLoading(false);
-  };
   const handleDisable = async (id) => {
     setLoading(true);
     await authService.disableAccount(id).then((res) => {
@@ -45,18 +35,26 @@ export default function ListUsers({ user }) {
     });
     setLoading(false);
   };
+  const handleRemove = async (id) => {
+    setLoading(true);
+    await authService.removeReport(id).then((res) => {
+      setCount(count + 1);
+    });
+    setLoading(false);
+  };
 
   useEffect(() => {
-    function getAll() {
-      userService.getAll().then((response) => {
+    function getReported() {
+      userService.getReported().then((response) => {
         setAccounts(response?.data);
+        console.log(response?.data);
       });
     }
-    getAll();
+    getReported();
   }, [count]);
   return (
     <React.Fragment>
-      <Title>All Users</Title>
+      <Title>Utilisateurs signalés</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -66,9 +64,8 @@ export default function ListUsers({ user }) {
             <TableCell>Username</TableCell>
             <TableCell>Email</TableCell>
             <TableCell>Role</TableCell>
-            <TableCell align="center">Activé</TableCell>
+            <TableCell align="center">Enlever</TableCell>
             <TableCell align="center">Désactiver</TableCell>
-            <TableCell align="center">Supprimer</TableCell>
             {/* <TableCell align="right">Sale Amount</TableCell> */}
           </TableRow>
         </TableHead>
@@ -108,12 +105,13 @@ export default function ListUsers({ user }) {
                     {account.roles[0].id === 3 && "Manager"}
                   </TableCell>
                   <TableCell align="center">
-                    {account.enabled && (
-                      <span className="text-success">Yes</span>
-                    )}
-                    {!account.enabled && (
-                      <span className="text-danger">No</span>
-                    )}
+                    <Button
+                      onClick={() => {
+                        handleRemove(account.id);
+                      }}
+                    >
+                      <CheckIcon style={{ color: "green" }} />
+                    </Button>
                   </TableCell>
                   <TableCell align="center">
                     <Button
@@ -125,27 +123,11 @@ export default function ListUsers({ user }) {
                       <PersonAddDisabledIcon color="secondary" />
                     </Button>
                   </TableCell>
-                  <TableCell align="center">
-                    <Button
-                      disabled={loading}
-                      onClick={() => {
-                        handleDelete(account.id);
-                      }}
-                    >
-                      <CloseIcon color="secondary" />
-                    </Button>
-                  </TableCell>
                 </TableRow>
               )
           )}
         </TableBody>
       </Table>
-
-      {/* <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more
-        </Link>
-      </div> */}
     </React.Fragment>
   );
 }

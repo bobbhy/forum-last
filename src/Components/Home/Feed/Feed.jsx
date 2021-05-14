@@ -307,81 +307,86 @@ function Feed(props) {
       )}
       {!loading && (
         <div className="feed">
-          <div className="feed_inputContainer">
-            <div className="feed_input">
-              <CreateIcon />
-              <form>
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  style={{ cursor: "text", fontSize: "18px" }}
-                  placeholder="What do you want to talk about?"
-                  onKeyDown={handleKeyDown}
-                />
-              </form>
-            </div>
-            {newImage && (
-              <div>
-                <img
-                  className="mx-auto d-block rounded border border-dark"
-                  src={newImage}
-                  style={{
-                    maxHeight: "90%",
-                    maxWidth: "90%",
-                    margin: "10px 10px",
-                  }}
-                  alt="a"
-                />
-              </div>
-            )}
-            <div className="feed_inputOptions">
-              <InputOption
-                Icon={PhotoIcon}
-                title="Photo"
-                color="#7085F9"
-                onClick={triggerInputFile}
-              />
-              <div class="form-group mb-2 d-none">
-                <label for="file-upload" className="btn btn-outline-dark mt-2 ">
-                  <i class="fas fa-upload"></i>Choose File
-                </label>
-                <input
-                  type="file"
-                  id="file-upload"
-                  className="d-none"
-                  accept=".jpeg,.png,.jpg,.tif,.svg,.jfif"
-                  ref={fileInputRef}
-                  onChange={onChange}
-                />
-                <Button
-                  className="MuiButton-sizeSmall MuiButton-textPrimary mt-2"
-                  variant="outlined"
-                  ref={uploadRef}
-                  onClick={(e) => {
-                    handleClick(e);
-                  }}
-                >
-                  UPLOAD
-                </Button>
+          {user?.roles[0]?.id != 2 && (
+            <div className="feed_inputContainer">
+              <div className="feed_input">
+                <CreateIcon />
+                <form>
+                  <input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    style={{ cursor: "text", fontSize: "18px" }}
+                    placeholder="De quoi voulez-vous parler?"
+                    onKeyDown={handleKeyDown}
+                  />
+                </form>
               </div>
               {newImage && (
-                <IconButton
-                  aria-label="delete"
-                  className={classes.margin}
-                  onClick={clearImage}
-                >
-                  <CloseIcon backgroundColor="gray" fontSize="large" />
-                </IconButton>
+                <div>
+                  <img
+                    className="mx-auto d-block rounded border border-dark"
+                    src={newImage}
+                    style={{
+                      maxHeight: "90%",
+                      maxWidth: "90%",
+                      margin: "10px 10px",
+                    }}
+                    alt="a"
+                  />
+                </div>
               )}
-              <InputOption
-                Icon={PostAddIcon}
-                title="Post"
-                color="green"
-                onClick={uploadPost}
-              />
+              <div className="feed_inputOptions">
+                <InputOption
+                  Icon={PhotoIcon}
+                  title="Photo"
+                  color="#7085F9"
+                  onClick={triggerInputFile}
+                />
+                <div class="form-group mb-2 d-none">
+                  <label
+                    for="file-upload"
+                    className="btn btn-outline-dark mt-2 "
+                  >
+                    <i class="fas fa-upload"></i>Choose File
+                  </label>
+                  <input
+                    type="file"
+                    id="file-upload"
+                    className="d-none"
+                    accept=".jpeg,.png,.jpg,.tif,.svg,.jfif"
+                    ref={fileInputRef}
+                    onChange={onChange}
+                  />
+                  <Button
+                    className="MuiButton-sizeSmall MuiButton-textPrimary mt-2"
+                    variant="outlined"
+                    ref={uploadRef}
+                    onClick={(e) => {
+                      handleClick(e);
+                    }}
+                  >
+                    UPLOAD
+                  </Button>
+                </div>
+                {newImage && (
+                  <IconButton
+                    aria-label="delete"
+                    className={classes.margin}
+                    onClick={clearImage}
+                  >
+                    <CloseIcon backgroundColor="gray" fontSize="large" />
+                  </IconButton>
+                )}
+                <InputOption
+                  Icon={PostAddIcon}
+                  title="Post"
+                  color="green"
+                  onClick={uploadPost}
+                />
+              </div>
             </div>
-          </div>
+          )}
           <div className="feed_PostContainer">
             {/* {!loaded && ( // shimmer part
               <>

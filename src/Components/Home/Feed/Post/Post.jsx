@@ -7,13 +7,13 @@ import InputOption from "../InputOption/InputOption";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import CommentIcon from "@material-ui/icons/Comment";
 import userService from "../../../../services/userService";
+import authService from "../../../../services/authService";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import axios from "axios";
 import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
-import authHeader from "../../../../services/authHeader";
 import Comment from "./Comments/Comment/Comment";
 import "./Comments/AddComment/AddComment.scss";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -23,6 +23,7 @@ import ModalB from "react-bootstrap/Modal";
 import ModalImage from "react-modal-image";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import SendIcon from "@material-ui/icons/Send";
+import WarningIcon from "@material-ui/icons/Warning";
 
 function getModalStyle() {
   const top = 50;
@@ -294,7 +295,6 @@ function Post({
       };
       console.log(comment);
       userService.uploadCompanyComment(postId, comment).then((response) => {
-        // window.location.reload();
         setRefresh(!refresh);
         setSnackOpen(true);
         setSuccessful(true);
@@ -317,13 +317,12 @@ function Post({
       (response) => {
         setToggleLike(true);
         setShownLikes(shownLikes + 1);
-        // onChange(true);
-        // onChange(false);
       },
       (error) => {
         setSuccessful(false);
         setUploadMessage("Couldn't like post!");
         setSnackOpen(true);
+        console.log(error);
       }
     );
   };
@@ -340,9 +339,14 @@ function Post({
       }
     );
   };
+  const report = (postId) => {
+    authService.reportByPost(postId).then((res) => {
+      setUploadMessage("Avertissement envoyé");
+      setSnackOpen(true);
+    });
+  };
 
   return (
-    // <div className="post_and_comment">
     <div className="post">
       <Modal
         open={open}
@@ -408,7 +412,7 @@ function Post({
         </p>
       </div>
       <div className="post_buttons">
-        {toggleLike && (
+        {toggleLike && user?.roles[0]?.id != 2 && (
           <InputOption
             Icon={ThumbUpIcon}
             title="Like"
@@ -417,7 +421,7 @@ function Post({
           />
         )}{" "}
         {/* dislike */}
-        {!toggleLike && (
+        {!toggleLike && user?.roles[0]?.id != 2 && (
           <InputOption
             Icon={ThumbUpAltOutlinedIcon}
             title="Like"
@@ -439,19 +443,33 @@ function Post({
           <>
             <InputOption
               Icon={EditTwoToneIcon}
-              title="Edit"
+              title="Modifier"
               color="purple"
               onClick={handleOpen}
             />
+          </>
+        )}
+        {(currentUserId === ownerId || user?.roles[0]?.id == 2) && (
+          <>
             <InputOption
               Icon={DeleteTwoToneIcon}
-              title="Delete"
+              title="Supprimer"
               color="red"
               onClick={() => {
                 deleteById(postId);
               }}
             />
           </>
+        )}
+        {user?.roles[0]?.id == 2 && (
+          <InputOption
+            Icon={WarningIcon}
+            title="Signaler"
+            color="red"
+            onClick={() => {
+              report(postId);
+            }}
+          />
         )}
       </div>
 
@@ -462,25 +480,26 @@ function Post({
               <h4>Comments</h4>
             </div>
           )}
-          <div className="add-comment">
-            <Avatar
-              src={
-                role === 1
-                  ? userService.imageLink + ownerImage
-                  : userService.imageLink + ownerImage
-              }
-              className={classes.large}
-            />
-            <textarea
-              rows="2"
-              className="add-text-area"
-              placeholder="Add a comment"
-              value={commentInput}
-              onChange={(e) => setCommentInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-            />
+          {user?.roles[0]?.id != 2 && (
+            <div className="add-comment">
+              <Avatar
+                src={
+                  role === 1
+                    ? userService.imageLink + ownerImage
+                    : userService.imageLink + ownerImage
+                }
+                className={classes.large}
+              />
+              <textarea
+                rows="2"
+                className="add-text-area"
+                placeholder="Add a comment"
+                value={commentInput}
+                onChange={(e) => setCommentInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
 
-            {/* <input
+              {/* <input
             type="text"
             // rows="4"
             className="add-text-area"
@@ -489,7 +508,8 @@ function Post({
             onChange={(e) => setCommentInput(e.target.value)}
             onKeyDown={handleKeyDown}
           /> */}
-          </div>
+            </div>
+          )}
           {commentInput && (
             <Button
               color="blue"
