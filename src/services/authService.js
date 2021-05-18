@@ -72,14 +72,29 @@ const deleteUser = (id) => {
     headers: authHeader(),
   });
 };
-
+const disableAccount = (id) => {
+  return axios.put(`${API_URL}disableAccount/${id}`);
+};
+const reportByPost = (postId) => {
+  return axios.put(`${API_URL}reportbypost/${postId}`);
+};
+const reportByComment = (commentId) => {
+  return axios.put(`${API_URL}reportbycomment/${commentId}`);
+};
+const removeReport = (id) => {
+  return axios.put(`${API_URL}unreportbyid/${id}`);
+};
 const authService = {
   register,
   login,
   logout,
   verify,
+  removeReport,
   getCurrentUser,
   deleteUser,
+  disableAccount,
+  reportByPost,
+  reportByComment,
 };
 
 export default authService;

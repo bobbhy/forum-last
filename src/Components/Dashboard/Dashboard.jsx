@@ -23,16 +23,16 @@ import EqualizerIcon from "@material-ui/icons/Equalizer";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import Statistics from "./Statistics";
 import Enable from "./Enable";
-import axios from "axios";
-import authHeader from "../../services/authHeader";
-import Charts from "./Charts";
 import Button from "@material-ui/core/Button";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import authService from "../../services/authService";
 import EmailIcon from "@material-ui/icons/Email";
 import { useHistory } from "react-router";
 import Messages from "./Messages";
-import userService from "../../services/userService"
+import HomeIcon from "@material-ui/icons/Home";
+import { Link } from "react-router-dom";
+import WarningIcon from "@material-ui/icons/Warning";
+import ReportedUsers from "./ReportedUsers";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -119,14 +119,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard({ user }) {
   const history = useHistory();
   const classes = useStyles();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const [toggleDash, setToggleDash] = useState(true);
   const [toggleStatistics, setToggleStatistics] = useState(false);
   const [toggleEnable, setToggleEnable] = useState(false);
   const [toggleMessages, setToggleMessages] = useState(false);
-
-  const [dada, setDada] = useState([]);
+  const [toggleReported, setToggleReported] = useState(false);
 
   const [accounts, setAccounts] = useState();
 
@@ -150,10 +149,12 @@ export default function Dashboard({ user }) {
     setToggleDash(true);
     setToggleStatistics(false);
     setToggleEnable(false);
+    setToggleReported(false);
     setToggleMessages(false);
   };
   const handleStatisticsClick = () => {
     setToggleDash(false);
+    setToggleReported(false);
     setToggleStatistics(true);
     setToggleMessages(false);
     setToggleEnable(false);
@@ -161,14 +162,23 @@ export default function Dashboard({ user }) {
   const handleEnableClick = () => {
     setToggleDash(false);
     setToggleStatistics(false);
+    setToggleReported(false);
     setToggleMessages(false);
     setToggleEnable(true);
   };
   const handleMessageClick = () => {
     setToggleDash(false);
+    setToggleReported(false);
     setToggleStatistics(false);
     setToggleEnable(false);
     setToggleMessages(true);
+  };
+  const handleReportedClick = () => {
+    setToggleDash(false);
+    setToggleStatistics(false);
+    setToggleEnable(false);
+    setToggleMessages(false);
+    setToggleReported(true);
   };
 
   return (
@@ -249,6 +259,20 @@ export default function Dashboard({ user }) {
               </ListItemIcon>
               <ListItemText primary="Messages" />
             </ListItem>
+            <ListItem button onClick={handleReportedClick}>
+              <ListItemIcon>
+                <WarningIcon />
+              </ListItemIcon>
+              <ListItemText primary="Messages" />
+            </ListItem>
+            <Link to="/home">
+              <ListItem>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary="Home" />
+              </ListItem>
+            </Link>
           </div>
         </List>
         <Divider />
@@ -355,6 +379,13 @@ export default function Dashboard({ user }) {
                   />
                 </Paper>
               </Grid>
+            </Grid>
+          )}
+          {toggleReported && (
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <ReportedUsers user={user} />
+              </Paper>
             </Grid>
           )}
         </Container>

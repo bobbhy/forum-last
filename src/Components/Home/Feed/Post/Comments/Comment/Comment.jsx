@@ -15,8 +15,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import authHeader from "../../../../../../services/authHeader";
-import { set } from "date-fns";
+import authService from "../../../../../../services/authService";
+import InputOption from "../../../InputOption/InputOption";
+import WarningIcon from "@material-ui/icons/Warning";
 
 function getModalStyle() {
   const top = 50;
@@ -219,7 +220,7 @@ export default function Comment({
             updateComment(commentId);
           }}
         >
-          Update
+          Modifier
         </Button>
       </p>
       {/* <SimpleModal /> */}
@@ -252,6 +253,12 @@ export default function Comment({
     getImageById();
   }, []);
 
+  const report = (commentId) => {
+    authService.reportByComment(commentId).then((res) => {
+      setUpdateMessage("Avertissement envoyé");
+      setSnackOpen(true);
+    });
+  };
   return (
     <>
       <div className="comment">
@@ -292,41 +299,58 @@ export default function Comment({
           <p className="comment-timestamp">{timestamp}</p>
           <span className="message">{message}</span>
           <div className="comment-actions">
-            <Tooltip title="Like">
-              <IconButton
-                aria-label="edit"
-                onClick={() => setToggleLike(!toggleLike)}
-              >
-                {!toggleLike && (
-                  <ThumbUpOutlinedIcon onClick={() => likeComment(commentId)} />
-                )}
-                {toggleLike && (
-                  <ThumbUpIcon
-                    color="primary"
-                    onClick={() => unlikeComment(commentId)}
-                  />
-                )}
-              </IconButton>
-            </Tooltip>
+            {user?.roles[0]?.id != 2 && (
+              <Tooltip title="Like">
+                <IconButton
+                  aria-label="edit"
+                  onClick={() => setToggleLike(!toggleLike)}
+                >
+                  {!toggleLike && (
+                    <ThumbUpOutlinedIcon
+                      onClick={() => likeComment(commentId)}
+                    />
+                  )}
+                  {toggleLike && (
+                    <ThumbUpIcon
+                      color="primary"
+                      onClick={() => unlikeComment(commentId)}
+                    />
+                  )}
+                </IconButton>
+              </Tooltip>
+            )}
+
             <span style={{ fontSize: "12px" }}>{shownLikes}</span>
             {currentUserId === ownerId && (
-              <>
-                <Tooltip title="Edit">
-                  <IconButton aria-label="edit" onClick={handleOpen}>
-                    <EditTwoToneIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Delete">
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => {
-                      deleteById(commentId);
-                    }}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Tooltip>
-              </>
+              <Tooltip title="Modifier">
+                <IconButton aria-label="edit" onClick={handleOpen}>
+                  <EditTwoToneIcon />
+                </IconButton>
+              </Tooltip>
+            )}
+            {(currentUserId === ownerId || user?.roles[0]?.id == 2) && (
+              <Tooltip title="Supprimer">
+                <IconButton
+                  aria-label="delete"
+                  onClick={() => {
+                    deleteById(commentId);
+                  }}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+            )}
+            {user?.roles[0]?.id == 2 && (
+              <Tooltip title="Signaler l'utilisateur">
+                <IconButton
+                  color="secondary"
+                  onClick={() => {
+                    report(commentId);
+                  }}
+                >
+                  <WarningIcon />
+                </IconButton>
+              </Tooltip>
             )}
           </div>
         </div>
