@@ -78,7 +78,7 @@ function DropdownMenu({ image, user }) {
           <div>
             <Button
               variant="outlined"
-              onClick={() => handleLogin("/register", 1)}
+              onClick={() => handleLogin("/", 1)}
               className="logoutButton"
               color="secondary"
               startIcon={<ExitToAppIcon />}
