@@ -69,7 +69,6 @@ const SkillForm = (props) => {
       const result = await userService.getDevLang();
       setData(result.data);
       setSuccessful(false);
-      console.log(result);
     };
     fetchData();
     async function getUserData() {

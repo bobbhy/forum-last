@@ -109,6 +109,7 @@ const Image = (props) => {
   return (
     <form>
       <h2 className="text-center">Add a photo to your profile</h2>
+      <p className="text-danger">Notez bien que cette photo doit etre professionelle</p>
       {image && (
         <div>
           <img

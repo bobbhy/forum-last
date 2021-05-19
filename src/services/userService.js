@@ -2,7 +2,7 @@ import axios from "axios";
 import authHeader from "./authHeader";
 
 const API_URL = "https://www.forum-uit.codes/";
-//const API_URL = "http://localhost:5000/";
+// const API_URL = "http://localhost:5000/";
 
 const getApiState = () => {
   return axios.get(API_URL + "hello");
@@ -257,6 +257,9 @@ const uploadDevLang = (name, value, icon) => {
 const deleteDevLang = (id) => {
   return axios.delete(`${API_URL}api/cv/dev/${id}`);
 };
+const deleteOtherItem=(id)=>{
+  return axios.delete(`${API_URL}api/cv/otherItem/${id}`);
+}
 const getNormalLang = () => {
   return axios.get(`${API_URL}api/cv/normal`, {
     headers: authHeader(),
@@ -291,6 +294,26 @@ const uploadSoftware = (name, value, icon) => {
     { headers: authHeader() }
   );
 };
+const createOther=(name)=>{
+  return axios.post(
+    `${API_URL}api/cv/other/${name}`,
+    {},
+    {headers:authHeader()}
+  )
+}
+const createOtherItem=(namex,name,value)=>{
+  return axios.post(
+    `${API_URL}api/cv/other/${namex}/add`,
+    {name,value},
+    {headers:authHeader()}
+  )
+}
+const getAllOtherItems=(name)=>{
+  return axios.get(
+    `${API_URL}api/cv/other/${name}`,
+    {headers:authHeader()}
+  )
+}
 const deleteSoftware = (id) => {
   return axios.delete(`${API_URL}api/cv/software/${id}`);
 };
@@ -533,5 +556,9 @@ const userService = {
   imageLink,
   uploadImageUrl,
   uploadImageUrlCompany,
+  createOther,
+  createOtherItem,
+  getAllOtherItems,
+  deleteOtherItem
 };
 export default userService;
