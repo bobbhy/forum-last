@@ -56,10 +56,12 @@ function Sidebar({ user }) {
             {user?.friendshipSended.length + user?.friendshipReceived.length}
           </p>
         </div>
-        <div className="sidebar_stat">
-          <p>Nombre de vues: </p>
-          <p className="sidebar_statNumber">{profileViews}</p>
-        </div>
+        {user?.roles[0]?.id == 1 && (
+          <div className="sidebar_stat">
+            <p>Nombre de vues: </p>
+            <p className="sidebar_statNumber">{profileViews}</p>
+          </div>
+        )}
       </div>
       <div className="sidebar_bottom">
         <p>Recent</p>
