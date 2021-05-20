@@ -9,10 +9,23 @@ a .svg-inline--fa {
 .landing
 {
   width: 100vw;
+  z-index: 10;
 }
 a .svg-inline--fa:hover {
   color: #47b2e4;
 
+}
+.Espaces
+{
+  padding: 15px;
+  box-shadow: 0px 2px 15px rgb(0 0 0 / 10%);
+}
+#clients
+{
+  padding: 15px;
+  box-shadow: 0px 2px 15px rgb(0 0 0 / 10%);
+  width: 70%;
+  margin: 20px auto;
 }
 
 .svg2 {
@@ -806,6 +819,10 @@ a {
 @media only screen and (max-width: 700px) {
   .parallax_box {
     padding: 0;
+  }
+  .parallax
+  {
+  display: none;
   }
 
   .landing {

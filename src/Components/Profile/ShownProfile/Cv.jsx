@@ -541,6 +541,7 @@ const Cv = (props) => {
                       dev={cv?.devLanguages}
                       normal={cv?.normalLanguages}
                       software={cv?.softwares}
+                      others={cv?.others}
                     />
                     <hr className="m-0" />
                     {/* Interests*/}

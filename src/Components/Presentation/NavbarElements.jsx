@@ -141,7 +141,6 @@ export const Collapse=styled.div`
   top:80px;
   background:#3f51b5;
   width:100%;
-  z-index:1000;
 `
 export const CollapseItem=styled.a`
 

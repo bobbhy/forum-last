@@ -143,11 +143,6 @@ const About = (props) => {
   };
 
   useEffect(() => {
-    // userService.getAbout().then((response) => {
-    //   setFullAbout(response?.data?.cv);
-    //   console.log("hh");
-    //   console.log(response?.data?.cv);
-    // });
     userService.getUserData().then((res) => {
       setGottenName(res?.data?.name);
       setFirstName(

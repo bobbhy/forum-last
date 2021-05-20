@@ -9,6 +9,7 @@ const Skill = (props) => {
   const dev = props.dev;
   const normal = props.normal;
   const software = props.software;
+  const others=props.others;
 
   return (
     <section className="resume-section m-0" id="skills">
@@ -59,6 +60,25 @@ const Skill = (props) => {
           ))}
         </div>
           </>)
+        }
+        {
+          others?.map((other)=>other.otherItems.length!=0 &&
+            (
+              <>
+                <div className="subheading mb-3 mt-3">{other.name}</div>
+        <div className="d-flex flex-row" style={{ flexWrap: "wrap" }}>
+          {other.otherItems?.map((otherItem)=>(
+            <div className="col-5 mr-4 d-block">
+              <Box component="fieldset" mb={3} borderColor="transparent">
+                <Typography component="legend">{otherItem.name}</Typography>
+                <Rating readOnly name="customized-10" defaultValue={otherItem.value} max={10} />
+              </Box>
+            </div>
+          ))}
+           </div>
+              </>
+            )
+          )
         }
         
         

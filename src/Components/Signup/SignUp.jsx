@@ -85,9 +85,11 @@ export default function SignUp({ user }) {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState("");
   const [successful, setSuccessful] = useState("");
+  const [flag,setFlag]=useState(false);
   const [value, setValue] = useState(0);
   const [etablishments, setEtablishments] = useState([]);
   const [etablishment, setEtablishment] = useState(0);
+  const [checked, setChecked] = useState(false);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -103,6 +105,14 @@ export default function SignUp({ user }) {
     }
     getEtablishments();
   }, []);
+  const handleChecked=()=>{
+    if(checked==false)
+    {
+      setFlag(false)
+      setShow(true)
+    }
+    setChecked(!checked);
+  }
   const handleChangeFirstName = (e) => {
     const firstName = e.target.value;
     setFirstName(firstName);
@@ -184,6 +194,10 @@ export default function SignUp({ user }) {
     }
   };
   const handleStudentSignup = (e) => {
+    if(checked==false)
+    {
+      setFlag(true)
+    }
     e.preventDefault();
     if (etablishment == 0) {
       setErrors({ ...errors, etablishment: "Etablishement is required" });
@@ -191,7 +205,7 @@ export default function SignUp({ user }) {
     }
     setMessage("");
     setLoading(true);
-    if (!Object.values(errors).some((x) => x !== null && x !== "")) {
+    if (!Object.values(errors).some((x) => x !== null && x !== "") && checked) {
       setLoading(true);
       const name =
         firstName.split(" ").join("").toLowerCase() +
@@ -405,14 +419,13 @@ export default function SignUp({ user }) {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <Button variant="primary" onClick={() => setShow(true)}>
                       <FormControlLabel
                         control={
-                          <Checkbox value="allowExtraEmails" color="primary" />
+                          <Checkbox checked={checked} onClick={handleChecked} value="allowExtraEmails" color="primary" />
                         }
                         label="j'accepte les conditions d'utilisations"
                       />
-                    </Button>
+                    {flag && <FormHelperText error>Accept conditions first</FormHelperText>}
                   </Grid>
 
                   <Modal

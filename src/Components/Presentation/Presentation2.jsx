@@ -24,17 +24,18 @@ const Navbar = () => {
         if(ref.current.style.opacity==1)
         {
              ref.current.style.opacity=0
+             ref.current.style.zIndex=0
         }
         else
         {
             ref.current.style.opacity=1
+            ref.current.style.zIndex=1000
 
         }
         
-        console.log(ref.current.style.opacity)
   }
   return (
-    <div className="d-flex flex-wrap">
+    <div className="d-flex flex-wrap bg-white roboto" style={{fontFamily:"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"}}>
       <Nav>
         <NavLink3 to='/'>
           <img src={logo} className="logo" alt='logo' />

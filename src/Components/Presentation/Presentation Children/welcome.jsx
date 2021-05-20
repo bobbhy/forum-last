@@ -232,7 +232,7 @@ export default function Welcome() {
           </div>
         </section>
         <section id="our-values" className="our-values">
-          <div className="container">
+          <div className="container Espaces">
             <div className="section-title">
               <h2>Espaces </h2>
             </div>

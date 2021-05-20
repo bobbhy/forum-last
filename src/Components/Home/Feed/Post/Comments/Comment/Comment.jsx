@@ -273,13 +273,13 @@ export default function Comment({
         <Link to={`/view/${ownerId}`} style={{ textDecoration: "none" }}>
           {role === 1 && (
             <Avatar
-              src={userService.imageLink + ownerImage}
+              src={image}
               className={classes.large}
             />
           )}
           {role === 3 && (
             <Avatar
-              src={userService.imageLink + ownerImage}
+              src={image}
               variant="square"
               className={classes.large}
             />

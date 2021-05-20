@@ -10,8 +10,6 @@ import AddCircleOutlinedIcon from "@material-ui/icons/AddCircleOutlined";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import TextField from '@material-ui/core/TextField';
-import authHeader from "../../../../../../services/authHeader";
-import axios from "axios";
 import userService from "../../../../../../services/userService";
 
 function Alert(props) {
@@ -62,7 +60,6 @@ const SkillForm = (props) => {
       const result = await userService.getNormalLang();
       setData(result.data);
       setSuccessful(false);
-      console.log(result);
     };
     fetchData();
   }, [successful]);
