@@ -307,23 +307,25 @@ function Feed(props) {
       )}
       {!loading && (
         <div className="feed">
-          <div className="alert alert-warning alert-white rounded">
-            <button
-              type="button"
-              className="close"
-              data-dismiss="alert"
-              aria-hidden="true"
-            >
-              ×
-            </button>
-            <div className="icon">
-              <i
-                className="fas fa-exclamation-triangle"
-                style={{ marginTop: "15px" }}
-              ></i>
+          {user?.roles[0]?.id == 1 && (
+            <div className="alert alert-warning alert-white rounded">
+              <button
+                type="button"
+                className="close"
+                data-dismiss="alert"
+                aria-hidden="true"
+              >
+                ×
+              </button>
+              <div className="icon">
+                <i
+                  className="fas fa-exclamation-triangle"
+                  style={{ marginTop: "15px" }}
+                ></i>
+              </div>
+              <strong>Attention!</strong> hhhhhhhhhh.
             </div>
-            <strong>Attention!</strong> hhhhhhhhhh.
-          </div>
+          )}
 
           {user?.roles[0]?.id != 2 && (
             <div className="feed_inputContainer">
