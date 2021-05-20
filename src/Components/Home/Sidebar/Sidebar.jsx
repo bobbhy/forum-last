@@ -7,7 +7,6 @@ function Sidebar({ user }) {
   const [profileViews, setProfileViews] = useState(0);
   useEffect(() => {
     userService.getProfileViews().then((res) => {
-      console.log(res?.data?.profileViewers);
       setProfileViews(res?.data?.profileViewers?.length);
     });
   }, []);
