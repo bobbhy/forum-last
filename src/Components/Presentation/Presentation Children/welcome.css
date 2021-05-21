@@ -1,11 +1,4 @@
-a .svg-inline--fa {
-  color: #fff;
-  font-size: 32px;
-  position: absolute;
-  left: 0;
-  top: 7px;
-  transition: 0.3s;
-}
+
 .landing
 {
   width: 100vw;
@@ -137,14 +130,6 @@ h6 {
   position: relative;
 }
 
-a .svg-inline--fa {
-  color: #fff;
-  font-size: 32px;
-  position: absolute;
-  left: 0;
-  top: 7px;
-  transition: 0.3s;
-}
 
 .dlgflex>.btnwatchvideo:hover i {
   color: #47b2e4;

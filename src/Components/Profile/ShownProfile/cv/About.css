@@ -22,9 +22,17 @@ section.resume-section {
   padding-bottom: 5rem;
   max-width: 75rem;
 }
+
 section.resume-section .resume-section-content {
   width: 100%;
 }
+@media (max-width: 500px)
+{
+  .resume-section-content h1 {
+    font-size: 30px;
+  }
+}
+
 
 @media (min-width: 768px) {
   section.resume-section {

@@ -320,10 +320,10 @@ function Feed(props) {
               <div className="icon">
                 <i
                   className="fas fa-exclamation-triangle"
-                  style={{ marginTop: "15px" }}
+                  style={{ marginTop: "25px" }}
                 ></i>
               </div>
-              <strong>Attention!</strong> hhhhhhhhhh.
+              <strong>Attention!</strong> Les administrateurs suivent l'accueil quotidiennement toute action inappropriée sera sanctionnée.
             </div>
           )}
 
