@@ -9,7 +9,7 @@ function Footer() {
               <div className="col-md-6 col-lg-3">
                 <div className="footer-contact">
                   <Link to="/">
-                  <img src={logo} alt="Logo" className="logo" />
+                  <img src={logo} alt="logo" className="logoxx" />
                   </Link>
                   <hr />
                   <p className="pp">Le Forum Annuel Virtuel De L’Université Ibn Tofail est d’une part un moment d’échange et d’ouverture de l’université sur son environnement régional et national, puis d’autre part, c’est un moment ou le lauréat et étudiant se positionne et se projette.</p>

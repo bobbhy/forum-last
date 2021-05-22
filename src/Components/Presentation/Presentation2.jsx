@@ -17,7 +17,7 @@ import {
   CollapseItem2,
   Offset
 } from './NavbarElements';
-import logo from "../../logo.png";
+import logo from "../../cropp.png";
 import Welcome from './Presentation Children/welcome';
 import Footer from './Presentation Children/Footer';
 import Team from './Presentation Children/Team';
@@ -57,7 +57,7 @@ const Navbar = () => {
     <div className="d-flex flex-wrap bg-white roboto" style={{fontFamily:"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"}}>
       <Nav>
         <NavLink3 to='/'>
-          <img src={logo} className="logo" alt='logo' />
+          <img src={logo} className="logoxx" alt='logo' />
         </NavLink3>
         <Bars onClick={handleClick}/>
         <NavMenu>
