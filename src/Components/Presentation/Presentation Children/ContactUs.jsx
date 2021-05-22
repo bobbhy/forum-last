@@ -2,7 +2,6 @@ import React, { useState, initialstate } from "react";
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import stylecontact from "./stylecontact.module.css"
 import messageimg from "./img/letter.svg"
 import contact from "./contact.module.css"
 import userService from "../../../services/userService";
@@ -86,19 +85,19 @@ export default function ContactUs() {
 
   };
   return (
-    <section id="contact-us">
-    <div className={`${stylecontact.head}`}>
+    <section id="contact-us" className={`${contact.contact_us} container`}>
+      <div className="section-title mb-3">
+              <h2>Contactez-nous </h2>
+            </div>
+    <div>
 
-      <div className={contact.contact1} data-aos="fade-up " data-aos-duration="1000">
+      <div className={contact.contact1}>
         <div className={contact.container1contact1}>
           <div className={contact.contact11pic} data1tilt>
             <img src={messageimg} alt="IMG" />
           </div>
 
           <div className={contact.divv}>
-            <span className={contact.contact11form1title}>
-              Contactez-nous
-            </span>
 
             <div className={contact.wrap1input1} data1validate="Name is required">
               <input className={contact.input1} type="text" name="name" value={nameSend} placeholder="Name"

@@ -54,7 +54,7 @@ const Skill = (props) => {
             <div className="col-sm-5 mr-4 d-block">
               <Box component="fieldset" mb={3} borderColor="transparent">
                 <Typography component="legend">{e.name}</Typography>
-                <Rating readOnly name="customized-10" defaultValue={e.value} max={10} />
+                <Rating readOnly name="customized-10" defaultValue={e.value} max={6} />
               </Box>
             </div>
           ))}

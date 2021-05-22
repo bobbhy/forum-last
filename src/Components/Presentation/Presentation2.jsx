@@ -1,4 +1,8 @@
 import React,{useRef} from 'react';
+import Button from '@material-ui/core/Button';
+import PersonIcon from '@material-ui/icons/Person';
+import { makeStyles } from '@material-ui/core/styles';
+import { useHistory, Link } from "react-router-dom";
 import {
   Nav,
   NavLink,
@@ -18,7 +22,22 @@ import Welcome from './Presentation Children/welcome';
 import Footer from './Presentation Children/Footer';
 import Team from './Presentation Children/Team';
 import ContactUs from './Presentation Children/ContactUs';
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+    borderRadius: 20,
+    boxShadow:'none',
+    marginLeft:25,
+    backgroundColor:'cornflowerblue',
+    '&:hover': {
+      backgroundColor: '#0069d9',
+      borderColor: '#0062cc',
+      boxShadow: 'none',
+    },
+  },
+}));
 const Navbar = () => {
+  const classes = useStyles();
   const ref = useRef(null);
   const handleClick=()=>{
         if(ref.current.style.opacity==1)
@@ -55,22 +74,28 @@ const Navbar = () => {
             Partenaires
           </NavLink>
           <NavLink href={`${window.location.pathname}#team`} activeStyle>
-            Team
+            Equipe
           </NavLink>
           <NavLink href={`${window.location.pathname}#contact-us`} activeStyle>
             Contactez nous
           </NavLink>
-          <NavLink2 to='/register' activeStyle>
-            S'inscrire
-          </NavLink2>
-          
+           
           
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
         <NavBtn>
-          <NavBtnLink to='/login'>Se connecter</NavBtnLink>
-        </NavBtn>
+         <Link to="/login">
+          <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        startIcon={<PersonIcon />}
+      >
+        Mon espace
+      </Button>
+      </Link>
+      </NavBtn>
       </Nav>
       <Collapse ref={ref}>
        <CollapseItem href={`${window.location.pathname}#home`}>
@@ -86,7 +111,7 @@ const Navbar = () => {
        Partenaires
        </CollapseItem>
         <CollapseItem href={`${window.location.pathname}#team`}>
-        Team
+        Equipe
        </CollapseItem>
         <CollapseItem href={`${window.location.pathname}#contact-us`} >
         Contactez-nous

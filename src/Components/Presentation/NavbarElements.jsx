@@ -26,6 +26,7 @@ width:100vw
 
 export const NavLink = styled.a`
   color: #fff;
+  font-size:20px;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -45,7 +46,7 @@ export const NavLink3 = styled.a`
   cursor: pointer;
   position:fixed;
   top:15px;
-  left:20px;
+  left:60px;
   float:left
   &.active {
     color: #15cdfc;
@@ -113,11 +114,14 @@ export const NavBtn = styled.nav`
 
 export const NavBtnLink = styled(Link)`
   border-radius: 4px;
-  background: #256ce1;
-  padding: 10px 22px;
+  background:transparent;
+  border-radius:30px;
+  padding:10px 22px;
+  font-size:20px;
+  border:1px solid #80aaff;
+  font-weight:800;
   color: #fff;
   outline: none;
-  border: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;

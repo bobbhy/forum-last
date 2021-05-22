@@ -4,7 +4,9 @@ import imgc1 from "./assets/img/clubs/club-1.png";
 import imgc2 from "./assets/img/clubs/club-2.png";
 import imgc3 from "./assets/img/clubs/club-3.png";
 import imgc4 from "./assets/img/clubs/club-4.png";
-import imgc5 from "./assets/img/clubs/club-3.png";
+import imgc5 from "./assets/img/clubs/club-5.png";
+import imgc6 from "./assets/img/clubs/club-6.jpeg";
+
 import imgpa0 from "./assets/img/pacademiques/0.png";
 import imgpa1 from "./assets/img/pacademiques/1.jpg";
 import imgpa2 from "./assets/img/pacademiques/2.jpg";
@@ -72,7 +74,7 @@ export default function Welcome() {
 
   let interval = useRef();
   const startTimer = () => {
-    const countdownDate = new Date("June 03 2021 00:00:00").getTime();
+    const countdownDate = new Date("June 23 2021 00:00:00").getTime();
     interval = setInterval(() => {
       const now = new Date().getTime();
       const distance = countdownDate - now; 
@@ -106,6 +108,7 @@ export default function Welcome() {
 
   return (
     <>
+      
       <section id="home"></section>
       <div className="landing" >
         <div className={welcomecss.s1} >
@@ -113,9 +116,11 @@ export default function Welcome() {
             <div className="row">
               <div className="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" id="#landing">
                 <div className={welcomecss.s10}>
-                  <h1>La première édition du Forum Virtuel à l’Université Ibn Tofail,et la 7 ieme édition du Forum ENSAK-ENTREPRISES</h1>
+                  <h1>La première édition du Forum Virtuel à l’Université Ibn Tofail</h1>
+                  <h1 className="p-3 text-center">Et</h1>
+                  <h1>La 7<sup>ème</sup> édition du Forum ENSAK-ENTREPRISES</h1>
                   <h5>Sous le thème</h5>
-                  <h2>Le rôle du digital à l’université pour une meilleure ouverture des lauréats & étudiants</h2>
+                  <h2>Le digital à l’université au service de l’entreprise et l’étudiant</h2>
                   <div className={welcomecss.dlgflex}>
                     <a href="#cliens" className={welcomecss.btngetstarted}>Plus de détails</a>
                     <a href="https://www.youtube.com/watch?v=6YQwLMsjoFU&ab_channel=HassanBERRAGRAGUI" target="_blank" className={welcomecss.btnwatchvideo} data-vbtype="video" data-autoplay="true"> Regarder la vidéo <i className="far fa-play-circle"></i></a>
@@ -155,7 +160,6 @@ export default function Welcome() {
           </div>
         </div>
 
-
         <section id="cliens" className="cliens" id="cliens">
           <div className="container-fluid">
             <div className="row">
@@ -165,6 +169,7 @@ export default function Welcome() {
             </div>
           </div>
         </section>
+        
         <section id="about1" className="about">
           <div className="container" data-aos="fade-up">
             <div className="section-titleleft">
@@ -221,9 +226,14 @@ export default function Welcome() {
                 <div className="section-title">
                   <h2>Présentation</h2>
                 </div>
-                <p>La première édition du Forum Virtuel à l’Université Ibn Tofail,et la 7 ieme édition du Forum ENSAK-ENTREPRISES est l’occasion de rapprocher le monde académique au monde professionnel, ainsi contribuer à renforcer le rôle de l’université dans son environnement.</p>
-                <p>Cette organisation en mode virtuel, est un témoignage de l’adoption de l’université des moyens digital pour à la fois faciliter aux entreprises et l’étudiant cette rencontre, qui pourrait être une préparation aux versions présentielles organisées par les
-                  différents établissements de l’Université Ibn Tofail.</p>
+                <p className="mt-4">La première édition du Forum Virtuel à l’Université Ibn Tofail et la 7 ème édition du Forum ENSAK-
+ENTREPRISES sont des occasions de promouvoir l’ouverture du monde académique sur le monde professionnel
+et de contribuer à l’ancrage de l’université dans son environnement économique avec un partenariat win-win
+entre les deux parties.</p>
+        <p>
+Cette organisation en mode virtuel traduit l’engagement de l’université sur la voie digitale pour faciliter la
+rencontre entre l’entreprise et l’étudiant. Elle pourra servir de prélude aux versions présentielles à organiser par
+les différents établissements de l’Université Ibn Tofail.</p>
 
               </div>
 
@@ -236,12 +246,12 @@ export default function Welcome() {
             <div className="section-title">
               <h2>Espaces </h2>
             </div>
-            <div className="row">
+            <div className="row mt-5 p-3">
               <div className="col-md-6 d-flex align-items-stretch">
                 <div className="card" >
                   <div className="card-body">
                     <h5 className="card-title"><a href="">E-Entreprise</a></h5>
-                    <p className="card-text">Vous étes un responsable RH dans une entreprise et vous cherchez à recruter un étudiant à l'université Ibn Tofail. La plateforme FORUM ENSAK est votre opportunité à trouver votre cible.</p>
+                    <p className="card-text">Vous êtes responsable RH dans une entreprise et vous cherchez à recruter un étudiant à l'université Ibn Tofail, la plateforme vous offre l’opportunité de trouver votre cible.</p>
                     <Link
                       href="#"
                       onClick={(e) => {
@@ -271,7 +281,7 @@ export default function Welcome() {
                 <div className="card1"  >
                   <div className="card-body">
                     <h5 className="card-title"><a href="">E-Etudiant</a></h5>
-                    <p className="card-text">Vous étes étudiant à l'université Ibn Tofail .La plateforme FORUM ENSAK est votre opportunité à décrocher un stage .</p>
+                    <p className="card-text">Vous êtes étudiant à l'université Ibn Tofail, la plateforme est l’outil idoine pour renforcer vos chances de décrocher votre emploi ou votre stage.</p>
                     <Link
                       href="#"
                       onClick={(e) => {
@@ -302,7 +312,7 @@ export default function Welcome() {
             </div>
           </div>
         </section>
-        <section id="clients" className="wow fadeInUp" >
+        <section id="clients" className="container p-4 wow fadeInUp" >
           <div className="container" id="partenairess">
             <div className="section-header">
               <h2>Partenaires professionnels</h2>
@@ -326,8 +336,6 @@ export default function Welcome() {
             </Slider>
 
           </div>
-        </section>
-        <section id="clients" className="wow fadeInUp">
           <div className="container">
             <div className="section-header">
               <h2>Partenaires académiques</h2>
@@ -385,10 +393,6 @@ export default function Welcome() {
             </Slider>
 
           </div>
-        </section>
-
-
-        <section id="clients" className="wow fadeInUp">
           <div className="container">
             <div className="section-header">
               <h2>Clubs</h2>
@@ -417,13 +421,13 @@ export default function Welcome() {
                 <img className="stand" src={imgc5} alt="" />
               </div>
               <div className="slide">
-                <img className="stand" src={imgc5} alt="" />
+                <img className="stand" src={imgc6} alt="" />
               </div>
               <div className="slide">
                 <img className="stand" src={imgc5} alt="" />
               </div>
               <div className="slide">
-                <img className="stand" src={imgc5} alt="" />
+                <img className="stand" src={imgc6} alt="" />
               </div>
               <div className="slide">
                 <img className="stand" src={imgc5} alt="" />

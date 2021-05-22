@@ -17,7 +17,6 @@ a .svg-inline--fa:hover {
 {
   padding: 15px;
   box-shadow: 0px 2px 15px rgb(0 0 0 / 10%);
-  width: 70%;
   margin: 20px auto;
 }
 
@@ -113,7 +112,7 @@ h6 {
   transition: 0.5s;
   margin: 10px 0 0 0;
   color: #fff;
-  background: rgb(47, 33, 75);
+  background: cornflowerblue;
 }
 
 .dlgflex>.btngetstarted:hover {
@@ -195,6 +194,10 @@ a {
     height: 100vh;
     text-align: center;
   }
+  #clients
+  {
+    width: 90%;
+  }
 
   .s10>.animated {
     -webkit-animation: none;
@@ -252,21 +255,6 @@ a {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .section-title {
   text-align: center;
 }
@@ -275,8 +263,9 @@ a {
   font-size: 32px;
   font-weight: bold;
   position: relative;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   color: #37517e;
+  margin-top: 15px;
 }
 
 .section-title h2::before {
@@ -309,8 +298,9 @@ a {
   font-size: 32px;
   font-weight: bold;
   position: relative;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   color: #37517e;
+  
 }
 
 .section-titleleft h2::before {
@@ -416,7 +406,8 @@ a {
 
 .about .content p {
   line-height: 30px;
-
+  font-size: 16px;
+  font-weight: 500;
 
 }
 
@@ -578,11 +569,13 @@ a {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+  0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .our-values .card-body {
   z-index: 10;
-  background: white;
+  background:rgba(255, 255, 255, .8);
   padding: 15px 30px;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
@@ -597,12 +590,15 @@ a {
 }
 
 .our-values .card-title a {
-  color: #150517;
+  color: #37517e;
+  font-size: 25px;
 }
 
 .our-values .card-text {
   min-height: 80px;
-  color: #020202;
+  color: #150517;
+  font-size: 16px;
+  text-align: justify;
 }
 
 .our-values .read-more a {
@@ -621,7 +617,8 @@ a {
 .card {
   width: 100%;
   text-align: center;
-
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+  0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .card .cta-btn {
@@ -686,6 +683,7 @@ a {
   width: 100%;
   text-align: center;
 
+
 }
 
 .card1 .cta-btn {
@@ -722,8 +720,17 @@ a {
 
 
 .card1 .cta-btn:hover {
+  color: white;
   background: #c297e5;
   border: 1px solid #b670f0;
+}
+.card .cta-btn2:hover,
+.card1 .cta-btn2:hover
+{
+  color: white;
+  background: rgb(53, 106, 210);
+  border: 1px solid rgb(15, 82, 214);
+
 }
 
 .our-values .card1 {
@@ -741,12 +748,11 @@ a {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 400px;
+  height: 200px;
 }
-
 .parallax_box {
   max-height: 150px;
-  padding: 200px 50px;
+  padding-top: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

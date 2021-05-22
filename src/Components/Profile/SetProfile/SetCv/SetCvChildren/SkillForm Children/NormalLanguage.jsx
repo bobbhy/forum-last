@@ -27,16 +27,29 @@ const statusOptions = [
 const marks = [
   {
     value: 1,
-    label: "1",
+    label: "A1",
+  },
+  {
+    value: 2,
+    label: "A2",
+  },
+  {
+    value: 3,
+    label: "B1",
+  },
+  {
+    value: 4,
+    label: "B1",
   },
   {
     value: 5,
-    label: "5",
+    label: "C1",
   },
   {
-    value: 10,
-    label: "10",
+    value: 6,
+    label: "C2",
   },
+  
 ];
 
 const SkillForm = (props) => {
@@ -164,7 +177,7 @@ const SkillForm = (props) => {
               step={1}
               marks={marks}
               min={1}
-              max={10}
+              max={6}
             />
           </div>
           <div className="row col-md-10 justify-content-around">
