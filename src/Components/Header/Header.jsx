@@ -14,7 +14,7 @@ import DropdownMenu from "./HeaderOption/DropdowMenu/DropdownMenu";
 import Search from "./Search/Search";
 import SearchMenu from "./Search/SearchMenu/SearchMenu";
 import userService from "../../services/userService";
-import logo from "../../logo.png";
+import logo from "../../cropp.png";
 
 function Header({ image, onChange, refreshHome }) {
   const [user, setUser] = useState(initialState);
@@ -50,7 +50,7 @@ function Header({ image, onChange, refreshHome }) {
     <div className="header">
       <div className="header_left align-items-center">
         <Link to="/">
-          <img src={logo} alt="Logo" className="logo" />
+          <img src={logo} alt="Logo" className="logoxx" />
         </Link>
         {/* SearchIcon */}
         {user && !isMobile && (
