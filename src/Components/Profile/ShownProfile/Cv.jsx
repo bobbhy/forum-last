@@ -411,7 +411,7 @@ const Cv = (props) => {
           />
           {role === 1 && (
             <div id="page-top">
-              <Navbar image={image} isExperience={isExperience} />
+              <Navbar image={image} isExperience={isExperience} isInterests={cv?.about?.interests ? true:false} isAwards={cv?.awards?.length ? true : false} />
               {/* Page Content*/}
               <div className="container-fluid p-0">
                 <hr className="m-0 pt-5 mr-3" />
@@ -545,7 +545,7 @@ const Cv = (props) => {
                     />
                     <hr className="m-0" />
                     {/* Interests*/}
-                    <Interests data={cv?.about?.interests} />
+                    {cv?.about?.interests && <Interests data={cv?.about?.interests} />}
                     <hr className="m-0" />
                     {/* Awards*/}
                     {cv?.awards.length !== 0 && <Award data={cv?.awards} />}

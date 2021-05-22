@@ -139,7 +139,7 @@ const SkillForm = (props) => {
   const singleOption = ({ data }) => (
     <div className="input-select">
       <div className="input-select__single-value d-flex justify-content-center">
-        <i className={data.icon} />
+        <i className={data.icon + " fa-2x"} />
         &nbsp; &nbsp;
         <span style={{ fontSize: "18px" }}>&nbsp;{data.label}</span>
       </div>

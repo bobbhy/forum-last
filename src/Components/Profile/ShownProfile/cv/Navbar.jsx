@@ -50,16 +50,16 @@ const Navabar = (props) => {
               Skills
             </a>
           </li>
-          <li className="nav-item">
+          {props?.isInterests && <li className="nav-item">
             <a className="nav-link js-scroll-trigger" href={`${window.location.pathname}#interests`}>
               Interests
             </a>
-          </li>
-          <li className="nav-item">
+          </li>}
+          {props?.isAwards && <li className="nav-item">
             <a className="nav-link js-scroll-trigger" href={`${window.location.pathname}#awards`}>
               Awards
             </a>
-          </li>
+          </li>}
         </ul>
       </div>
     </nav>

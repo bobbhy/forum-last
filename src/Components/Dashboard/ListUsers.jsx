@@ -9,13 +9,15 @@ import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
 import axios from "axios";
 import authHeader from "../../services/authHeader";
-import { Avatar } from "@material-ui/core";
+import { Avatar, TableFooter } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { Close } from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 import authService from "../../services/authService";
 import userService from "../../services/userService";
 import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
+import Pagination from '@material-ui/lab/Pagination';
+
 function preventDefault(event) {
   event.preventDefault();
 }
@@ -31,6 +33,11 @@ export default function ListUsers({ user }) {
   const [accounts, setAccounts] = useState();
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
+  const [countx,setCountx]=useState(1);
+  const [countgrid,setCountgrid]=useState(0);
+  const handleChange=(e)=>{
+      setCountx(parseInt(e.target.innerText));
+  }
   const handleDelete = async (id) => {
     setLoading(true);
     await authService.deleteUser(id).then((response) => {
@@ -50,6 +57,7 @@ export default function ListUsers({ user }) {
     function getAll() {
       userService.getAll().then((response) => {
         setAccounts(response?.data);
+        Number.isInteger(response.data.length/10)?setCountgrid(response.data.length/10):setCountgrid(Math.floor(response.data.length/10)+1);
       });
     }
     getAll();
@@ -69,15 +77,14 @@ export default function ListUsers({ user }) {
             <TableCell align="center">Activé</TableCell>
             <TableCell align="center">Désactiver</TableCell>
             <TableCell align="center">Supprimer</TableCell>
-            {/* <TableCell align="right">Sale Amount</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
           {accounts?.map(
-            (account) =>
-              account?.id != user?.id && (
+            (account,index) =>
+              account?.id != user?.id && index<=countx*10 && index>countx*10-10&&(
                 <TableRow key={account.id}>
-                  <TableCell>{account.id}</TableCell>
+                  <TableCell>{index}</TableCell>
                   <TableCell>
                     {account.roles[0].id === 1 && (
                       <Avatar src={userService.imageLink + account.cv.image} />
@@ -140,12 +147,7 @@ export default function ListUsers({ user }) {
           )}
         </TableBody>
       </Table>
-
-      {/* <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more
-        </Link>
-      </div> */}
+       <Pagination defaultPage={1} hideNextButton hidePrevButton onChange={handleChange} count={countgrid} className="mt-3" />
     </React.Fragment>
   );
 }

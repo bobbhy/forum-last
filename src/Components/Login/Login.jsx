@@ -68,13 +68,13 @@ export default function Login({ user, userInfo }) {
     const password = e.target.value;
     setPassword(password);
     if (password?.length === 0) {
-      setErrors({ ...errors, password: "Password required" });
+      setErrors({ ...errors, password: "Mot de passe est obligatoire " });
     } else {
       setErrors({ ...errors, password: null });
       if (password?.length < 8)
         setErrors({
           ...errors,
-          password: "Password must be equal or greater than 8",
+          password: "Mot de passe doit contenir au moin 8 caracteres",
         });
     }
   };
@@ -82,13 +82,13 @@ export default function Login({ user, userInfo }) {
     const username = e.target.value;
     setUsername(username);
     if (username?.length === 0) {
-      setErrors({ ...errors, username: "Username or email required" });
+      setErrors({ ...errors, username: "Pseudo ou adresse email sont obligatoires" });
     } else {
       setErrors({ ...errors, username: null });
       if (username?.length < 3)
         setErrors({
           ...errors,
-          username: "Username or email must be equal or greater than 3",
+          username: "Pseudo ou adresse email doit contenir au moin 3 caracteres",
         });
     }
   };
@@ -142,7 +142,7 @@ export default function Login({ user, userInfo }) {
               fullWidth
               id="email"
               required={true}
-              label="Username Or Email"
+              label="Pseudo Ou Adresse Email"
               name="email"
               autoComplete="email"
               autoFocus
@@ -157,7 +157,7 @@ export default function Login({ user, userInfo }) {
               required={true}
               fullWidth
               name="password"
-              label="Password"
+              label="Mot De Passe"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -166,7 +166,7 @@ export default function Login({ user, userInfo }) {
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label="Se souvenir de moi"
             />
             <Button
               type="submit"
@@ -178,11 +178,6 @@ export default function Login({ user, userInfo }) {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="/" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
                 <Link
                   href=""
@@ -192,7 +187,7 @@ export default function Login({ user, userInfo }) {
                   }}
                   variant="body2"
                 >
-                  {"Don't have an account? Sign Up"}
+                  {"Vous n'avez pas un compte? S'inscrire"}
                 </Link>
               </Grid>
             </Grid>
@@ -200,7 +195,7 @@ export default function Login({ user, userInfo }) {
         </div>
         {message && (
           <Alert
-            severity="error"
+            severity="error mx-4"
             onClose={() => {
               setMessage(null);
             }}

@@ -111,14 +111,14 @@ function Header({ image, onChange, refreshHome }) {
               className="button"
               onClick={() => handleButtonClick("/login", true)}
             >
-              LOG IN
+              Se connecter
             </Button>
             <Button
               variant="contained"
               className="button"
               onClick={() => handleButtonClick("/register")}
             >
-              REGISTER
+              S'inscrire
             </Button>
           </>
         )}

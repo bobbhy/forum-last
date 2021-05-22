@@ -117,7 +117,7 @@ export default function SignUp({ user }) {
     const firstName = e.target.value;
     setFirstName(firstName);
     if (firstName.length === 0) {
-      setErrors({ ...errors, firstName: "First name is required" });
+      setErrors({ ...errors, firstName: "Nom est obligatoire" });
     } else {
       setErrors({ ...errors, firstName: null });
     }
@@ -126,7 +126,7 @@ export default function SignUp({ user }) {
     const lastName = e.target.value;
     setLastName(lastName);
     if (lastName.length === 0) {
-      setErrors({ ...errors, lastName: "Last name is required" });
+      setErrors({ ...errors, lastName: "Prénom est obligatoire" });
     } else {
       setErrors({ ...errors, lastName: null });
     }
@@ -135,27 +135,34 @@ export default function SignUp({ user }) {
     const userName = e.target.value;
     setUserName(userName);
     if (userName.length === 0) {
-      setErrors({ ...errors, userName: "User name is required" });
+      setErrors({ ...errors, userName: "Pseudo est obligatoire" });
     } else {
       setErrors({ ...errors, userName: null });
       if (userName?.length < 3)
         setErrors({
           ...errors,
-          userName: "User name must be equal or greater than 3",
+          userName: "Pseudo doit contenir plus de 3 caractères",
         });
+      else if(userName?.length>15)
+      {
+         setErrors({
+          ...errors,
+          userName: "Pseudo doit contenir moins de 15 caractères",
+        });
+      }
     }
   };
   const handleChangeEmail = (e) => {
     const email = e.target.value;
     setEmail(email);
     if (email.length === 0) {
-      setErrors({ ...errors, email: "Email is required" });
+      setErrors({ ...errors, email: "Email est obligatoire" });
     } else if (!email.endsWith("@uit.ac.ma") && value === 0) {
-      setErrors({ ...errors, email: "Use your university email" });
+      setErrors({ ...errors, email: "Utilisez un email universitaire" });
     } else {
       setErrors({ ...errors, email: null });
       if (!validateEmail(email)) {
-        setErrors({ ...errors, email: "Invalid email format" });
+        setErrors({ ...errors, email: "Fomat invalide" });
       }
     }
   };
@@ -163,7 +170,7 @@ export default function SignUp({ user }) {
     const etablishment = e.target.value;
     setEtablishment(etablishment);
     if (etablishment == 0) {
-      setErrors({ ...errors, etablishment: "Etablishement is required" });
+      setErrors({ ...errors, etablishment: "Etablissement est obligatoire" });
     } else {
       setErrors({ ...errors, etablishment: null });
     }
@@ -173,7 +180,7 @@ export default function SignUp({ user }) {
     const companyName = e.target.value;
     setCompanyName(companyName);
     if (companyName.length === 0) {
-      setErrors({ ...errors, companyName: "User name is required" });
+      setErrors({ ...errors, companyName: "Nom de l'entreprise est obligatoire" });
     } else {
       setErrors({ ...errors, companyName: null });
     }
@@ -183,13 +190,13 @@ export default function SignUp({ user }) {
     const password = e.target.value;
     setPassword(password);
     if (password?.length === 0) {
-      setErrors({ ...errors, password: "Password required" });
+      setErrors({ ...errors, password: "Mot de passe est obligatoire" });
     } else {
       setErrors({ ...errors, password: null });
       if (password?.length < 8)
         setErrors({
           ...errors,
-          password: "Password must be equal or greater than 8",
+          password: "Mot de passe doit etre supérieur ou égale à 8 caractères",
         });
     }
   };
@@ -200,7 +207,7 @@ export default function SignUp({ user }) {
     }
     e.preventDefault();
     if (etablishment == 0) {
-      setErrors({ ...errors, etablishment: "Etablishement is required" });
+      setErrors({ ...errors, etablishment: "Etablissement est obligatoire" });
       return 0;
     }
     setMessage("");
@@ -239,10 +246,14 @@ export default function SignUp({ user }) {
     }
   };
   const handleManagerSignup = (e) => {
+    if(checked==false)
+    {
+      setFlag(true)
+    }
     e.preventDefault();
     setMessage("");
     setLoading(true);
-    if (!Object.values(errors).some((x) => x !== null && x !== "")) {
+    if (!Object.values(errors).some((x) => x !== null && x !== "") && checked) {
       setLoading(true);
       const name =
         firstName.split(" ").join("").toLowerCase() +
@@ -254,7 +265,7 @@ export default function SignUp({ user }) {
         .register(name, companyName, userNamex, emailx, password, 3)
         .then(
           (response) => {
-            setMessage("Please wait for the admin to enable your account");
+            setMessage("S'il vous plait veuillez attendre la vérification de votre identité à travers les administrateurs avant de se connecter");
             setSuccessful(true);
             setLoading(false);
           },
@@ -293,15 +304,15 @@ export default function SignUp({ user }) {
               textColor="primary"
               centered
             >
-              <Tab label="Student Registration" className={classes.tab} />
-              <Tab label="Manager Registration" />
+              <Tab label="Etudiant" className={classes.tab} />
+              <Tab label="Manager" className={classes.tab} />
             </Tabs>
           </Paper>
 
           {!successful && value === 0 && (
             <>
               <Typography component="h1" variant="h5" className={classes.typo}>
-                Sign up as a Student
+                S'inscrire comme étudiant
               </Typography>
               <form
                 className={classes.form}
@@ -318,7 +329,7 @@ export default function SignUp({ user }) {
                       fullWidth
                       error={Boolean(errors?.firstName)}
                       id="firstName"
-                      label="First Name"
+                      label="Nom"
                       value={firstName
                         .split(" ")
                         .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
@@ -334,7 +345,7 @@ export default function SignUp({ user }) {
                       required
                       fullWidth
                       id="lastName"
-                      label="Last Name"
+                      label="Prénom"
                       name="lastName"
                       autoComplete="lname"
                       value={lastName
@@ -352,7 +363,7 @@ export default function SignUp({ user }) {
                       required
                       fullWidth
                       id="username"
-                      label="Username"
+                      label="Pseudo"
                       name="username"
                       autoComplete="username"
                       value={userName}
@@ -393,7 +404,7 @@ export default function SignUp({ user }) {
                       required
                       fullWidth
                       id="email"
-                      label="Email Address"
+                      label="Addresse Email"
                       name="email"
                       autoComplete="email"
                       value={email}
@@ -409,7 +420,7 @@ export default function SignUp({ user }) {
                       required
                       fullWidth
                       name="password"
-                      label="Password"
+                      label="Mot De Passe"
                       type="password"
                       id="password"
                       onChange={handleChangePassword}
@@ -423,9 +434,9 @@ export default function SignUp({ user }) {
                         control={
                           <Checkbox checked={checked} onClick={handleChecked} value="allowExtraEmails" color="primary" />
                         }
-                        label="j'accepte les conditions d'utilisations"
+                        label="J'accepte les conditions d'utilisations"
                       />
-                    {flag && <FormHelperText error>Accept conditions first</FormHelperText>}
+                    {flag && <FormHelperText error>Veuillez accepter les conditions d'abord</FormHelperText>}
                   </Grid>
 
                   <Modal
@@ -516,7 +527,7 @@ export default function SignUp({ user }) {
                   color="primary"
                   className={classes.submit}
                 >
-                  Sign Up
+                  S'inscrire
                 </Button>
                 <Grid container justify="flex-end">
                   <Grid item>
@@ -528,7 +539,7 @@ export default function SignUp({ user }) {
                       }}
                       variant="body2"
                     >
-                      Already have an account? Sign in
+                      Avez-vous deja un compte ? Se Connecter
                     </Link>
                   </Grid>
                 </Grid>
@@ -538,7 +549,7 @@ export default function SignUp({ user }) {
           {!successful && value === 1 && (
             <>
               <Typography component="h1" variant="h5" className={classes.typo}>
-                Sign up as an Enterprise Manager
+                S'inscrire comme manager
               </Typography>
               <form
                 className={classes.form}
@@ -555,7 +566,7 @@ export default function SignUp({ user }) {
                       fullWidth
                       error={Boolean(errors?.firstName)}
                       id="firstName"
-                      label="First Name"
+                      label="Nom"
                       value={firstName
                         .split(" ")
                         .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
@@ -571,7 +582,7 @@ export default function SignUp({ user }) {
                       required
                       fullWidth
                       id="lastName"
-                      label="Last Name"
+                      label="Prénom"
                       name="lastName"
                       autoComplete="lname"
                       value={lastName
@@ -589,7 +600,7 @@ export default function SignUp({ user }) {
                       required
                       fullWidth
                       id="username"
-                      label="Company Name"
+                      label="Nom De L'entreprise"
                       name="companyName"
                       autoComplete="companyName"
                       value={companyName}
@@ -604,7 +615,7 @@ export default function SignUp({ user }) {
                       required
                       fullWidth
                       id="username"
-                      label="Username"
+                      label="Pseudo"
                       name="username"
                       autoComplete="username"
                       value={userName}
@@ -619,7 +630,7 @@ export default function SignUp({ user }) {
                       required
                       fullWidth
                       id="email"
-                      label="Email Address"
+                      label="Adresse Email"
                       name="email"
                       autoComplete="email"
                       value={email}
@@ -635,7 +646,7 @@ export default function SignUp({ user }) {
                       required
                       fullWidth
                       name="password"
-                      label="Password"
+                      label="Mot De Passe"
                       type="password"
                       id="password"
                       onChange={handleChangePassword}
@@ -645,18 +656,18 @@ export default function SignUp({ user }) {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <Button variant="primary" onClick={() => setShow(true)}>
                       <FormControlLabel
                         control={
-                          <Checkbox value="allowExtraEmails" color="primary" />
+                          <Checkbox checked={checked} onClick={handleChecked} value="allowExtraEmails" color="primary" />
                         }
-                        label="j'accepte les conditions d'utilisations"
+                        label="J'accepte les conditions d'utilisations"
                       />
-                    </Button>
+                    {flag && <FormHelperText error>Veuillez accepter les conditions d'abord</FormHelperText>}
                   </Grid>
 
                   <Modal
                     show={show}
+                    size="lg"
                     onHide={() => setShow(false)}
                     dialogClassName="modal-190w"
                     aria-labelledby="example-custom-modal-styling-title"
@@ -742,7 +753,7 @@ export default function SignUp({ user }) {
                   color="primary"
                   className={classes.submit}
                 >
-                  Sign Up
+                  S'inscrire
                 </Button>
                 <Grid container justify="flex-end">
                   <Grid item>
@@ -754,7 +765,7 @@ export default function SignUp({ user }) {
                       }}
                       variant="body2"
                     >
-                      Already have an account? Sign in
+                      Avez-vous deja un compte ? Se Connecter
                     </Link>
                   </Grid>
                 </Grid>
@@ -764,6 +775,7 @@ export default function SignUp({ user }) {
         </div>
         {message && (
           <Alert
+            className="mt-3 h2 mx-5"
             severity={!successful ? "error" : "success"}
             onClose={() => {
               setMessage(null);

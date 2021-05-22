@@ -55,10 +55,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 function getSteps() {
   return [
-    "Programming Languages",
-    "Languages you can speak",
-    "Softwares",
-    "Others",
+    "Vos langues",
+    "Logiciels",
+    "Langages de programmation",
+    "Autres",
   ];
 }
 
@@ -72,11 +72,11 @@ export default function SkillForm(props) {
   const getStepContent = (ActiveStep) => {
     switch (ActiveStep) {
       case 0:
-        return <DevLanguage />;
-      case 1:
         return <NormalLanguage />;
-      case 2:
+      case 1:
         return <Software />;
+      case 2:
+        return <DevLanguage />;
       case 3:
         return <Other />;
       default:
