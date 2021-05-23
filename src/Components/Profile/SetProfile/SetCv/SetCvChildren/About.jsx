@@ -120,6 +120,7 @@ const About = (props) => {
         city,
         number,
         bio,
+        domaine,
         interests,
         domaine
       )
@@ -144,6 +145,10 @@ const About = (props) => {
 
   useEffect(() => {
     userService.getUserData().then((res) => {
+      if(res?.data?.cv?.about?.bio)
+      {
+        props.onChange(true);
+      }
       setGottenName(res?.data?.name);
       setFirstName(
         res?.data?.name
@@ -159,6 +164,12 @@ const About = (props) => {
           ?.map((e) => e.charAt(0).toUpperCase() + e.slice(1))
           .join(" ")
       );
+      setAddress(res?.data?.cv.about.address)
+      setNumber(res?.data?.cv.about.number)
+      setCity(res?.data?.cv.about.city)
+      setInterests(res?.data.cv.about.interests)
+      setDomaine(res?.data.cv.about.domaine)
+      setBio(res?.data.cv.about.bio)
     });
   }, []);
 
@@ -261,7 +272,7 @@ const About = (props) => {
             Filiere :
           </label>
           <div className="col-sm-5">
-            <Form.Control as="select" onChange={handleDomaineChange}>
+            <Form.Control as="select" value={domaine} onChange={handleDomaineChange}>
               <option value="Informatique">Informatique</option>
               <option value="Electrique">Electrique</option>
               <option value="Mécanique">Mécanique</option>

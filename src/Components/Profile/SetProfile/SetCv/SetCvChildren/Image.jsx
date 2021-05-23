@@ -36,6 +36,13 @@ const Image = (props) => {
   const [message, setMessage] = useState("");
   const [initializing, setInitializing] = useState(false)
   const [error, setError] = useState(false);
+  useEffect(() => {
+    if(props.image)
+    {
+      setImage(userService.imageLink+props.image)
+      props.onChange(true);
+    }
+  }, [successful]);
   const onChange = async (e) => {
     setError(false)
     const myRenamedFile = new File(
@@ -108,8 +115,8 @@ const Image = (props) => {
   };
   return (
     <form>
-      <h2 className="text-center">Add a photo to your profile</h2>
-      <p className="text-danger">Notez bien que cette photo doit etre professionelle</p>
+      <h2 className="text-center">Ajoutez votre photo de profil</h2>
+      <p className="text-danger">Notez bien que cette photo doit etre professionelle et ne doit pas dépassé pas 1 Mb</p>
       {image && (
         <div>
           <img
@@ -124,13 +131,13 @@ const Image = (props) => {
       <div className="d-flex flex-row justify-content-around ">
         <div class="form-group mb-2">
           <label for="file-upload" className="btn btn-outline-dark mt-2 ">
-            <i class="fas fa-upload"></i>Choose File
+            <i class="fas fa-upload"></i>Choisir Un fichier
           </label>
           <input
             type="file"
             id="file-upload"
             className="d-none"
-            accept=".jpeg,.png,.jpg,.tif,.svg,.jfif"
+            accept=".jpeg,.png,.jpg,.tif,.jfif"
             onChange={onChange}
           />
         </div>

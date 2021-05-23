@@ -86,7 +86,8 @@ const Image = (props) => {
   };
   return (
     <form>
-      <h2 className="text-center">Add a company photo</h2>
+      <h2 className="text-center">Ajoutez la photo de votre entreprise</h2>
+      <p className="text-danger">Notez bien que cette photo ne doit pas dépassé pas 1 Mb</p>
       {image && (
         <div>
           <img
@@ -106,7 +107,7 @@ const Image = (props) => {
             type="file"
             id="file-upload"
             className="d-none"
-            accept=".jpeg,.png,.jpg,.tif,.svg"
+            accept=".jpeg,.png,.jpg,.tif"
             onChange={onChange}
           />
         </div>

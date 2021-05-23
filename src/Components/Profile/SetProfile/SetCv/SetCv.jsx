@@ -78,6 +78,7 @@ export default function SetCv(props) {
               setToggle(value);
             }}
             id={props?.user?.id}
+            image={props?.user?.cv?.image}
           />
         );
       case 1:
@@ -129,7 +130,6 @@ export default function SetCv(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      {console.log(props?.user)}
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           {/* <Typography component="h1" variant="h4" align="center">

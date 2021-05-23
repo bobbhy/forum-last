@@ -6,6 +6,9 @@ import imgc3 from "./assets/img/clubs/club-3.png";
 import imgc4 from "./assets/img/clubs/club-4.png";
 import imgc5 from "./assets/img/clubs/club-5.png";
 import imgc6 from "./assets/img/clubs/club-6.jpeg";
+import imgc7 from "./assets/img/clubs/club-7.jpeg";
+import imgc8 from "./assets/img/clubs/club-8.jpeg";
+import imgc9 from "./assets/img/clubs/club-9.jpg";
 
 import imgpa0 from "./assets/img/pacademiques/0.png";
 import imgpa1 from "./assets/img/pacademiques/1.jpg";
@@ -119,6 +122,7 @@ export default function Welcome() {
                   <h1>La première édition du Forum Virtuel à l’Université Ibn Tofail</h1>
                   <h1 className="p-3 text-center">Et</h1>
                   <h1>La 7<sup>ème</sup> édition du Forum ENSAK-ENTREPRISES</h1>
+                  <h2>Le 23 et 24 Juin 2021</h2>
                   <h5>Sous le thème</h5>
                   <h2>Le digital à l’université au service de l’entreprise et l’étudiant</h2>
                   <div className={welcomecss.dlgflex}>
@@ -414,11 +418,6 @@ les différents établissements de l’Université Ibn Tofail.</p>
               </div>
               <div className="slide">
                 <img className="stand" src={imgc5} alt="" />
-              </div><div className="slide">
-                <img className="stand" src={imgc4} alt="" />
-              </div>
-              <div className="slide">
-                <img className="stand" src={imgc5} alt="" />
               </div>
               <div className="slide">
                 <img className="stand" src={imgc6} alt="" />
@@ -427,10 +426,13 @@ les différents établissements de l’Université Ibn Tofail.</p>
                 <img className="stand" src={imgc5} alt="" />
               </div>
               <div className="slide">
-                <img className="stand" src={imgc6} alt="" />
+                <img className="stand" src={imgc7} alt="" />
               </div>
               <div className="slide">
-                <img className="stand" src={imgc5} alt="" />
+                <img className="stand" src={imgc8} alt="" />
+              </div>
+              <div className="slide">
+                <img className="stand" src={imgc9} alt="" />
               </div>
               
 

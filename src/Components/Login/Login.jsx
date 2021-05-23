@@ -131,7 +131,7 @@ export default function Login({ user, userInfo }) {
         )}
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
-            Sign in
+            Se connecter
           </Typography>
           <form className={classes.form} onSubmit={handLogin}>
             <TextField
@@ -175,7 +175,7 @@ export default function Login({ user, userInfo }) {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Se connecter
             </Button>
             <Grid container>
               <Grid item>
