@@ -1,8 +1,8 @@
 import axios from "axios";
 import authHeader from "./authHeader";
 
-const API_URL = "https://www.forum-uit.codes/api/auth/";
-// const API_URL = "http://localhost:5000/api/auth/";
+// const API_URL = "https://www.forum-uit.codes/api/auth/";
+const API_URL = "http://localhost:5000/api/auth/";
 
 const register = (
   name,
