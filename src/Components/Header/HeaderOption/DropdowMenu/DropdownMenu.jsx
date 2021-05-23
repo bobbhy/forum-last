@@ -72,18 +72,19 @@ function DropdownMenu({ image, user }) {
               className="menu_headerButton"
               color="primary"
             >
-              View Your profile
+              Voir Profile
             </Button>
           </div>
           <div>
             <Button
               variant="outlined"
+              style={{fontSize:12}}
               onClick={() => handleLogin("/", 1)}
               className="logoutButton"
               color="secondary"
               startIcon={<ExitToAppIcon />}
             >
-              Logout
+              Se déconnecter
             </Button>
           </div>
         </div>

@@ -415,7 +415,7 @@ function Post({
         {toggleLike && user?.roles[0]?.id != 2 && (
           <InputOption
             Icon={ThumbUpIcon}
-            title="Like"
+            title="J'aime"
             color="blue"
             onClick={() => unlikePost(postId)}
           />
@@ -424,7 +424,7 @@ function Post({
         {!toggleLike && user?.roles[0]?.id != 2 && (
           <InputOption
             Icon={ThumbUpAltOutlinedIcon}
-            title="Like"
+            title="J'aime"
             color="blue"
             onClick={() => likePost(postId)}
           />
@@ -432,7 +432,7 @@ function Post({
         {/* like */}
         <InputOption
           Icon={CommentIcon}
-          title="Comment"
+          title="Commenter"
           color="green"
           onClick={() => setToggleComment(!toggleComment)}
         />

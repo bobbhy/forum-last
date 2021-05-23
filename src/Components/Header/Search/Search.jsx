@@ -44,7 +44,7 @@ function Search({ children }) {
         autocomplete="off"
         onFocus={handleSearch}
         onChange={handleChange}
-        placeholder="Search"
+        placeholder="Rechercher"
       />
       {open && <CloseIcon className="close" onClick={handleClose} />}
       {open && React.cloneElement(children, { profiles, flag, handleClose })}

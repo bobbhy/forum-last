@@ -44,7 +44,7 @@ function SearchMenu(profiles) {
                 )
               )
             ) : (
-              <h1>No Result</h1>
+              <h1>Aucun Resultat</h1>
             )}
           </div>
         )}

@@ -57,7 +57,7 @@ function Sidebar({ user }) {
         </div>
         {user?.roles[0]?.id == 1 && (
           <div className="sidebar_stat">
-            <p>Nombre de vues: </p>
+            <p>Nombre de vues </p>
             <p className="sidebar_statNumber">{profileViews}</p>
           </div>
         )}

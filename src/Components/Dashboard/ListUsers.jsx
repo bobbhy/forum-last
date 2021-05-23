@@ -17,7 +17,7 @@ import authService from "../../services/authService";
 import userService from "../../services/userService";
 import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
 import Pagination from '@material-ui/lab/Pagination';
-
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 function preventDefault(event) {
   event.preventDefault();
 }
@@ -48,6 +48,13 @@ export default function ListUsers({ user }) {
   const handleDisable = async (id) => {
     setLoading(true);
     await authService.disableAccount(id).then((res) => {
+      setCount(count + 1);
+    });
+    setLoading(false);
+  };
+   const handleEnable = async (id) => {
+    setLoading(true);
+    await authService.enableAccount(id).then((res) => {
       setCount(count + 1);
     });
     setLoading(false);
@@ -123,14 +130,24 @@ export default function ListUsers({ user }) {
                     )}
                   </TableCell>
                   <TableCell align="center">
-                    <Button
+                    {account.enabled?(<Button
                       disabled={loading}
                       onClick={() => {
                         handleDisable(account.id);
                       }}
                     >
                       <PersonAddDisabledIcon color="secondary" />
+                    </Button>):(
+                      <Button
+                      disabled={loading}
+                      onClick={() => {
+                        handleEnable(account.id);
+                      }}
+                    >
+                      <PersonAddIcon style={{color:"green"}} />
                     </Button>
+                    )}
+                    
                   </TableCell>
                   <TableCell align="center">
                     <Button

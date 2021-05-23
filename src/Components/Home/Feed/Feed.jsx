@@ -10,11 +10,12 @@ import authHeader from "../../../services/authHeader";
 import Button from "@material-ui/core/Button";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-import Shimmer from "react-shimmer-effect";
+//import Shimmer from "react-shimmer-effect";
 import userService from "../../../services/userService";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Loader from "react-loader-spinner";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -90,8 +91,7 @@ function Feed(props) {
   const [refresh, setRefresh] = useState(false);
   //const [loaded, setLoaded] = useState(false); // bash toggle shimmer
 
-  //if < 10 posts makibansh l button
-  const [toggleLoadMore, setToggleLoadMore] = useState(false);
+  // const [toggleLoadMore, setToggleLoadMore] = useState(false);
 
   const [childLoaderRefresh, setChildLoaderRefresh] = useState(false);
 
@@ -106,6 +106,7 @@ function Feed(props) {
   const uploadRef = useRef(null);
   const [newImage, setNewImage] = useState(null);
   const [fileType, setFileType] = useState(initialState);
+  const [shown, setShown] = useState(10);
   const [fileContent, setFileContent] = useState([]);
 
   const onChange = (e) => {
@@ -159,6 +160,7 @@ function Feed(props) {
 
   //traitement showing posts
   const loopThroughPosts = (count) => {
+    setShown(shown + 10);
     for (
       let i = count * postsPerPage - postsPerPage;
       i < postsPerPage * count;
@@ -211,15 +213,14 @@ function Feed(props) {
         result = await userService.getPosts();
       }
       setRes(result?.data);
-      setTimeout(() => {
-        // setLoaded(true);
-        if (result?.data?.length > 10) {
-          setToggleLoadMore(true);
-        }
-      }, 500);
+      // setTimeout(() => {
+      //   // setLoaded(true);
+      //   // if (result?.data?.length > 10) {
+      //   //   setToggleLoadMore(true);
+      //   // }
+      // }, 500);
 
       arrayForHoldingPosts = result?.data?.slice(0, 10);
-      setPostsToShow(res?.slice(0, 10));
     };
     getPosts();
   }, [refresh]);
@@ -297,7 +298,6 @@ function Feed(props) {
       {loading && (
         <Loader
           type="Oval"
-          // color="rgb(63, 63, 63)"
           color="#6573c3"
           height={30}
           width={30}
@@ -323,7 +323,8 @@ function Feed(props) {
                   style={{ marginTop: "25px" }}
                 ></i>
               </div>
-              <strong>Attention!</strong> Les administrateurs suivent l'accueil quotidiennement toute action inappropriée sera sanctionnée.
+              <strong>Attention!</strong> Les administrateurs suivent l'accueil
+              quotidiennement toute action inappropriée sera sanctionnée.
             </div>
           )}
 
@@ -400,7 +401,7 @@ function Feed(props) {
                 )}
                 <InputOption
                   Icon={PostAddIcon}
-                  title="Post"
+                  title="Publier"
                   color="green"
                   onClick={uploadPost}
                 />
@@ -417,70 +418,36 @@ function Feed(props) {
                     <div className={classes.longline} />
                   </Shimmer>
                 </div>
-                <div className={classes.container}>
-                  <Shimmer>
-                    <div className={classes.circle} />
-                    <div className={classes.line} />
-                    <div className={classes.longline} />
-                  </Shimmer>
-                </div>
-                <div className={classes.container}>
-                  <Shimmer>
-                    <div className={classes.circle} />
-                    <div className={classes.line} />
-                    <div className={classes.longline} />
-                  </Shimmer>
-                </div>
-                <div className={classes.container}>
-                  <Shimmer>
-                    <div className={classes.circle} />
-                    <div className={classes.line} />
-                    <div className={classes.longline} />
-                  </Shimmer>
-                </div>
-                <div className={classes.container}>
-                  <Shimmer>
-                    <div className={classes.circle} />
-                    <div className={classes.line} />
-                    <div className={classes.longline} />
-                  </Shimmer>
-                </div>
-                <div className={classes.container}>
-                  <Shimmer>
-                    <div className={classes.circle} />
-                    <div className={classes.line} />
-                    <div className={classes.longline} />
-                  </Shimmer>
-                </div>
-                <div className={classes.container}>
-                  <Shimmer>
-                    <div className={classes.circle} />
-                    <div className={classes.line} />
-                  </Shimmer>
-                </div>
               </>
             )} */}
             {/* {loaded && */}
-            {postsToShow?.map((e, key) => (
-              <Post
-                key={key}
-                user={user}
-                postId={e?.id}
-                message={e?.message}
-                timestamp={e?.updatedAt.substring(0, 10)}
-                username={e?.ownerUsername}
-                name={e?.ownerName}
-                role={e?.role}
-                ownerId={e?.ownersId}
-                refresh={refresh}
-                currentUserId={user?.id}
-                ownerImage={image}
-                imageType={e?.imageType}
-                onChange={(value) => setChildLoaderRefresh(value)}
-              />
-            ))}
+            <InfiniteScroll
+              dataLength={shown}
+              next={() => handleShowMorePosts()}
+              hasMore={true}
+              loader={<h4> ... </h4>}
+            >
+              {postsToShow?.map((e, key) => (
+                <Post
+                  key={key}
+                  user={user}
+                  postId={e?.id}
+                  message={e?.message}
+                  timestamp={e?.updatedAt.substring(0, 10)}
+                  username={e?.ownerUsername}
+                  name={e?.ownerName}
+                  role={e?.role}
+                  ownerId={e?.ownersId}
+                  refresh={refresh}
+                  currentUserId={user?.id}
+                  ownerImage={image}
+                  imageType={e?.imageType}
+                  onChange={(value) => setChildLoaderRefresh(value)}
+                />
+              ))}
+            </InfiniteScroll>
           </div>
-          {toggleLoadMore && postsToShow.length != res.length && (
+          {/* {toggleLoadMore && postsToShow.length != res.length && (
             <Button
               size="small"
               variant="contained"
@@ -488,7 +455,7 @@ function Feed(props) {
             >
               Load more
             </Button>
-          )}
+          )} */}
         </div>
       )}
     </div>

@@ -75,6 +75,9 @@ const deleteUser = (id) => {
 const disableAccount = (id) => {
   return axios.put(`${API_URL}disableAccount/${id}`);
 };
+const enableAccount = (id) => {
+  return axios.put(`${API_URL}enableAccount/${id}`);
+};
 const reportByPost = (postId) => {
   return axios.put(`${API_URL}reportbypost/${postId}`);
 };
@@ -95,6 +98,7 @@ const authService = {
   disableAccount,
   reportByPost,
   reportByComment,
+  enableAccount
 };
 
 export default authService;

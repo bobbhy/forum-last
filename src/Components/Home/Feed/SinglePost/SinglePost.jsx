@@ -362,7 +362,7 @@ export default function SinglePost(props) {
               {toggleLike && (
                 <InputOption
                   Icon={ThumbUpIcon}
-                  title="Like"
+                  title="J'aime"
                   color="blue"
                   onClick={() => unlikePost(postId)}
                 />
@@ -371,7 +371,7 @@ export default function SinglePost(props) {
               {!toggleLike && (
                 <InputOption
                   Icon={ThumbUpAltOutlinedIcon}
-                  title="Like"
+                  title="J'aime"
                   color="blue"
                   onClick={() => likePost(postId)}
                 />
@@ -379,7 +379,7 @@ export default function SinglePost(props) {
               {/* like */}
               <InputOption
                 Icon={CommentIcon}
-                title="Comment"
+                title="Commenter"
                 color="green"
                 onClick={() => setToggleComment(!toggleComment)}
               />
