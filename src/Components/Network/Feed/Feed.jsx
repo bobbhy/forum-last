@@ -122,7 +122,6 @@ function Feed({ user }) {
                   />
                   <h2>{company?.companyName}</h2>
                   <h5>{company?.email}</h5>
-                  <h6>{Math.floor(Math.random() * 1000)}</h6>
                   <Button
                     className={styles.Button}
                     onClick={() => handleClick(company?.id)}

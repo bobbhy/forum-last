@@ -15,7 +15,6 @@ import Network from "./Components/Network/Network";
 import Cv from "./Components/Profile/ShownProfile/Cv";
 import Messages from "./Components/Messages/Messages";
 import SinglePostMain from "./Components/Home/Feed/SinglePost/SinglePostMain";
-import authHeader from "./services/authHeader";
 import Presentation2 from "./Components/Presentation/Presentation2";
 
 function App() {

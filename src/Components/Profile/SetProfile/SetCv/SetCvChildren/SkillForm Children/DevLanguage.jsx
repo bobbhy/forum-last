@@ -11,7 +11,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import AddCircleOutlinedIcon from "@material-ui/icons/AddCircleOutlined";
 import authHeader from "../../../../../../services/authHeader";
 import axios from "axios";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 import userService from "../../../../../../services/userService";
 
 function Alert(props) {
@@ -28,7 +28,7 @@ const statusOptions = [
   { value: "Python", label: "Python", icon: "fab fa-python" },
   { value: "Angular", label: "Angular", icon: "fab fa-angular" },
   { value: "ReactJS", label: "ReactJS", icon: "fab fa-react" },
-  { value: "Autre", label: "Autre" }
+  { value: "Autre", label: "Autre" },
 ];
 
 const marks = [
@@ -51,7 +51,7 @@ const SkillForm = (props) => {
   const [successful, setSuccessful] = useState(false);
   const [name, setName] = useState("HTML5");
   const [skillValue, setSkillValue] = useState();
-  const [isOther, setIsOther] = useState(false)
+  const [isOther, setIsOther] = useState(false);
   const [icon, setIcon] = useState("fab fa-html5 fa-2x");
   let selected = [];
   const [disabled, setDisabled] = useState(false);
@@ -81,30 +81,26 @@ const SkillForm = (props) => {
   }, [successful]);
 
   const upload = () => {
-    if (!flag) {
-      userService.flagStudent(id)
-    }
     const value = skillValue;
-    userService.uploadDevLang(name, value, icon)
-      .then(
-        (response) => {
-          setMessage(response.data.message);
-          setSuccessful(true);
-          setMessage("Added");
-          handleClick();
-          setDisabled(true);
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-          setMessage(resMessage);
-          setSuccessful(false);
-        }
-      );
+    userService.uploadDevLang(name, value, icon).then(
+      (response) => {
+        setMessage(response.data.message);
+        setSuccessful(true);
+        setMessage("Added");
+        handleClick();
+        setDisabled(true);
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        setMessage(resMessage);
+        setSuccessful(false);
+      }
+    );
   };
   const deleteById = (id) => {
     userService.deleteDevLang(id).then((response) => {
@@ -115,11 +111,11 @@ const SkillForm = (props) => {
     });
   };
   const handleChange = (e) => {
-    const value = e.target.value
-    setName(value)
-    setIcon(' ')
-    setDisabled(false)
-  }
+    const value = e.target.value;
+    setName(value);
+    setIcon(" ");
+    setDisabled(false);
+  };
   const handleClose = (reason) => {
     if (reason === "clickaway") {
       return;
@@ -130,14 +126,12 @@ const SkillForm = (props) => {
   const skillPicker = (e) => {
     if (e.value == "Autre") {
       setIsOther(true);
-    }
-    else {
+    } else {
       setIsOther(false);
       setName(e.value);
       setIcon(e.icon);
       setDisabled(false);
     }
-
   };
 
   const skValue = (value) => {
@@ -169,11 +163,16 @@ const SkillForm = (props) => {
               }
             />
           </div>
-          {isOther &&
+          {isOther && (
             <div className="col-md-10 mb-3">
-              <TextField id="standard-basic" label="Your Other Skill" required onChange={handleChange} />
+              <TextField
+                id="standard-basic"
+                label="Your Other Skill"
+                required
+                onChange={handleChange}
+              />
             </div>
-          }
+          )}
           <div className="col-md-10">
             <Typography id="discrete-slider" gutterBottom>
               Proficiency:
@@ -227,9 +226,15 @@ const SkillForm = (props) => {
             {data?.map((dev) => (
               <tr className="mt-10">
                 <td>
-                  {
-                    dev.icon == ' ' ? (<><i class={`${dev.icon} fa-x`} />{" "}</>) : (<><i class={`${dev.icon} fa-2x`} />{" "}</>)
-                  }
+                  {dev.icon == " " ? (
+                    <>
+                      <i class={`${dev.icon} fa-x`} />{" "}
+                    </>
+                  ) : (
+                    <>
+                      <i class={`${dev.icon} fa-2x`} />{" "}
+                    </>
+                  )}
                   <span style={{ fontSize: "18px" }}>{dev.name}</span>
                 </td>
                 <td>

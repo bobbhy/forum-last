@@ -1,8 +1,8 @@
 import axios from "axios";
 import authHeader from "./authHeader";
 
-// const API_URL = "https://www.forum-uit.codes/";
-const API_URL = "http://localhost:5000/";
+const API_URL = "https://www.forum-uit.codes/";
+// const API_URL = "http://localhost:5000/";
 
 const getApiState = () => {
   return axios.get(API_URL + "hello");

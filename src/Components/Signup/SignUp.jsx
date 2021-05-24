@@ -85,7 +85,7 @@ export default function SignUp({ user }) {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState("");
   const [successful, setSuccessful] = useState("");
-  const [flag,setFlag]=useState(false);
+  const [flag, setFlag] = useState(false);
   const [value, setValue] = useState(0);
   const [etablishments, setEtablishments] = useState([]);
   const [etablishment, setEtablishment] = useState(0);
@@ -105,14 +105,13 @@ export default function SignUp({ user }) {
     }
     getEtablishments();
   }, []);
-  const handleChecked=()=>{
-    if(checked==false)
-    {
-      setFlag(false)
-      setShow(true)
+  const handleChecked = () => {
+    if (checked == false) {
+      setFlag(false);
+      setShow(true);
     }
     setChecked(!checked);
-  }
+  };
   const handleChangeFirstName = (e) => {
     const firstName = e.target.value;
     setFirstName(firstName);
@@ -143,9 +142,8 @@ export default function SignUp({ user }) {
           ...errors,
           userName: "Pseudo doit contenir plus de 3 caractères",
         });
-      else if(userName?.length>15)
-      {
-         setErrors({
+      else if (userName?.length > 15) {
+        setErrors({
           ...errors,
           userName: "Pseudo doit contenir moins de 15 caractères",
         });
@@ -180,7 +178,10 @@ export default function SignUp({ user }) {
     const companyName = e.target.value;
     setCompanyName(companyName);
     if (companyName.length === 0) {
-      setErrors({ ...errors, companyName: "Nom de l'entreprise est obligatoire" });
+      setErrors({
+        ...errors,
+        companyName: "Nom de l'entreprise est obligatoire",
+      });
     } else {
       setErrors({ ...errors, companyName: null });
     }
@@ -201,9 +202,8 @@ export default function SignUp({ user }) {
     }
   };
   const handleStudentSignup = (e) => {
-    if(checked==false)
-    {
-      setFlag(true)
+    if (checked == false) {
+      setFlag(true);
     }
     e.preventDefault();
     if (etablishment == 0) {
@@ -246,9 +246,8 @@ export default function SignUp({ user }) {
     }
   };
   const handleManagerSignup = (e) => {
-    if(checked==false)
-    {
-      setFlag(true)
+    if (checked == false) {
+      setFlag(true);
     }
     e.preventDefault();
     setMessage("");
@@ -265,7 +264,9 @@ export default function SignUp({ user }) {
         .register(name, companyName, userNamex, emailx, password, 3)
         .then(
           (response) => {
-            setMessage("S'il vous plait veuillez attendre la vérification de votre identité à travers les administrateurs avant de se connecter");
+            setMessage(
+              "S'il vous plait veuillez attendre la vérification de votre identité à travers les administrateurs avant de se connecter"
+            );
             setSuccessful(true);
             setLoading(false);
           },
@@ -430,13 +431,22 @@ export default function SignUp({ user }) {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox checked={checked} onClick={handleChecked} value="allowExtraEmails" color="primary" />
-                        }
-                        label="J'accepte les conditions d'utilisations"
-                      />
-                    {flag && <FormHelperText error>Veuillez accepter les conditions d'abord</FormHelperText>}
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={checked}
+                          onClick={handleChecked}
+                          value="allowExtraEmails"
+                          color="primary"
+                        />
+                      }
+                      label="J'accepte les conditions d'utilisations"
+                    />
+                    {flag && (
+                      <FormHelperText error>
+                        Veuillez accepter les conditions d'abord
+                      </FormHelperText>
+                    )}
                   </Grid>
 
                   <Modal
@@ -606,7 +616,6 @@ export default function SignUp({ user }) {
                       value={companyName}
                       onChange={handleChangeCompanyName}
                       error={Boolean(errors?.userName)}
-                      helperText={errors?.userName}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -656,13 +665,22 @@ export default function SignUp({ user }) {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox checked={checked} onClick={handleChecked} value="allowExtraEmails" color="primary" />
-                        }
-                        label="J'accepte les conditions d'utilisations"
-                      />
-                    {flag && <FormHelperText error>Veuillez accepter les conditions d'abord</FormHelperText>}
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={checked}
+                          onClick={handleChecked}
+                          value="allowExtraEmails"
+                          color="primary"
+                        />
+                      }
+                      label="J'accepte les conditions d'utilisations"
+                    />
+                    {flag && (
+                      <FormHelperText error>
+                        Veuillez accepter les conditions d'abord
+                      </FormHelperText>
+                    )}
                   </Grid>
 
                   <Modal
