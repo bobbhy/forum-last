@@ -2,9 +2,9 @@ import React, { useState, useEffect, initialstate } from "react";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import * as faceapi from "face-api.js"
+import * as faceapi from "face-api.js";
 import axios from "axios";
-import userService from "../../../../../services/userService"
+import userService from "../../../../../services/userService";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -34,17 +34,16 @@ const Image = (props) => {
 
   const [successful, setSuccessful] = useState(initialstate);
   const [message, setMessage] = useState("");
-  const [initializing, setInitializing] = useState(false)
+  const [initializing, setInitializing] = useState(false);
   const [error, setError] = useState(false);
   useEffect(() => {
-    if(props.image)
-    {
-      setImage(userService.imageLink+props.image)
+    if (props.image) {
+      setImage(userService.imageLink + props.image);
       props.onChange(true);
     }
   }, [successful]);
   const onChange = async (e) => {
-    setError(false)
+    setError(false);
     const myRenamedFile = new File(
       [e.target?.files[0]],
       props.id + "." + e.target?.files[0].type.split("/")[1]
@@ -55,16 +54,17 @@ const Image = (props) => {
       setImage(URL.createObjectURL(img));
       setTimeout(async () => {
         if (initializing) {
-          const fr = document.getElementById("img")
+          const fr = document.getElementById("img");
           const detection = await faceapi.detectSingleFace(fr);
           if (!detection) {
-            setError(false)
-            setMessage("No Face Detected in this image");
+            setError(false);
+            setMessage(
+              "No face detected in this image or bad positioning crop your image or choose another one"
+            );
             setSuccessful(false);
             setTimeout(setOpen(true), 500);
-          }
-          else {
-            setError(true)
+          } else {
+            setError(true);
           }
         }
       }, 100);
@@ -74,12 +74,10 @@ const Image = (props) => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     const loadmodels = async () => {
-      const MODEL_URL = process.env.PUBLIC_URL + '/Models';
-      setInitializing(true)
-      Promise.all([
-        faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
-      ])
-    }
+      const MODEL_URL = process.env.PUBLIC_URL + "/Models";
+      setInitializing(true);
+      Promise.all([faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL)]);
+    };
     loadmodels();
     setUser(user);
   }, []);
@@ -116,7 +114,10 @@ const Image = (props) => {
   return (
     <form>
       <h2 className="text-center">Ajoutez votre photo de profil</h2>
-      <p className="text-danger">Notez bien que cette photo doit etre professionelle et ne doit pas dépassé pas 1 Mb</p>
+      <p className="text-danger">
+        Notez bien que cette photo doit etre professionelle et ne doit pas
+        dépassé pas 1 Mb
+      </p>
       {image && (
         <div>
           <img

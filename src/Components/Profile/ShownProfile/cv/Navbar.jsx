@@ -30,36 +30,60 @@ const Navabar = (props) => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href={`${window.location.pathname}#about`}>
+            <a
+              className="nav-link js-scroll-trigger"
+              href={`${window.location.pathname}#about`}
+            >
               About
             </a>
           </li>
-          {props.isExperience && (<li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href={`${window.location.pathname}#experience`}>
-              Experience
-            </a>
-          </li>)}
+          {props.isExperience && (
+            <li className="nav-item">
+              <a
+                className="nav-link js-scroll-trigger"
+                href={`${window.location.pathname}#experience`}
+              >
+                Experience
+              </a>
+            </li>
+          )}
 
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href={`${window.location.pathname}#education`}>
+            <a
+              className="nav-link js-scroll-trigger"
+              href={`${window.location.pathname}#education`}
+            >
               Education
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href={`${window.location.pathname}#skills`}>
+            <a
+              className="nav-link js-scroll-trigger"
+              href={`${window.location.pathname}#skills`}
+            >
               Skills
             </a>
           </li>
-          {props?.isInterests && <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href={`${window.location.pathname}#interests`}>
-              Interests
-            </a>
-          </li>}
-          {props?.isAwards && <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href={`${window.location.pathname}#awards`}>
-              Awards
-            </a>
-          </li>}
+          {props?.isInterests && (
+            <li className="nav-item">
+              <a
+                className="nav-link js-scroll-trigger"
+                href={`${window.location.pathname}#interests`}
+              >
+                Interests
+              </a>
+            </li>
+          )}
+          {props?.isAwards && (
+            <li className="nav-item">
+              <a
+                className="nav-link js-scroll-trigger"
+                href={`${window.location.pathname}#awards`}
+              >
+                Awards
+              </a>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

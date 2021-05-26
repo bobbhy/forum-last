@@ -108,6 +108,7 @@ function App() {
                   <Home image={image} user={user} refreshHome={refreshHome} />
                 )}
               />
+
               <Route
                 exact
                 path={"/profile"}
@@ -119,11 +120,13 @@ function App() {
                 path={"/post/:postId"}
                 component={() => <SinglePostMain user={user} image={image} />}
               />
-              <Route
-                exact
-                path="/admin"
-                component={() => <Dashboard user={user} />}
-              />
+              {user?.roles[0].id == 2 && (
+                <Route
+                  exact
+                  path="/admin"
+                  component={() => <Dashboard user={user} />}
+                />
+              )}
               <Route
                 exact
                 path="/MyNetwork"

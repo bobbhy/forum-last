@@ -67,8 +67,8 @@ const Socials = (props) => {
 
   const upload = () => {
     let ur = url;
-    if(!url.startsWith("https://")){
-        ur = "https://" + url
+    if (!url.startsWith("https://")) {
+      ur = "https://" + url;
     }
     const link = { name: id, url: ur };
     userService.uploadCvLink(link).then(
@@ -87,7 +87,7 @@ const Socials = (props) => {
   return (
     <div>
       <div class="form-group row col-sm-12 align-items-center">
-        <label class="col-sm-2 col-form-label">Add Socials:</label>
+        <label class="col-sm-2 col-form-label">Liens:</label>
         <MDBContainer className="col-sm-10 flex-row mt-3">
           <Tooltip title="Lien pour votre profil Facebook">
             <MDBBtn
@@ -153,7 +153,7 @@ const Socials = (props) => {
               upload();
             }}
           >
-            Add
+            Ajouter
           </Button>
         </div>
       )}

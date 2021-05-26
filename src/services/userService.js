@@ -235,8 +235,8 @@ const uploadAboutCompany = (address, city, number, bio, socials) => {
 const flagCompany = (id) => {
   return axios.put(`${API_URL}api/comp/flag/${id}`);
 };
-const flagStudent = (id) => {
-  return axios.put(`${API_URL}api/cv/flag/${id}`);
+const flagStudent = async (id) => {
+  return await axios.put(`${API_URL}api/cv/flag/${id}`);
 };
 const getDevLang = () => {
   return axios.get(`${API_URL}api/cv/dev`, {

@@ -162,18 +162,8 @@ export default function SetCv(props) {
                       Merci pour votre temps
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      Comme prochaine étape, nous suggérons de reprendre le même
-                      processus dans le site web universitaire cvthèque :&nbsp;
-                      <Link
-                        style={{ fontSize: 20 }}
-                        component="button"
-                        variant="body2"
-                        onClick={() => {
-                          window.open("https://cvtheque.uit.ac.ma/", "_blank");
-                        }}
-                      >
-                        Ici
-                      </Link>
+                      Comme prochaine étape, vous allez découvrir toutes les
+                      fonctionalitées de notre plateforme de
                     </Typography>
                     <br />
                     <Button

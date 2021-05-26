@@ -9,7 +9,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import AddCircleOutlinedIcon from "@material-ui/icons/AddCircleOutlined";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 import userService from "../../../../../../services/userService";
 
 function Alert(props) {
@@ -21,7 +21,7 @@ const statusOptions = [
   { value: "English", label: "English" },
   { value: "Arabic", label: "Arabic" },
   { value: "Spanish", label: "Spanish" },
-  { value: "Autre", label: "Autre" }
+  { value: "Autre", label: "Autre" },
 ];
 
 const marks = [
@@ -39,7 +39,7 @@ const marks = [
   },
   {
     value: 4,
-    label: "B1",
+    label: "B2",
   },
   {
     value: 5,
@@ -49,7 +49,6 @@ const marks = [
     value: 6,
     label: "C2",
   },
-  
 ];
 
 const SkillForm = (props) => {
@@ -58,7 +57,7 @@ const SkillForm = (props) => {
   const [successful, setSuccessful] = useState(false);
   const [name, setName] = useState("French");
   const [skillValue, setSkillValue] = useState();
-  const [isOther, setIsOther] = useState(false)
+  const [isOther, setIsOther] = useState(false);
   let selected = [];
   const [disabled, setDisabled] = useState(false);
 
@@ -77,41 +76,39 @@ const SkillForm = (props) => {
     fetchData();
   }, [successful]);
   const handleChange = (e) => {
-    const value = e.target.value
-    setName(value)
-    setDisabled(false)
-  }
+    const value = e.target.value;
+    setName(value);
+    setDisabled(false);
+  };
   const upload = () => {
     const value = skillValue;
-    userService.uploadNormalLang(name, value)
-      .then(
-        (response) => {
-          setMessage(response.data.message);
-          setSuccessful(true);
-          setMessage("Added");
-          handleClick();
-          setDisabled(true);
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-          setMessage(resMessage);
-          setSuccessful(false);
-        }
-      );
+    userService.uploadNormalLang(name, value).then(
+      (response) => {
+        setMessage(response.data.message);
+        setSuccessful(true);
+        setMessage("Added");
+        handleClick();
+        setDisabled(true);
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        setMessage(resMessage);
+        setSuccessful(false);
+      }
+    );
   };
   const deleteById = (id) => {
-    userService.deleteNormalLang(id)
-      .then((response) => {
-        setSuccessful(true);
-        setMessage("Deleted!");
-        handleClick();
-        setSuccessful(false);
-      });
+    userService.deleteNormalLang(id).then((response) => {
+      setSuccessful(true);
+      setMessage("Deleted!");
+      handleClick();
+      setSuccessful(false);
+    });
   };
 
   const handleClose = (reason) => {
@@ -123,9 +120,8 @@ const SkillForm = (props) => {
 
   const skillPicker = (e) => {
     if (e.value == "Autre") {
-      setIsOther(true)
-    }
-    else {
+      setIsOther(true);
+    } else {
       setIsOther(false);
       setName(e.value);
       setDisabled(false);
@@ -160,11 +156,16 @@ const SkillForm = (props) => {
               }
             />
           </div>
-          {isOther &&
+          {isOther && (
             <div className="col-md-10 mb-3">
-              <TextField id="standard-basic" label="Your Other Skill" required onChange={handleChange} />
+              <TextField
+                id="standard-basic"
+                label="Your Other Skill"
+                required
+                onChange={handleChange}
+              />
             </div>
-          }
+          )}
           <div className="col-md-10">
             <Typography id="discrete-slider" gutterBottom>
               Proficiency:

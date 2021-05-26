@@ -145,8 +145,7 @@ const About = (props) => {
 
   useEffect(() => {
     userService.getUserData().then((res) => {
-      if(res?.data?.cv?.about?.bio)
-      {
+      if (res?.data?.cv?.about?.bio) {
         props.onChange(true);
       }
       setGottenName(res?.data?.name);
@@ -164,12 +163,12 @@ const About = (props) => {
           ?.map((e) => e.charAt(0).toUpperCase() + e.slice(1))
           .join(" ")
       );
-      setAddress(res?.data?.cv.about.address)
-      setNumber(res?.data?.cv.about.number)
-      setCity(res?.data?.cv.about.city)
-      setInterests(res?.data.cv.about.interests)
-      setDomaine(res?.data.cv.about.domaine)
-      setBio(res?.data.cv.about.bio)
+      setAddress(res?.data?.cv.about.address);
+      setNumber(res?.data?.cv.about.number);
+      setCity(res?.data?.cv.about.city);
+      setInterests(res?.data.cv.about.interests);
+      setDomaine(res?.data.cv.about.domaine);
+      setBio(res?.data.cv.about.bio);
     });
   }, []);
 
@@ -178,7 +177,7 @@ const About = (props) => {
       <form>
         <div className="form-group row align-items-center">
           <label for="number" className="col-sm-2  col-form-label">
-            Full Name:
+            Nom Complet<sup>*</sup>:
           </label>
           <div className="col-sm-5 mt-2 ">
             <input
@@ -187,7 +186,7 @@ const About = (props) => {
                 backgroundColor: "#f3f2ef",
               }}
               type="text"
-              placeholder="First Name"
+              placeholder="Prénom"
               defaultValue={firstName}
               value={firstName
                 .split(" ")
@@ -205,7 +204,7 @@ const About = (props) => {
               }}
               type="text"
               id="number"
-              placeholder="Last Name"
+              placeholder="Nom"
               defaultValue={lastName}
               value={lastName
                 .split(" ")
@@ -218,7 +217,7 @@ const About = (props) => {
         </div>
         <div className="form-group row align-items-center">
           <label for="number" className="col-sm-2 col-form-label">
-            Address:
+            Adresse<sup>*</sup>:
           </label>
           <div className="col-sm-8">
             {" "}
@@ -228,7 +227,7 @@ const About = (props) => {
                 backgroundColor: "#f3f2ef",
               }}
               type="text"
-              placeholder="Address"
+              placeholder="Adresse"
               value={address}
               onChange={handleAddressChange}
               required
@@ -241,7 +240,7 @@ const About = (props) => {
                 backgroundColor: "#f3f2ef",
               }}
               type="text"
-              placeholder="City"
+              placeholder="Ville"
               value={city}
               onChange={handleCityChange}
               required
@@ -251,7 +250,7 @@ const About = (props) => {
 
         <div className="form-group row align-items-center">
           <label for="example-tel-input" class="col-sm-2 col-form-label">
-            Telephone :
+            Téléphone :
           </label>
           <div className="col-sm-5">
             <Input
@@ -261,7 +260,7 @@ const About = (props) => {
                 backgroundColor: "#f3f2ef",
               }}
               value={number}
-              placeholder="Number"
+              placeholder="Votre numéro"
               onChange={handleNumberChange}
               id="example-tel-input"
             />
@@ -269,10 +268,14 @@ const About = (props) => {
         </div>
         <div className="form-group row align-items-center">
           <label for="example-tel-input" class="col-sm-2 col-form-label">
-            Filiere :
+            Filière<sup>*</sup>:
           </label>
           <div className="col-sm-5">
-            <Form.Control as="select" value={domaine} onChange={handleDomaineChange}>
+            <Form.Control
+              as="select"
+              value={domaine}
+              onChange={handleDomaineChange}
+            >
               <option value="Informatique">Informatique</option>
               <option value="Electrique">Electrique</option>
               <option value="Mécanique">Mécanique</option>
@@ -287,7 +290,7 @@ const About = (props) => {
         </div>
         <div class="form-group">
           <label for="bio" class="col-sm-2 col-form-label">
-            Bio:
+            Bio<sup>*</sup>:
           </label>
           <br />
           <textarea
@@ -307,7 +310,7 @@ const About = (props) => {
         </div>
         <div class="form-group">
           <label for="interests" class="col-sm-2 col-form-label">
-            Interests:
+            Interêts:
           </label>
           <br />
           <textarea
@@ -316,7 +319,7 @@ const About = (props) => {
             name="interests"
             id="comment"
             maxLength="800"
-            placeholder="What interests you?"
+            placeholder="Vos interêts?"
             style={{
               backgroundColor: "#f3f2ef",
               resize: "none",

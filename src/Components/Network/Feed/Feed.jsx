@@ -120,7 +120,9 @@ function Feed({ user }) {
                     className={styles.company_avatar}
                     alt="Image of "
                   />
-                  <h2>{company?.companyName}</h2>
+                  <div className={company.box}>
+                    <h3>{company?.companyName}</h3>
+                  </div>
                   <h5>{company?.email}</h5>
                   <Button
                     className={styles.Button}

@@ -3,7 +3,7 @@ import "./ProfileInfo.css";
 import { Avatar } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
-function ProfileInfo({ id, name, company, role, image }) {
+function ProfileInfo({ id, name, company, role, image, username }) {
   const history = useHistory();
   const handleClick = () => {
     history.push("/view/" + id);
@@ -29,13 +29,14 @@ function ProfileInfo({ id, name, company, role, image }) {
 
       {role === 1 && (
         <h5>
-          {capitalizeTheFirstLetterOfEachWord(name)} - <span>Etudiant</span>
+          {capitalizeTheFirstLetterOfEachWord(name)} - <span>@{username}</span>{" "}
+          - <span>Etudiant</span>
         </h5>
       )}
       {role === 3 && (
         <h5>
           {capitalizeTheFirstLetterOfEachWord(company)} -{" "}
-          <span>Entreprise</span>
+          <span>@{username}</span>- <span>Entreprise</span>
         </h5>
       )}
     </div>

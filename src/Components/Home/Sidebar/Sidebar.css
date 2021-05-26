@@ -14,6 +14,7 @@
 }
 .sidebar_avatar {
   margin-bottom: 10px;
+  background-color: white;
 }
 .sidebar_top {
   display: flex;

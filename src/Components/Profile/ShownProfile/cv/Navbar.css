@@ -36,6 +36,9 @@
     height: 10rem;
     border: 0.5rem solid rgba(255, 255, 255, 0.2);
   }
+  #sideNav .navbar-brand .img-profile2 {
+    background-color: white;
+  }
   #sideNav .navbar-collapse {
     display: flex;
     align-items: flex-start;

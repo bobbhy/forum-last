@@ -41,8 +41,9 @@
   border-radius: 0 !important;
   border: 1px solid lightgray !important;
   width: 70px !important;
-  height: 70px!important;
+  height: 70px !important;
   margin-bottom: 0;
+  background-color: white;
 }
 .company_avatar2 {
   width: 70px !important;

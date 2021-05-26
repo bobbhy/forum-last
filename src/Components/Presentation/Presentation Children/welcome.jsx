@@ -12,6 +12,8 @@ import imgc9 from "./assets/img/clubs/club-9.jpg";
 import imgc10 from "./assets/img/clubs/club-10.jpeg";
 import imgc11 from "./assets/img/clubs/club-11.jpeg";
 import imgc12 from "./assets/img/clubs/club-12.jpeg";
+import imgc13 from "./assets/img/clubs/club-13.jpeg";
+
 import imgpa0 from "./assets/img/pacademiques/0.png";
 import imgpa1 from "./assets/img/pacademiques/1.jpg";
 import imgpa2 from "./assets/img/pacademiques/2.jpg";
@@ -141,7 +143,7 @@ export default function Welcome() {
                       Plus de détails
                     </a>
                     <a
-                      href="https://www.youtube.com/watch?v=6YQwLMsjoFU&ab_channel=HassanBERRAGRAGUI"
+                      href="https://www.youtube.com/watch?v=x9JVGJ-_wzg"
                       target="_blank"
                       className={welcomecss.btnwatchvideo}
                       data-vbtype="video"
@@ -278,7 +280,7 @@ export default function Welcome() {
               <div className="col-lg-6 video-box align-self-baseline">
                 <img src={imgvideo} className="img-fluid imgvideo" alt="" />
                 <a
-                  href="https://www.youtube.com/watch?v=6YQwLMsjoFU&ab_channel=HassanBERRAGRAGUI"
+                  href="https://www.youtube.com/watch?v=x9JVGJ-_wzg"
                   className="venobox play-btn mb-4"
                   data-vbtype="video"
                   data-autoplay="true"
@@ -494,6 +496,9 @@ export default function Welcome() {
               </div>
               <div className="slide">
                 <img className="stand" src={imgc12} alt="" />
+              </div>
+              <div className="slide">
+                <img className="stand" src={imgc13} alt="" />
               </div>
             </Slider>
           </div>

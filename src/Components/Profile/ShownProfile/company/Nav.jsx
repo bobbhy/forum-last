@@ -9,7 +9,7 @@ const Nav = (props) => {
       <a className="navbar-brand js-scroll-trigger" href="#page-top">
         <span className="d-none d-lg-block">
           <img
-            className="img-fluid img-profile square mx-auto mb-2"
+            className="img-fluid img-profile img-profile2 square mx-auto mb-2"
             src={props?.image}
             alt=""
           />
